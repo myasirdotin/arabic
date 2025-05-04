@@ -35,6 +35,8 @@
       color: var(--text-color);
       line-height: 1.6;
       position: relative;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
     }
 
     header {
@@ -44,7 +46,7 @@
       background-position: center;
       background-repeat: no-repeat;
       color: white;
-      padding: 60px 0;
+      padding: 80px 0;
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -57,13 +59,13 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%), linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4));
-      opacity: 0.8;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%), linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5));
+      opacity: 0.7;
     }
 
     .container {
       max-width: 1200px;
-      margin: 40px auto;
+      margin: 0 auto;
       padding: 0 20px;
     }
 
@@ -71,8 +73,7 @@
       font-family: 'Amiri', serif;
       font-size: 3.5em;
       margin: 0;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-      position: relative;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.3);
     }
 
     header p {
@@ -80,14 +81,13 @@
       margin: 15px 0 0;
       opacity: 0.9;
       font-weight: 300;
-      position: relative;
     }
 
     .intro {
       text-align: center;
       max-width: 800px;
-      margin: 0 auto 40px;
-      font-size: 1.2em;
+      margin: 40px auto;
+      font-size: 1.1em;
       color: #555;
     }
 
@@ -95,8 +95,8 @@
       background: white;
       border-radius: 12px;
       padding: 30px;
-      margin: 30px 0;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      margin: 40px 0;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
       border-left: 6px solid var(--accent-color);
     }
 
@@ -113,14 +113,14 @@
     .lessons {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 30px;
+      gap: 40px;
       margin-top: 40px;
     }
 
     .card {
       background: white;
       border-radius: 15px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
       padding: 30px;
       transition: all 0.3s ease;
       position: relative;
@@ -139,17 +139,18 @@
 
     .card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
     }
 
     .card h2 {
       font-family: 'Amiri', serif;
-      font-size: 1.6em;
+      font-size: 1.8em;
       color: var(--primary-color);
       margin: 0 0 15px;
       display: flex;
       align-items: center;
       gap: 15px;
+      transition: all 0.3s ease;
     }
 
     .card h2 .lesson-icon {
@@ -197,10 +198,21 @@
       text-align: center;
       padding: 40px 20px;
       margin-top: 60px;
-      font-size: 1em;
+      font-size: 1.2em;
       color: #777;
       border-top: 1px solid #e0e0e0;
-      background: white;
+      background: var(--primary-color);
+      color: white;
+    }
+
+    footer a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
     }
 
     @media (max-width: 768px) {
@@ -220,6 +232,7 @@
         font-size: 1.4em;
       }
     }
+
   </style>
 </head>
 <body>
@@ -233,7 +246,7 @@
 
 <div class="container">
   <div class="intro">
-    <p>Start with Lesson 1 and progress through our this curriculum, building your knowledge.</p>
+    <p>Start with Lesson 1 and progress through our curriculum, building your knowledge.</p>
   </div>
 
   <div class="note-box">
@@ -241,7 +254,6 @@
     <p>I’ve recently started learning Arabic through the Kalaam App, and to keep my studies organized, I’ve created this digital diary to structure all the essential information.</p>
     <p>Feel free to explore—if you find it helpful, you’re welcome to use it! I’ll continue updating it with more resources over time.</p>
     <p><strong>Key Tip:</strong> Supplement your learning with YouTube for in-depth explanations—this is crucial!</p>
-    <p>Read the content multiple times, even if it’s not fully clear at first. This will spark questions, many of which will be answered through related video series.</p>
     <p>Revisit the material afterward for deeper understanding and clarity.</p>
   </div>
 
@@ -324,13 +336,13 @@
       <p>Sentence structure and advanced topics.</p>
       <a href="13_sentence_structure.html">Continue</a>
     </div>
-  </div>
-</div>
-<div class="card">
-  <h2><span class="lesson-icon">❓</span> Lesson 14: Questions</h2>
-  <p>Forming questions and using interrogatives.</p>
-  <a href="14_questions.html">Continue →</a>
-</div>
+
+
+    <div class="card">
+      <h2><span class="lesson-icon">❓</span> Lesson 14: Questions</h2>
+      <p>Forming questions and using interrogatives.</p>
+      <a href="14_questions.html">Continue →</a>
+    </div>
 
 <div class="card">
   <h2><span class="lesson-icon">✖️</span> Lesson 15: Negation</h2>
@@ -349,6 +361,8 @@
   <p>Advanced sentence structures and exceptions.</p>
   <span class="progress-tag">In Development</span>
 </div>
+
+  </div>
 <footer>
   © 2025 Arabic Grammar by Yasir Rasool. All rights reserved.
 </footer>
