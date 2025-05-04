@@ -12,130 +12,208 @@
     gtag('js', new Date());
     gtag('config', 'G-E8RSVHS80Z');
   </script>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary-color: #00695c;
-      --secondary-color: #00796b;
-      --accent-color: #4db6ac;
-      --text-color: #333;
-      --light-bg: #f5f7fa;
+      --primary-color: #2c6e49;
+      --secondary-color: #4a8e6a;
+      --accent-color: #f4a261;
+      --text-color: #2d2d2d;
+      --light-bg: #f8f1e9;
+      --gradient: linear-gradient(135deg, #2c6e49 0%, #4a8e6a 100%);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
     body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Poppins', sans-serif;
       background-color: var(--light-bg);
       color: var(--text-color);
       line-height: 1.6;
+      position: relative;
+      background-image: url('data:image/svg+xml,%3Csvg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%researchers="evenodd" opacity="0.1"%3E%3Cpath d="M20 2c-9.925 0-18 8.075-18 18s8.075 18 18 18 18-8.075 18-18S29.925 2 20 2zm0 2c8.837 0 16 7.163 16 16s-7.163 16-16 16S4 28.837 4 20 11.163 4 20 4zm0 2c-7.732 0-14 6.268-14 14s6.268 14 14 14 14-6.268 14-14S27.732 6 20 6zm0 2c6.627 0 12 5.373 12 12s-5.373 12-12 12S8 26.627 8 20 13.373 8 20 8z"/%3E%3C/g%3E%3C/svg%3E');
     }
 
     header {
-      background-color: var(--primary-color);
+      background: var(--gradient);
       color: white;
-      padding: 30px 0;
+      padding: 60px 0;
       text-align: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+      opacity: 0.3;
     }
 
     .container {
-      max-width: 1100px;
+      max-width: 1200px;
       margin: 40px auto;
       padding: 0 20px;
     }
 
     h1 {
+      font-family: 'Amiri', serif;
+      font-size: 3.5em;
       margin: 0;
-      font-size: 2.5em;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
     }
 
     header p {
-      font-size: 1.1em;
-      margin: 10px 0 0;
+      font-size: 1.3em;
+      margin: 15px 0 0;
       opacity: 0.9;
+      font-weight: 300;
+    }
+
+    .intro {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 40px;
+      font-size: 1.2em;
+      color: #555;
+    }
+
+    .note-box {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      margin: 30px 0;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      border-left: 6px solid var(--accent-color);
+    }
+
+    .note-box strong {
+      color: var(--primary-color);
+      font-size: 1.1em;
+    }
+
+    .note-box p {
+      margin: 15px 0;
+      color: #555;
     }
 
     .lessons {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 25px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
       margin-top: 40px;
     }
 
     .card {
-      background-color: white;
-      border-radius: 12px;
-      box-shadow: 0 3px 15px rgba(0,0,0,0.08);
-      padding: 25px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      padding: 30px;
       transition: all 0.3s ease;
-      border-left: 4px solid var(--accent-color);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--gradient);
     }
 
     .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+      transform: translateY(-8px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
     }
 
     .card h2 {
-      font-size: 1.3em;
+      font-family: 'Amiri', serif;
+      font-size: 1.6em;
       color: var(--primary-color);
-      margin-top: 0;
-      margin-bottom: 15px;
+      margin: 0 0 15px;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 15px;
     }
 
     .card h2 .lesson-icon {
-      font-size: 1.2em;
+      font-size: 1.4em;
+      color: var(--accent-color);
     }
 
     .card p {
-      font-size: 1em;
-      margin: 0 0 15px;
-      color: #555;
+      font-size: 1.1em;
+      margin: 0 0 20px;
+      color: #666;
     }
 
     .card a {
       display: inline-block;
       text-decoration: none;
-      color: var(--secondary-color);
+      color: white;
+      background: var(--gradient);
       font-weight: 600;
-      padding: 8px 15px;
-      border: 1px solid var(--accent-color);
-      border-radius: 6px;
-      transition: all 0.2s ease;
+      padding: 12px 25px;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
     .card a:hover {
-      background-color: var(--accent-color);
-      color: white;
+      background: var(--accent-color);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
 
     .progress-tag {
       display: inline-block;
-      background-color: #e0f2f1;
-      color: var(--secondary-color);
-      padding: 3px 10px;
+      background-color: #fff3e0;
+      color: var(--accent-color);
+      padding: 6px 15px;
       border-radius: 20px;
-      font-size: 0.8em;
+      font-size: 0.9em;
       margin-left: 10px;
-      font-weight: bold;
+      font-weight: 600;
     }
 
     footer {
       text-align: center;
-      padding: 30px;
-      margin-top: 50px;
-      font-size: 0.9em;
+      padding: 40px 20px;
+      margin-top: 60px;
+      font-size: 1em;
       color: #777;
       border-top: 1px solid #e0e0e0;
+      background: white;
     }
 
-    .intro {
-      text-align: center;
-      max-width: 700px;
-      margin: 0 auto 30px;
-      font-size: 1.1em;
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5em;
+      }
+      
+      header {
+        padding: 40px 0;
+      }
+
+      .card {
+        padding: 20px;
+      }
+
+      .card h2 {
+        font-size: 1.4em;
+      }
     }
   </style>
 </head>
@@ -143,14 +221,23 @@
 
 <header>
   <div class="container">
-    <h1>📘 Arabic Grammar Mastery</h1>
+    <h1>Arabic Grammar Mastery</h1>
     <p>Structured lessons for systematic learning of Arabic grammar</p>
   </div>
 </header>
 
 <div class="container">
   <div class="intro">
-    <p>Start with Lesson 1 and progress through our comprehensive Arabic grammar curriculum. Each lesson builds on previous knowledge with clear examples and exercises.</p>
+    <p>Embark on a journey to master Arabic grammar with our carefully crafted lessons. Start with Lesson 1 and progress through our comprehensive curriculum, building your knowledge step by step with clear examples and practical exercises.</p>
+  </div>
+
+  <div class="note-box">
+    <p><strong>Assalamualaikum dear readers & learners,</strong></p>
+    <p>I’ve recently started learning Arabic through the Kalaam App, and to keep my studies organized, I’ve created this digital diary to structure all the essential information.</p>
+    <p>Feel free to explore—if you find it helpful, you’re welcome to use it! I’ll continue updating it with more resources over time.</p>
+    <p><strong>Key Tip:</strong> Supplement your learning with YouTube for in-depth explanations—this is crucial!</p>
+    <p>Read the content multiple times, even if it’s not fully clear at first. This will spark questions, many of which will be answered through related video series.</p>
+    <p>Revisit the material afterward for deeper understanding and clarity.</p>
   </div>
 
   <h2>📚 Lesson Catalog:</h2>
@@ -158,73 +245,73 @@
     <div class="card">
       <h2><span class="lesson-icon">📌</span> Lesson 1: Nouns</h2>
       <p>Learn how nouns work in Arabic including gender, number, and i‘rāb.</p>
-      <a href="01_noun.html">Start Learning →</a>
+      <a href="01_noun.html">Start Learning</a>
     </div>
 
     <div class="card">
       <h2><span class="lesson-icon">🔤</span> Lesson 2: Gender</h2>
       <p>Master masculine and feminine nouns with identification rules.</p>
-      <a href="02_gender.html">Continue →</a>
+      <a href="02_gender.html">Continue</a>
     </div>
 
     <div class="card">
       <h2><span class="lesson-icon">🔢</span> Lesson 3: Number</h2>
       <p>Singular, dual and plural forms with sound and broken plurals.</p>
-      <a href="03_number.html">Continue →</a>
+      <a href="03_number.html">Continue</a>
     </div>
 
     <div class="card">
       <h2><span class="lesson-icon">🎯</span> Lesson 4: I'rab</h2>
       <p>Grammatical case endings (dammah, fathah, kasrah).</p>
-      <a href="04_irab.html">Continue →</a>
+      <a href="04_irab.html">Continue</a>
     </div>
 
     <div class="card">
       <h2><span class="lesson-icon">🔍</span> Lesson 5: Definiteness</h2>
       <p>Definite vs. indefinite nouns and solar/lunar letters.</p>
-      <a href="05_definite.html">Continue →</a>
+      <a href="05_definite.html">Continue</a>
     </div>
 
     <div class="card">
       <h2><span class="lesson-icon">🌈</span> Lesson 6: Adjectives</h2>
       <p>Agreement rules and descriptive structures.</p>
-      <a href="06_adjectives.html">Continue →</a>
+      <a href="06_adjectives.html">Continue</a>
     </div>
 
     <div class="card">
       <h2><span class="lesson-icon">🤝</span> Lesson 7: Possession</h2>
       <p>Idaafa construction and possessive phrases.</p>
-      <a href="07_possession.html">Continue →</a>
+      <a href="07_possession.html">Continue</a>
     </div>
 
     <div class="card">
       <h2><span class="lesson-icon">👉</span> Lesson 8: Demonstratives</h2>
       <p>This/that and these/those in Arabic.</p>
-      <a href="08_demonstratives.html">Continue →</a>
+      <a href="08_demonstratives.html">Continue</a>
     </div>
 
     <div class="card">
       <h2><span class="lesson-icon">👤</span> Lesson 9: Pronouns</h2>
       <p>Attached and detached pronoun forms.</p>
-      <a href="09_pronouns.html">Continue →</a>
+      <a href="09_pronouns.html">Continue</a>
     </div>
 
     <div class="card">
       <h2><span class="lesson-icon">🏃</span> Lesson 10: Verbs Intro</h2>
       <p>Past, present and command tense basics.</p>
-      <a href="10_verbs.html">Continue →</a>
+      <a href="10_verbs.html">Continue</a>
     </div>
 
     <div class="card">
       <h2><span class="lesson-icon">🔧</span> Lesson 11: Verb Types</h2>
       <p>Sound, weak, transitive and derived forms.</p>
-      <a href="11_verb_types.html">Continue →</a>
+      <a href="11_verb_types.html">Continue</a>
     </div>
 
     <div class="card">
       <h2><span class="lesson-icon">🎓</span> Lesson 12: Advanced Verbs</h2>
       <p>Complete conjugation and moods.</p>
-      <a href="12_advanced_verbs.html">Continue →</a>
+      <a href="12_advanced_verbs.html">Continue</a>
     </div>
 
     <div class="card">
@@ -236,7 +323,7 @@
 </div>
 
 <footer>
-  &copy; 2025 Arabic Grammar by Yasir Rasool. All rights reserved.
+  © 2025 Arabic Grammar by Yasir Rasool. All rights reserved.
 </footer>
 
 </body>
