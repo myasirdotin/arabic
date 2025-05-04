@@ -1,101 +1,196 @@
-/* style.css */
+/* ========================================
+   CSS VARIABLES
+======================================== */
+:root {
+  --primary-color: #00695c;
+  --primary-dark: #004d40;
+  --accent-color: #00796b;
+  --highlight-bg: #e0f7fa;
+  --warning-color: #ff9800;
+  --note-bg: #e0f7fa;
+  --example-bg: #f1f8e9;
+  --highlight-green: #388e3c;
+}
+
+/* ========================================
+   BASE STYLES
+======================================== */
 body {
-    font-family: 'Segoe UI', Tahoma, sans-serif;
-    background-color: #f4f7f9;
-    margin: 0;
-    padding: 20px;
-    color: #333;
-  }
-  .container {
-    max-width: 850px;
-    margin: auto;
-    background: #fff;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.05);
-  }
-  h1, h2 {
-    color: #00695c;
-  }
-  .note {
-    background: #e0f7fa;
-    padding: 12px 20px;
-    margin: 20px 0;
-    border-left: 5px solid #00796b;
-    border-radius: 6px;
-  }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-  }
-  th, td {
-    border: 1px solid #ccc;
-    padding: 10px;
-    text-align: left;
-  }
-  th {
-    background: #00796b;
-    color: #fff;
-  }
-  .example {
-    background: #f1f8e9;
-    padding: 10px;
-    margin: 10px 0;
-    border-left: 4px solid #558b2f;
-    border-radius: 4px;
-  }
-  .nav-buttons {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 40px;
-  }
-  .nav-buttons a {
-    background-color: #00695c;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  .nav-buttons a:hover {
-    background-color: #004d40;
-  }
-  @media (max-width: 600px) {
-    .container {
-      padding: 20px;
-    }
-    table, th, td {
-      font-size: 14px;
-    }
-    .nav-buttons {
-      flex-direction: column;
-      gap: 10px;
-      align-items: stretch;
-    }
-  }
-    .code-snippet {
-        background: #f9fbe7;
-        padding: 10px;
-        border-radius: 4px;
-        font-family: 'Courier New', Courier, monospace;
-        overflow-x: auto;
-    }  
-    .tip-box {
-      background: #f8f9fa;
-      border-left: 4px solid #4CAF50;
-      padding: 10px;
-      margin: 15px 0;
-    }
-    .arabic {
-      font-family: 'Traditional Arabic', Arial, sans-serif;
-      font-size: 1.2em;
-    }
-    /* Add to your styles.css */
-.irab-table th, .summary-table th {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  background-color: #f4f7f9;
+  margin: 0;
+  padding: 20px;
+  color: #333;
+}
+
+.container {
+  max-width: 850px;
+  margin: auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+h1, h2 {
+  color: var(--primary-color);
+}
+
+/* ========================================
+   TYPOGRAPHY & TEXT UTILITY
+======================================== */
+.arabic, .arabic-text {
+  font-family: 'Traditional Arabic', Arial, sans-serif;
+  font-size: 1.2em;
+  color: #333;
+}
+
+.arabic-text span {
+  background-color: var(--highlight-bg);
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+.footnote {
+  font-size: 0.9em;
+  color: #666;
+  margin-top: -15px;
+}
+
+.footnote a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.footnote a:hover {
+  text-decoration: underline;
+}
+
+.highlighted-text {
+  background-color: #ffeb3b;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+/* ========================================
+   BOXES & NOTICES
+======================================== */
+.note {
+  background: var(--note-bg);
+  padding: 12px 20px;
+  margin: 20px 0;
+  border-left: 5px solid var(--accent-color);
+  border-radius: 6px;
+}
+
+.note.small {
+  font-size: 0.85em;
+  margin-top: 10px;
+}
+
+.note.small a {
+  font-size: 0.85em;
+}
+
+.note.small a:hover {
+  text-decoration: underline;
+}
+
+.example-box {
+  background: var(--highlight-bg);
+  padding: 10px;
+  border-radius: 5px;
+  margin: 15px 0;
+}
+
+.example-box code {
+  background: var(--highlight-bg);
+  padding: 2px 5px;
+  border-radius: 3px;
+}
+
+.example {
+  background: var(--example-bg);
+  padding: 10px;
+  margin: 10px 0;
+  border-left: 4px solid #558b2f;
+  border-radius: 4px;
+}
+
+.warning {
+  border-left: 4px solid var(--warning-color);
+  background: #fff8e1;
+}
+
+.highlight {
+  background-color: #e8f5e9;
+  border-left: 4px solid var(--highlight-green);
+  padding: 10px;
+  margin: 15px 0;
+}
+
+.tip-box {
+  background: #f8f9fa;
+  border-left: 4px solid #4CAF50;
+  padding: 10px;
+  margin: 15px 0;
+}
+
+.pattern-box {
+  background: #f8f9fa;
+  border-radius: 5px;
+  padding: 15px;
+  margin: 15px 0;
+  border-left: 4px solid #4CAF50;
+}
+
+/* ========================================
+   TABLES
+======================================== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background: var(--accent-color);
+  color: #fff;
+}
+
+.irab-table th,
+.summary-table th,
+.def-table th {
   background-color: #f0f7ff;
 }
 
+.tanween-table,
+.adj-table {
+  width: 100%;
+  margin: 20px 0;
+  border-collapse: collapse;
+}
+
+.tanween-table td, .tanween-table th,
+.adj-table td, .adj-table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.adj-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* ========================================
+   LAYOUTS
+======================================== */
 .grid-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -109,25 +204,69 @@ body {
   border-radius: 5px;
 }
 
-.warning {
-  border-left: 4px solid #ff9800;
-  background: #fff8e1;
+/* ========================================
+   NAVIGATION BUTTONS
+======================================== */
+.nav-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
 }
 
-.example-box {
-  background: #f5f5f5;
-  padding: 10px;
-  border-radius: 5px;
-  margin: 15px 0;
+.nav-buttons a {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
 }
-  .example-box code {
-    background: #e0f7fa;
-    padding: 2px 5px;
-    border-radius: 3px;
+
+.nav-buttons a:hover {
+  background-color: var(--primary-dark);
+}
+
+/* ========================================
+   CODE SNIPPETS
+======================================== */
+.code-snippet {
+  background: #f9fbe7;
+  padding: 10px;
+  border-radius: 4px;
+  font-family: 'Courier New', Courier, monospace;
+  overflow-x: auto;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+======================================== */
+@media (max-width: 600px) {
+  .container {
+    padding: 20px;
   }
-  .highlight {
-    background-color: #e8f5e9;
-    border-left: 4px solid #388e3c;
-    padding: 10px;
-    margin: 15px 0;
+
+  table, th, td {
+    font-size: 14px;
   }
+
+  .nav-buttons {
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+  }
+}
+.youtube-button {
+  background-color: #c4302b; /* YouTube red */
+  color: white;
+  padding: 8px 12px;
+  text-decoration: none;
+  border: none;
+  border-radius: 4px;
+  display: inline-block;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.youtube-button:hover {
+  background-color: #a52a22;
+}
