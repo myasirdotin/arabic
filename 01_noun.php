@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Arabic Grammar – Noun Lesson</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOM8d7x1z5l5e5c5e5e5e5e5e5e5e5e5e5e5e" crossorigin="anonymous" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>📌 What is a Noun in Arabic?</h1>
+    <p><strong>الاسم (Al-Ism)</strong> — The Noun</p>
+    <div class="note">
+      A noun in Arabic is any word that refers to:<br>
+      • A person (e.g., <b>أحمد</b> — Ahmad)<br>
+      • A place (e.g., <b>مكة</b> — Makkah)<br>
+      • A thing (e.g., <b>كتاب</b> — Book)<br>
+      • An idea or concept (e.g., <b>عدالة</b> — Justice)
+    </div>
+    <p>In Arabic, nouns are categorized into different types based on their characteristics and functions.</p>
+    <p>They can be classified as:</p>
+    <h2>✅ Features of Arabic Nouns:</h2>
+    <ul>
+      <li><b>Gender:</b> Masculine (مذكر) or Feminine (مؤنث)</li>
+      <li><b>Number:</b> Singular (مفرد), Dual (مثنى), or Plural (جمع)</li>
+      <li><b>Case Endings (الإِعْرَاب):</b> Change based on sentence role</li>
+    </ul>
+
+    <h2>🎯 Examples of Nouns:</h2>
+    <table>
+      <tr>
+        <th>Arabic</th>
+        <th>English</th>
+        <th>Type</th>
+      </tr>
+      <tr>
+        <td>طالب</td>
+        <td>Student</td>
+        <td>Person</td>
+      </tr>
+      <tr>
+        <td>مدرسة</td>
+        <td>School</td>
+        <td>Place</td>
+      </tr>
+      <tr>
+        <td>كرسي</td>
+        <td>Chair</td>
+        <td>Object</td>
+      </tr>
+      <tr>
+        <td>حرية</td>
+        <td>Freedom</td>
+        <td>Idea</td>
+      </tr>
+    </table>
+
+    <h2>📘 What is I‘rāb (الإِعْرَاب)?</h2>
+    <p><strong>I‘rāb</strong> means the grammatical case ending that shows the word's role in a sentence (subject, object, preposition-following). It appears as a vowel at the end of a word.</p>
+
+    <h3>🔄 3 Main Types of I‘rāb for Nouns:</h3>
+    <table>
+      <tr>
+        <th>Case</th>
+        <th>Arabic</th>
+        <th>Ending</th>
+        <th>Function</th>
+      </tr>
+      <tr>
+        <td>Raf‘</td>
+        <td>الرفع</td>
+        <td>ُ (Dammah)</td>
+        <td>Subject / Doer</td>
+      </tr>
+      <tr>
+        <td>Nasb</td>
+        <td>النصب</td>
+        <td>َ (Fathah)</td>
+        <td>Object / After certain particles</td>
+      </tr>
+      <tr>
+        <td>Jarr</td>
+        <td>الجرّ</td>
+        <td>ِ (Kasrah)</td>
+        <td>After a preposition / Idafah</td>
+      </tr>
+    </table>
+
+    <h3>🧠 Examples of I‘rāb in Action (noun: <b>طالب</b>):</h3>
+    <div class="example">جاءَ طالبٌ. → <i>Talibun</i> (Raf‘ – subject)</div>
+    <div class="example">رأيتُ طالبًا. → <i>Taliban</i> (Nasb – object)</div>
+    <div class="example">مررتُ بطالبِ. → <i>Talibin</i> (Jarr – after preposition)</div>
+
+    <h2>📝 Summary:</h2>
+    <table>
+      <tr>
+        <th>Term</th>
+        <th>Arabic</th>
+        <th>Meaning</th>
+      </tr>
+      <tr>
+        <td>Noun</td>
+        <td>الاسم</td>
+        <td>Person, place, thing, or idea</td>
+      </tr>
+      <tr>
+        <td>I‘rāb</td>
+        <td>الإِعْرَاب</td>
+        <td>Grammatical case ending</td>
+      </tr>
+    </table>
+    <h2>📝 Online Resources:</h2>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Link</th>
+      </tr>
+      <tr>
+        <td>Qari Aaqib</td>
+        <td>NOUN & AERAAB</td>
+        <td>
+          <a href="https://www.youtube.com/watch?v=ruGDTHDC2nA&list=PL7ryrm4bCxy8Hkdco9fRz3LGffuQqeMD4&index=3" target="_blank" rel="noopener noreferrer">
+            View on YouTube
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td>Dr Khalid Ul Hakeem</td>
+        <td>Aasaan Arabic Grammar</td>
+        <td>
+          <a href="https://www.youtube.com/watch?v=024tOQ2G0Uw&list=PLK2neZI9VJXxH28kgwFOSmAY3N7K54RLW" target="_blank" rel="noopener noreferrer">
+            View on YouTube
+          </a>
+        </td>
+      </tr>
+    </table>
+    
+
+    <div class="nav-buttons">
+      <a href="index.html">⬅️ Previous Lesson</a>
+      <a href="02_gender.php">Next Lesson ➡️</a>
+    </div>
+  </div>
+  <?php 
+      // Include the script file for any additional functionality
+  include 'script.php'; 
+      ?>
+</body>
+</html>
