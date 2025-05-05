@@ -6,6 +6,11 @@
   <title>Arabic Grammar - Course Contents</title>
   <link rel="stylesheet" href="css/styles.css" />
   <style>
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
     .contents-table {
       width: 100%;
       border-collapse: collapse;
@@ -34,15 +39,15 @@
       font-weight: bold;
     }
     .beginner {
-      background-color: #b0d4c8;
-      color: #2e7d32;
+      background-color: #c8e6c9;
+      color: #1b5e20;
     }
     .intermediate {
-      background-color: #32a2a8;
-      color: #1565c0;
+      background-color: #b3e5fc;
+      color: #01579b;
     }
     .advanced {
-      background-color: #d6ffe4;
+      background-color: #ffe0b2;
       color: #e65100;
     }
     .search-container {
@@ -54,6 +59,65 @@
       border: 1px solid #ddd;
       border-radius: 5px;
       font-size: 1em;
+    }
+    .btn {
+      display: inline-block;
+      padding: 8px 16px;
+      background-color: #00695c;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 0.9em;
+    }
+    .btn:hover {
+      background-color: #004d40;
+    }
+    .nav-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    /* Mobile Styles */
+    @media screen and (max-width: 768px) {
+      .contents-table {
+        display: none;
+      }
+      .mobile-table {
+        display: block;
+      }
+      .lesson-card {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 15px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      .lesson-card h3 {
+        margin: 0 0 10px;
+        font-size: 1.2em;
+        color: #00695c;
+      }
+      .lesson-card p {
+        margin: 5px 0;
+        font-size: 0.9em;
+      }
+      .lesson-card .level-badge {
+        margin: 5px 0;
+      }
+      .lesson-card .btn {
+        display: block;
+        text-align: center;
+        margin-top: 10px;
+      }
+    }
+
+    /* Desktop Styles */
+    @media screen and (min-width: 769px) {
+      .mobile-table {
+        display: none;
+      }
     }
   </style>
 </head>
@@ -220,6 +284,129 @@
       </tbody>
     </table>
 
+    <div class="mobile-table">
+      <div class="lesson-card">
+        <h3>01: Nouns in Arabic</h3>
+        <p><strong>Concepts:</strong> Gender, Number, I'rab</p>
+        <p><span class="level-badge beginner">Beginner</span></p>
+        <a href="01_noun.html" class="btn">View</a>
+      </div>
+      <div class="lesson-card">
+        <h3>02: Gender in Nouns</h3>
+        <p><strong>Concepts:</strong> Masculine/Feminine forms</p>
+        <p><span class="level-badge beginner">Beginner</span></p>
+        <a href="02_gender.html" class="btn">View</a>
+      </div>
+      <div class="lesson-card">
+        <h3>03: Number in Nouns</h3>
+        <p><strong>Concepts:</strong> Singular, Dual, Plural</p>
+        <p><span class="level-badge beginner">Beginner</span></p>
+        <a href="03_number.html" class="btn">View</a>
+      </div>
+      <div class="lesson-card">
+        <h3>04: I'rab (Case Endings)</h3>
+        <p><strong>Concepts:</strong> Dammah, Fathah, Kasrah</p>
+        <p><span class="level-badge intermediate">Intermediate</span></p>
+        <a href="04_irab.html" class="btn">View</a>
+      </div>
+      <div class="lesson-card">
+        <h3>05: Definiteness</h3>
+        <p><strong>Concepts:</strong> Al-, Tanween</p>
+        <p><span class="level-badge intermediate">Intermediate</span></p>
+        <a href="05_definite.html" class="btn">View</a>
+      </div>
+      <div class="lesson-card">
+        <h3>06: Adjectives</h3>
+        <p><strong>Concepts:</strong> Agreement rules</p>
+        <p><span class="level-badge intermediate">Intermediate</span></p>
+        <a href="06_adjectives.html" class="btn">View</a>
+      </div>
+      <div class="lesson-card">
+        <h3>07: Possession</h3>
+        <p><strong>Concepts:</strong> Idaafa construction</p>
+        <p><span class="level-badge intermediate">Intermediate</span></p>
+        <a href="07_possession.html" class="btn">View</a>
+      </div>
+      <div class="lesson-card">
+        <h3>08: Demonstratives</h3>
+        <p><strong>Concepts:</strong> This/That, These/Those</p>
+        <p><span class="level-badge intermediate">Intermediate</span></p>
+        <a href="08_demonstratives.html" class="btn">View</a>
+      </div>
+      <div class="lesson-card">
+        <h3>09: Pronouns</h3>
+        <p><strong>Concepts:</strong> Attached/Detached forms</p>
+        <p><span class="level-badge intermediate">Intermediate</span></p>
+        <a href="09_pronouns.html" class="btn">View</a>
+      </div>
+      <div class="lesson-card">
+        <h3>10: Verb Introduction</h3>
+        <p><strong>Concepts:</strong> Past, Present, Command</p>
+        <p><span class="level-badge intermediate">Intermediate</span></p>
+        <a href="10_verbs.html" class="btn">View</a>
+      </div>
+      <div class="lesson-card">
+        <h3>11: Verb Types</h3>
+        <p><strong>Concepts:</strong> Sound, Weak, Transitive</p>
+        <p><span class="level-badge advanced">Advanced</span></p>
+        <a href="11_verb_types.html" class="btn">View</a>
+      </div>
+      <div class="lesson-card">
+        <h3>12: Advanced Verbs</h3>
+        <p><strong>Concepts:</strong> Conjugation, Moods</p>
+        <p><span class="level-badge advanced">Advanced</span></p>
+        <a href="12_advanced_verbs.html" class="btn">View</a>
+      </div>
+      <div class="lesson-card">
+        <h3>13: Sentence Structure</h3>
+        <p><strong>Concepts:</strong> Nominal/Verbal sentences</p>
+        <p><span class="level-badge advanced">Advanced</span></p>
+        <a href="13_sentence_structure.html" class="btn">View</a>
+      </div>
+      <div class="lesson-card">
+        <h3>14: Question Formation</h3>
+        <p><strong>Concepts:</strong> Interrogatives</p>
+        <p><span class="level-badge advanced">Advanced</span></p>
+        <a href="14_questions.html" class="btn">View</a>
+      </div>
+      <div class="lesson-card">
+        <h3>15: Negation</h3>
+        <p><strong>Concepts:</strong> Negative particles</p>
+        <p><span class="level-badge advanced">Advanced</span></p>
+        <a href="15_negation.html" class="btn">View</a>
+      </div>
+      <div class="lesson-card">
+        <h3>16: Verb Doubling</h3>
+        <p><strong>Concepts:</strong> Form II, IV patterns</p>
+        <p><span class="level-badge advanced">Advanced</span></p>
+        <a href="16_verb_doubling.html" class="btn">View</a>
+      </div>
+      <div class="lesson-card">
+        <h3>17: Advanced Sentences</h3>
+        <p><strong>Concepts:</strong> Conditionals, Relatives</p>
+        <p><span class="level-badge advanced">Advanced</span></p>
+        <a href="17_advanced_sentences.html" class="btn">View</a>
+      </div>
+      <div class="lesson-card">
+        <h3>18: Reading Practice</h3>
+        <p><strong>Concepts:</strong> Authentic texts</p>
+        <p><span class="level-badge advanced">Advanced</span></p>
+        <a href="18_reading_practice.html" class="btn">View</a>
+      </div>
+      <div class="lesson-card">
+        <h3>19: Writing Practice</h3>
+        <p><strong>Concepts:</strong> Composition exercises</p>
+        <p><span class="level-badge advanced">Advanced</span></p>
+        <a href="19_writing_practice.html" class="btn">View</a>
+      </div>
+      <div class="lesson-card">
+        <h3>20: Review Test</h3>
+        <p><strong>Concepts:</strong> Comprehensive assessment</p>
+        <p><span class="level-badge advanced">Advanced</span></p>
+        <a href="20_review_test.html" class="btn">View</a>
+      </div>
+    </div>
+
     <div class="nav-buttons">
       <a href="index.html" class="btn">🏠 Return to Home</a>
       <a href="01_noun.html" class="btn">📖 Start Learning</a>
@@ -232,7 +419,9 @@
       const filter = input.value.toUpperCase();
       const table = document.querySelector(".contents-table");
       const tr = table.getElementsByTagName("tr");
+      const cards = document.querySelectorAll(".lesson-card");
 
+      // Search desktop table
       for (let i = 1; i < tr.length; i++) {
         let found = false;
         const td = tr[i].getElementsByTagName("td");
@@ -247,6 +436,12 @@
         
         tr[i].style.display = found ? "" : "none";
       }
+
+      // Search mobile cards
+      cards.forEach(card => {
+        const text = card.textContent || card.innerText;
+        card.style.display = text.toUpperCase().indexOf(filter) > -1 ? "" : "none";
+      });
     }
   </script>
 </body>
