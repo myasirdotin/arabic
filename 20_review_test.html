@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Arabic Grammar – Review Test</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-E8RSVHS80Z"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-E8RSVHS80Z');
+  </script>
+  <style>
+    .test-section {
+      background: #f5f5f5;
+      border-left: 4px solid #2196F3;
+      padding: 20px;
+      margin: 25px 0;
+      border-radius: 0 8px 8px 0;
+    }
+    .question {
+      margin: 15px 0;
+      padding: 10px;
+      background: white;
+      border-radius: 5px;
+    }
+    .answer-input {
+      width: 100%;
+      padding: 8px;
+      margin: 5px 0;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    .submit-btn {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 20px 0;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .hidden-answer {
+      display: none;
+      color: #2e7d32;
+      font-weight: bold;
+      margin-top: 5px;
+    }
+    .islamic-icon {
+      color: #006400;
+      margin-right: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1><span class="islamic-icon">📚</span> Arabic Grammar Review Test</h1>
+    <p><strong>اختبار شامل</strong> — Comprehensive Assessment of Lessons 1-19</p>
+    
+    <div class="note">
+      This final test evaluates your understanding of all grammar concepts covered in the course. Try to complete it without referring back to lessons.
+    </div>
+
+    <div class="test-section">
+      <h2><span class="islamic-icon">🖊️</span> Section 1: Nouns & Sentence Structure</h2>
+      
+      <div class="question">
+        <p>1. Identify the case ending for the underlined word:<br>
+        <span class="arabic">رَأَيْتُ الطَّالِبَ</span> (I saw the student)</p>
+        <input type="text" class="answer-input" id="q1">
+        <button onclick="showAnswer('a1')" class="hint-btn">Show Answer</button>
+        <div id="a1" class="hidden-answer">Answer: فتحة (accusative case)</div>
+      </div>
+      
+      <div class="question">
+        <p>2. Convert to dual form:<br>
+        <span class="arabic">كِتَابٌ جَدِيدٌ</span> (a new book)</p>
+        <input type="text" class="answer-input" id="q2">
+        <button onclick="showAnswer('a2')" class="hint-btn">Show Answer</button>
+        <div id="a2" class="hidden-answer">Answer: <span class="arabic">كِتَابَانِ جَدِيدَانِ</span></div>
+      </div>
+    </div>
+
+    <div class="test-section">
+      <h2><span class="islamic-icon">🔤</span> Section 2: Verbs & Conjugation</h2>
+      
+      <div class="question">
+        <p>3. Conjugate in present tense (he/she):<br>
+        <span class="arabic">كَتَبَ</span> (to write)</p>
+        <input type="text" class="answer-input" id="q3">
+        <button onclick="showAnswer('a3')" class="hint-btn">Show Answer</button>
+        <div id="a3" class="hidden-answer">Answer: <span class="arabic">يَكْتُبُ</span></div>
+      </div>
+      
+      <div class="question">
+        <p>4. Convert to Form II with translation:<br>
+        <span class="arabic">فَهِمَ</span> (to understand)</p>
+        <input type="text" class="answer-input" id="q4">
+        <button onclick="showAnswer('a4')" class="hint-btn">Show Answer</button>
+        <div id="a4" class="hidden-answer">Answer: <span class="arabic">فَهَّمَ</span> (to make understand/explain)</div>
+      </div>
+    </div>
+
+    <div class="test-section">
+      <h2><span class="islamic-icon">🕌</span> Section 3: Islamic Arabic Application</h2>
+      
+      <div class="question">
+        <p>5. Analyze the grammar in this Islamic phrase:<br>
+        <span class="arabic">إِنَّ الصَّلَاةَ كَانَتْ عَلَى الْمُؤْمِنِينَ كِتَابًا مَوْقُوتًا</span></p>
+        <p>Identify:</p>
+        <ul>
+          <li>The grammatical case of <span class="arabic">الصَّلَاةَ</span></li>
+          <li>The verb form of <span class="arabic">كَانَتْ</span></li>
+          <li>The type of <span class="arabic">مَوْقُوتًا</span></li>
+        </ul>
+        <textarea class="answer-input" id="q5" rows="3"></textarea>
+        <button onclick="showAnswer('a5')" class="hint-btn">Show Answer</button>
+        <div id="a5" class="hidden-answer">
+          Answer: 
+          <ul>
+            <li><span class="arabic">الصَّلَاةَ</span> - منصوب (accusative) because of <span class="arabic">إِنَّ</span></li>
+            <li><span class="arabic">كَانَتْ</span> - past tense, feminine singular</li>
+            <li><span class="arabic">مَوْقُوتًا</span> - adjective describing <span class="arabic">كِتَابًا</span>, منصوب</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="question">
+        <p>6. Write a sentence about Ramadan using:</p>
+        <ul>
+          <li>One Form IV verb</li>
+          <li>A relative clause</li>
+          <li>A time expression</li>
+        </ul>
+        <textarea class="answer-input" id="q6" rows="3"></textarea>
+        <button onclick="showAnswer('a6')" class="hint-btn">Show Answer</button>
+        <div id="a6" class="hidden-answer">
+          Answer (sample): <span class="arabic">في رَمَضَانَ، أُحِبُّ القُرْآنَ الَّذِي أَنْزَلَهُ اللهُ فِي هَذَا الشَّهْرِ</span><br>
+          (In Ramadan, I love the Quran which Allah revealed in this month)
+        </div>
+      </div>
+    </div>
+
+    <div class="test-section">
+      <h2><span class="islamic-icon">✍️</span> Section 4: Writing</h2>
+      <div class="question">
+        <p>7. Write a 5-sentence paragraph about the importance of seeking knowledge in Islam using:</p>
+        <ul>
+          <li>Two different verb forms</li>
+          <li>One nominal sentence and one verbal sentence</li>
+          <li>At least one passive verb</li>
+          <li>The connector <span class="arabic">لِأَنَّ</span></li>
+        </ul>
+        <textarea class="answer-input" id="q7" rows="5"></textarea>
+      </div>
+    </div>
+
+    <button class="submit-btn" onclick="checkAnswers()">Submit Test</button>
+
+    <div class="nav-buttons">
+      <a href="19_writing_practice.html">⬅️ Previous Lesson</a>
+      <a href="index.html">🏠 Return to Main Menu</a>
+    </div>
+  </div>
+
+  <script>
+    function showAnswer(id) {
+      const answer = document.getElementById(id);
+      if (answer.style.display === 'none') {
+        answer.style.display = 'block';
+      } else {
+        answer.style.display = 'none';
+      }
+    }
+
+    function checkAnswers() {
+      alert("Test submitted! Compare your answers with the model answers shown.");
+    }
+  </script>
+</body>
+</html>
