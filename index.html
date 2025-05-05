@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="Learn Arabic grammar step-by-step through beautifully structured lessons. Start from nouns, move through verbs, and master sentence structure at your own pace." />
   <title>Arabic Lessons – Home</title>
-  
+
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-E8RSVHS80Z"></script>
   <script>
@@ -16,16 +16,17 @@
   </script>
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;600&family=Noto+Sans+Arabic:wght@300;400;600&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --primary-color: #2c6e49;
-      --secondary-color: #4a8e6a;
-      --accent-color: #f4a261;
-      --text-color: #2d2d2d;
-      --light-bg: #f8f1e9;
-      --gradient: linear-gradient(135deg, #2c6e49 0%, #4a8e6a 100%);
+      --primary-color: #1a5f3a;
+      --secondary-color: #3a8c5e;
+      --accent-color: #e88b38;
+      --text-color: #1f2a44;
+      --light-bg: #fdfaf5;
+      --gradient: linear-gradient(135deg, #1a5f3a 0%, #3a8c5e 100%);
+      --highlight-color: #fff4e0;
     }
 
     * {
@@ -38,23 +39,24 @@
       font-family: 'Poppins', sans-serif;
       background-color: var(--light-bg);
       color: var(--text-color);
-      line-height: 1.6;
+      line-height: 1.7;
       scroll-behavior: smooth;
     }
 
     header {
       background: var(--gradient), url('https://images.unsplash.com/photo-1715347783182-93fa68d5a5e7?q=80&w=1973&auto=format&fit=crop&ixlib=rb-4.0.3') center/cover no-repeat;
       color: white;
-      padding: 80px 20px;
+      padding: 100px 20px;
       text-align: center;
       position: relative;
+      overflow: hidden;
     }
 
     header::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%), rgba(0,0,0,0.4);
+      background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 70%), rgba(0,0,0,0.5);
       z-index: 1;
     }
 
@@ -65,105 +67,127 @@
 
     h1 {
       font-family: 'Amiri', serif;
-      font-size: 3.5em;
-      margin-bottom: 10px;
-      text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      font-size: 4em;
+      margin-bottom: 15px;
+      text-shadow: 0 3px 8px rgba(0,0,0,0.4);
+      animation: fadeInDown 1s ease-out;
     }
 
     header p {
-      font-size: 1.2em;
+      font-size: 1.3em;
       font-weight: 300;
+      max-width: 600px;
+      margin: 0 auto;
     }
 
     .container {
-      max-width: 1200px;
+      max-width: 1280px;
       margin: auto;
-      padding: 20px;
+      padding: 30px;
     }
 
     .intro {
       text-align: center;
-      max-width: 800px;
-      margin: 40px auto;
-      font-size: 1.1em;
-      color: #555;
+      max-width: 900px;
+      margin: 50px auto;
+      font-size: 1.15em;
+      color: #4a4a4a;
+      animation: fadeIn 1s ease-out;
     }
 
     .intro a.button-link {
       display: inline-block;
-      background-color: var(--primary-color);
+      background: var(--gradient);
       color: white;
-      padding: 12px 24px;
-      margin-top: 20px;
+      padding: 14px 30px;
+      margin-top: 25px;
       text-decoration: none;
-      border-radius: 8px;
+      border-radius: 50px;
       font-weight: 600;
-      transition: background 0.3s ease;
+      font-size: 1.1em;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .intro a.button-link:hover {
-      background-color: var(--secondary-color);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
     }
 
     .note-box {
       background: white;
-      border-left: 6px solid var(--accent-color);
-      border-radius: 12px;
-      padding: 30px;
-      margin: 40px 0;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      border-left: 8px solid var(--accent-color);
+      border-radius: 15px;
+      padding: 35px;
+      margin: 50px 0;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+      animation: slideInLeft 0.8s ease-out;
+    }
+
+    .note-box::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 5px;
+      background: var(--gradient);
     }
 
     .note-box strong {
       color: var(--primary-color);
+      font-family: 'Amiri', serif;
+      font-size: 1.2em;
     }
 
     .lessons {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-      margin-top: 40px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 35px;
+      margin-top: 50px;
     }
 
     .card {
       background: white;
-      border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      padding: 25px;
-      transition: 0.3s ease;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      padding: 30px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       position: relative;
+      overflow: hidden;
+      animation: fadeInUp 0.5s ease-out;
     }
 
     .card::before {
       content: '';
-      height: 4px;
+      height: 5px;
       width: 100%;
       background: var(--gradient);
       position: absolute;
       top: 0;
       left: 0;
-      border-radius: 15px 15px 0 0;
+      border-radius: 20px 20px 0 0;
     }
 
     .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      transform: translateY(-8px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     }
 
     .card h2 {
-      font-size: 1.5em;
-      margin-bottom: 10px;
+      font-size: 1.6em;
+      margin-bottom: 12px;
       color: var(--primary-color);
       font-family: 'Amiri', serif;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
 
     .card p {
       color: #555;
       font-size: 1em;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
     }
 
     .card a {
@@ -171,48 +195,157 @@
       background: var(--gradient);
       color: white;
       text-decoration: none;
-      padding: 10px 20px;
-      border-radius: 25px;
+      padding: 12px 25px;
+      border-radius: 30px;
       font-weight: bold;
-      transition: background 0.3s;
+      font-size: 0.95em;
+      transition: background 0.3s ease, transform 0.3s ease;
       text-transform: uppercase;
     }
 
     .card a:hover {
       background: var(--accent-color);
+      transform: scale(1.05);
     }
 
     .progress-tag {
       display: inline-block;
-      background: #fff3e0;
+      background: var(--highlight-color);
       color: var(--accent-color);
-      padding: 6px 14px;
-      border-radius: 20px;
+      padding: 8px 16px;
+      border-radius: 25px;
       font-weight: 600;
       font-size: 0.9em;
-      margin-top: 10px;
+      margin-top: 12px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #4CAF50;
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      margin-top: 20px;
+      font-weight: 600;
+      transition: transform 0.3s ease;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+    }
+
+    .btn-advanced {
+      background: #2196F3;
+    }
+
+    .btn-highlight {
+      background: #FFC107;
+      color: #333;
+      font-weight: 600;
+    }
+
+    .card-highlight {
+      background: var(--highlight-color);
+      border-top: 5px solid #FFC107;
+    }
+
+    .level-badge {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      padding: 5px 10px;
+      border-radius: 15px;
+      font-size: 0.8em;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .level-badge.beginner {
+      background: #E8F5E9;
+      color: #2E7D32;
+    }
+
+    .level-badge.intermediate {
+      background: #E3F2FD;
+      color: #1565C0;
+    }
+
+    .level-badge.advanced {
+      background: #F3E5F5;
+      color: #7B1FA2;
     }
 
     footer {
       background: var(--primary-color);
       color: white;
       text-align: center;
-      padding: 30px 20px;
-      font-size: 1.1em;
-      margin-top: 60px;
+      padding: 40px 20px;
+      font-size: 1.2em;
+      margin-top: 80px;
+      position: relative;
     }
 
     footer a {
       color: #fff;
       text-decoration: underline;
+      transition: color 0.3s ease;
     }
 
+    footer a:hover {
+      color: var(--accent-color);
+    }
+
+    /* Animations */
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-50px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    /* Responsive Design */
     @media (max-width: 768px) {
       h1 {
-        font-size: 2.5em;
+        font-size: 2.8em;
+      }
+      header {
+        padding: 60px 20px;
       }
       .card {
+        padding: 25px;
+      }
+      .intro a.button-link {
+        padding: 12px 25px;
+        font-size: 1em;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 2.2em;
+      }
+      header p {
+        font-size: 1.1em;
+      }
+      .container {
         padding: 20px;
+      }
+      .card h2 {
+        font-size: 1.4em;
       }
     }
   </style>
@@ -227,13 +360,13 @@
   </div>
 </header>
 
-<div class="container">
+<main class="container">
 
   <div class="intro">
-    <p>Start with Lesson 1 and progress through our curriculum, building your knowledge.</p>
-    <p>Each lesson is designed to be comprehensive yet digestible, ensuring you grasp the concepts effectively.</p>
-    <p>Click on the lesson titles to begin your journey!</p>
-    <p>For a complete overview of the course, check out the full contents below.</p>
+    <h2>Welcome to Your Arabic Learning Journey!</h2>
+    <p>Each lesson is designed to be engaging, comprehensive, and easy to follow, ensuring you master the concepts at your own pace.</p>
+    <p>Click on the lesson titles to dive in!</p>
+    <p>For a complete overview of the course, explore the full contents below.</p>
     <a href="contents.html" class="button-link">View Full Course Contents</a>
   </div>
 
@@ -245,116 +378,155 @@
     <p>Revisit the material afterward for deeper understanding and clarity.</p>
   </div>
 
-  <h2 style="text-align:center;">📚 Lesson Catalog</h2>
+  <h2 style="text-align:center; font-family: 'Amiri', serif; color: var(--primary-color); margin-bottom: 40px;">📚 Lesson Catalog</h2>
 
   <div class="lessons">
 
-    <!-- Example Lesson Cards -->
     <div class="card">
       <h2>📌 Lesson 1: Nouns</h2>
       <p>Learn how nouns work in Arabic including gender, number, and i‘rāb.</p>
       <a href="01_noun.html">Start Learning</a>
+      <span class="level-badge beginner">Beginner</span>
     </div>
-
+  
     <div class="card">
       <h2>🔤 Lesson 2: Gender</h2>
       <p>Master masculine and feminine nouns with identification rules.</p>
       <a href="02_gender.html">Continue</a>
+      <span class="level-badge beginner">Beginner</span>
     </div>
-
+  
     <div class="card">
       <h2>🔢 Lesson 3: Number</h2>
       <p>Singular, dual and plural forms with sound and broken plurals.</p>
       <a href="03_number.html">Continue</a>
+      <span class="level-badge beginner">Beginner</span>
     </div>
-
+  
     <div class="card">
       <h2>🎯 Lesson 4: I'rab</h2>
       <p>Grammatical case endings (dammah, fathah, kasrah).</p>
       <a href="04_irab.html">Continue</a>
+      <span class="level-badge beginner">Beginner</span>
     </div>
-
+  
     <div class="card">
       <h2>🔍 Lesson 5: Definiteness</h2>
       <p>Definite vs. indefinite nouns and solar/lunar letters.</p>
       <a href="05_definite.html">Continue</a>
+      <span class="level-badge beginner">Beginner</span>
     </div>
-
+  
     <div class="card">
       <h2>🌈 Lesson 6: Adjectives</h2>
       <p>Agreement rules and descriptive structures.</p>
       <a href="06_adjectives.html">Continue</a>
+      <span class="level-badge intermediate">Intermediate</span>
     </div>
-
+  
     <div class="card">
       <h2>🤝 Lesson 7: Possession</h2>
       <p>Idaafa construction and possessive phrases.</p>
       <a href="07_possession.html">Continue</a>
+      <span class="level-badge intermediate">Intermediate</span>
     </div>
-
+  
     <div class="card">
       <h2>👉 Lesson 8: Demonstratives</h2>
       <p>This/that and these/those in Arabic.</p>
       <a href="08_demonstratives.html">Continue</a>
+      <span class="level-badge intermediate">Intermediate</span>
     </div>
-
+  
     <div class="card">
       <h2>👤 Lesson 9: Pronouns</h2>
       <p>Attached and detached pronoun forms.</p>
       <a href="09_pronouns.html">Continue</a>
+      <span class="level-badge intermediate">Intermediate</span>
     </div>
-
+  
     <div class="card">
       <h2>🏃 Lesson 10: Verbs Intro</h2>
       <p>Past, present and command tense basics.</p>
       <a href="10_verbs.html">Continue</a>
+      <span class="level-badge intermediate">Intermediate</span>
     </div>
-
+  
     <div class="card">
       <h2>🔧 Lesson 11: Verb Types</h2>
       <p>Sound, weak, transitive and derived forms.</p>
       <a href="11_verb_types.html">Continue</a>
+      <span class="level-badge advanced">Advanced</span>
     </div>
-
+  
     <div class="card">
       <h2>🎓 Lesson 12: Advanced Verbs</h2>
       <p>Complete conjugation and moods.</p>
-      <a href="12_advanced_verbs.html">Continue</a>
+      <a href="12_advanced_verbs.html" class="btn btn-advanced">View Lesson</a>
+      <span class="level-badge advanced">Advanced</span>
     </div>
-
+  
     <div class="card">
       <h2>🚧 Lesson 13: Coming Soon</h2>
       <p>Sentence structure and advanced topics.</p>
-      <span class="progress-tag">In Development</span>
+      <a href="13_sentence_structure.html">Continue</a>
+      <span class="level-badge advanced">Advanced</span>
     </div>
-
+  
     <div class="card">
       <h2>❓ Lesson 14: Questions</h2>
       <p>Forming questions and using interrogatives.</p>
-      <a href="14_questions.html">Continue →</a>
+      <a href="14_questions.html">Continue</a>
+      <span class="level-badge advanced">Advanced</span>
     </div>
-
+  
     <div class="card">
-      <h2>✖️ Lesson 15: Negation</h2>
-      <p>Negative particles and sentence structures.</p>
-      <a href="15_negation.html">Continue →</a>
+      <h2>🎓 Lesson 15: Negation</h2>
+      <p>Master negative particles in Arabic.</p>
+      <a href="15_negation.html" class="btn btn-advanced">View Lesson</a>
+      <span class="level-badge advanced">Advanced</span>
     </div>
-
+  
     <div class="card">
-      <h2>🔄 Lesson 16: Verb Doubling</h2>
-      <p>Form II and IV verbs with intensive meanings.</p>
-      <a href="16_verb_doubling.html">Continue →</a>
+      <h2>🎓 Lesson 16: Verb Doubling</h2>
+      <p>Form II and IV verb patterns.</p>
+      <a href="16_verb_doubling.html" class="btn btn-advanced">View Lesson</a>
+      <span class="level-badge advanced">Advanced</span>
     </div>
-
+  
     <div class="card">
-      <h2>🚧 Lesson 17: Coming Soon</h2>
-      <p>Advanced sentence structures and exceptions.</p>
-      <span class="progress-tag">In Development</span>
+      <h2>🎓 Lesson 17: Advanced Sentences</h2>
+      <p>Conditionals and relative clauses.</p>
+      <a href="17_advanced_sentences.html" class="btn btn-advanced">View Lesson</a>
+      <span class="level-badge advanced">Advanced</span>
     </div>
-
+  
+    <div class="card">
+      <h2>📖 Lesson 18: Reading Practice</h2>
+      <p>Work with authentic Arabic texts.</p>
+      <a href="18_reading_practice.html" class="btn btn-advanced">View Lesson</a>
+      <span class="level-badge advanced">Advanced</span>
+    </div>
+  
+    <div class="card">
+      <h2>✍️ Lesson 19: Writing Practice</h2>
+      <p>Composition exercises and drills.</p>
+      <a href="19_writing_practice.html" class="btn btn-advanced">View Lesson</a>
+      <span class="level-badge advanced">Advanced</span>
+    </div>
+  
+    <div class="card card-highlight">
+      <h2>🏆 Final Review Test</h2>
+      <p>Comprehensive assessment of all concepts.</p>
+      <a href="20_review_test.html" class="btn btn-highlight">Take Test</a>
+      <span class="level-badge advanced">Advanced</span>
+    </div>
+  
   </div>
-</div>
-<div id="google_translate_element" style="text-align: center; margin-top: 30px;"></div>
+  
+</main>
+
+<div id="google_translate_element" style="text-align: center; margin: 40px 0;"></div>
 
 <script type="text/javascript">
   function googleTranslateElementInit() {
@@ -364,8 +536,7 @@
     );
   }
 </script>
-
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 <footer>
   <p>📢 Share this resource with your friends and family to help them on their Arabic journey!</p>
