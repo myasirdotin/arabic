@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Arabic Grammar – Verbs</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    .quiz-box {
+      background: #f0f8ff;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      border: 1px solid #ccc;
+    }
+    .quiz-box select,
+    .quiz-box button {
+      margin: 10px 5px;
+      padding: 5px 10px;
+    }
+    .quiz-box button {
+      background: #008cba;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .quiz-box button:hover {
+      background: #005f6b;
+    }
+    .arabic { font-family: 'Scheherazade', serif; font-size: 1.2em; direction: rtl; }
+    .arabic-large { font-size: 2em; direction: rtl; }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- 🔍 Quiz Section -->
+    <div class="quiz-box">
+      <h2>🎓 Quick Quiz: Analyze the Word</h2>
+      <label for="word-select">Select a word:</label>
+      <select id="word-select">
+        <option value="" disabled selected>-- Choose a word --</option>
+        <option value="كَتَبَ">كَتَبَ</option>
+        <option value="كِتابٌ">كِتابٌ</option>
+        <option value="مَكْتَبٌ">مَكْتَبٌ</option>
+        <option value="مُعَلِّمٌ">مُعَلِّمٌ</option>
+        <option value="مُعَلِّمَةٌ">مُعَلِّمَةٌ</option>
+        <option value="طالِبٌ">طالِبٌ</option>
+        <option value="طالِبَةٌ">طالِبَةٌ</option>
+        <option value="يَكْتُبُ">يَكْتُبُ</option>
+        <option value="تَذْهَبُ">تَذْهَبُ</option>
+        <option value="ذَهَبَ">ذَهَبَ</option>
+        <option value="مَدْرَسَةٌ">مَدْرَسَةٌ</option>
+        <option value="قَلَمٌ">قَلَمٌ</option>
+        <option value="كُرْسِيٌّ">كُرْسِيٌّ</option>
+        <option value="مِفْتاحٌ">مِفْتاحٌ</option>
+        <option value="مِرْآةٌ">مِرْآةٌ</option>
+        <option value="بابٌ">بابٌ</option>
+        <option value="شُبَّاكٌ">شُبَّاكٌ</option>
+        <option value="يَدْرُسُ">يَدْرُسُ</option>
+        <option value="سَيّارَةٌ">سَيّارَةٌ</option>
+        <option value="رَجُلٌ">رَجُلٌ</option>
+        <option value="اِمْرَأَةٌ">اِمْرَأَةٌ</option>
+        <option value="بِنْتٌ">بِنْتٌ</option>
+        <option value="وَلَدٌ">وَلَدٌ</option>
+        <option value="يَذْهَبُ">يَذْهَبُ</option>
+        <option value="تَكْتُبُ">تَكْتُبُ</option>
+        <option value="مُهَنْدِسٌ">مُهَنْدِسٌ</option>
+        <option value="مُهَنْدِسَةٌ">مُهَنْدِسَةٌ</option>
+        <option value="اُكْتُبْ">اُكْتُبْ</option>
+        <option value="اِقْرَأْ">اِقْرَأْ</option>
+      </select>
+      <button onclick="checkSelectedWord()">Check Word Type</button>
+
+      <div id="step2" style="display:none;">
+        <p id="word-type-result"></p>
+        <p>➡️ What is the gender?</p>
+        <button onclick="selectGender('Masculine')">مذكّر</button>
+        <button onclick="selectGender('Feminine')">مؤنّث</button>
+      </div>
+
+      <div id="step3" style="display:none;">
+        <p>➡️ What is the number form?</p>
+        <button onclick="selectNumber('Singular')">مفرد</button>
+        <button onclick="selectNumber('Dual')">مثنّى</button>
+        <button onclick="selectNumber('Plural')">جمع</button>
+      </div>
+
+      <div id="final-result" style="display:none;">
+        <h3>🧾 Summary:</h3>
+        <p id="summary-text"></p>
+      </div>
+    </div>
+
+    <!-- 👇 Your Original Lesson Content Starts Here -->
+    <h1>📌 Arabic Verbs (الأفعال)</h1>
+    <p><strong>الماضي، المضارع، الأمر</strong> — Past, Present, Command</p>
+    
+    <div class="note">
+      Arabic verbs are built on root systems (usually 3 letters) and change form based on tense, person, gender, and number.
+    </div>
+
+    <h2>✅ The Three Main Tenses:</h2>
+    <table>
+      <tr>
+        <th>Tense</th>
+        <th>Arabic</th>
+        <th>Example</th>
+        <th>Meaning</th>
+      </tr>
+      <tr>
+        <td>Past</td>
+        <td class="arabic">ماضي</td>
+        <td class="arabic">كَتَبَ</td>
+        <td>He wrote</td>
+      </tr>
+      <tr>
+        <td>Present</td>
+        <td class="arabic">مضارع</td>
+        <td class="arabic">يَكْتُبُ</td>
+        <td>He writes/is writing</td>
+      </tr>
+      <tr>
+        <td>Command</td>
+        <td class="arabic">أمر</td>
+        <td class="arabic">اُكْتُبْ</td>
+        <td>Write! (masc.)</td>
+      </tr>
+    </table>
+
+    <h2>🎯 Root System (الجذر):</h2>
+    <div class="root-box">
+      <p>Most verbs derive from <strong>3-letter roots</strong>:</p>
+      <div class="arabic-large">ك - ت - ب</div>
+      <p>This root gives us words related to "writing":</p>
+      <ul>
+        <li><span class="arabic">كَتَبَ</span> (he wrote)</li>
+        <li><span class="arabic">كِتابٌ</span> (book)</li>
+        <li><span class="arabic">مَكْتَبَةٌ</span> (library)</li>
+      </ul>
+    </div>
+
+    <h2>📘 Past Tense Conjugation:</h2>
+    <table>
+      <tr>
+        <th>Person</th>
+        <th>Arabic</th>
+        <th>Example (كَتَبَ)</th>
+      </tr>
+      <tr>
+        <td>I</td>
+        <td class="arabic">تُ</td>
+        <td class="arabic">كَتَبْتُ</td>
+      </tr>
+      <tr>
+        <td>You (masc.)</td>
+        <td class="arabic">تَ</td>
+        <td class="arabic">كَتَبْتَ</td>
+      </tr>
+      <tr>
+        <td>You (fem.)</td>
+        <td class="arabic">تِ</td>
+        <td class="arabic">كَتَبْتِ</td>
+      </tr>
+      <tr>
+        <td>He</td>
+        <td class="arabic">َ</td>
+        <td class="arabic">كَتَبَ</td>
+      </tr>
+      <tr>
+        <td>She</td>
+        <td class="arabic">َتْ</td>
+        <td class="arabic">كَتَبَتْ</td>
+      </tr>
+    </table>
+
+    <h2>📝 Present Tense Prefixes/Suffixes:</h2>
+    <table>
+      <tr>
+        <th>Person</th>
+        <th>Prefix</th>
+        <th>Example (يَكْتُبُ)</th>
+      </tr>
+      <tr>
+        <td>I</td>
+        <td class="arabic">أ</td>
+        <td class="arabic">أَكْتُبُ</td>
+      </tr>
+      <tr>
+        <td>You (masc.)</td>
+        <td class="arabic">ت</td>
+        <td class="arabic">تَكْتُبُ</td>
+      </tr>
+      <tr>
+        <td>You (fem.)</td>
+        <td class="arabic">ت</td>
+        <td class="arabic">تَكْتُبِينَ</td>
+      </tr>
+      <tr>
+        <td>He</td>
+        <td class="arabic">ي</td>
+        <td class="arabic">يَكْتُبُ</td>
+      </tr>
+      <tr>
+        <td>She</td>
+        <td class="arabic">ت</td>
+        <td class="arabic">تَكْتُبُ</td>
+      </tr>
+    </table>
+
+    <h3>🧠 Verb Sentence Examples:</h3>
+    <div class="example-box">
+      <p><span class="arabic">كَتَبَ الرِّسالَةَ</span> (He wrote the letter)</p>
+      <p><span class="arabic">تَكْتُبُ الواجِبَ</span> (You [fem.] are writing the homework)</p>
+      <p><span class="arabic">اِقْرَأِ الكِتابَ</span> (Read the book! [masc.])</p>
+    </div>
+
+    <div class="tip-box warning">
+      <h3>⚠️ Important Notes:</h3>
+      <ol>
+        <li>Present tense often implies <strong>continuous</strong> action ("is writing")</li>
+        <li>Command forms change based on <strong>gender/number</strong></li>
+        <li>Verbs agree with subjects in <strong>gender/number</strong></li>
+      </ol>
+    </div>
+
+    <div class="practice-box">
+      <h3>✍️ Practice:</h3>
+      <p>Conjugate these verbs:</p>
+      <ol>
+        <li>He ate (أَكَلَ) → <span class="arabic hint">أَكَلَ</span></li>
+        <li>I study (يَدْرُسُ) → <span class="arabic hint">أَدْرُسُ</span></li>
+        <li>You (masc.) write! → <span class="arabic hint">اُكْتُبْ</span></li>
+      </ol>
+    </div>
+
+    <div class="nav-buttons">
+      <a href="09_pronouns.html">⬅️ Previous Lesson</a>
+      <a href="index.html">📚 View All Lessons</a>
+      <a href="11_verb_types.html">Next Lesson ➡️</a>
+    </div>
+  </div>
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-E8RSVHS80Z"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-E8RSVHS80Z');
+  </script>
+
+  <!-- Quiz Logic -->
+  <script>
+    let wordType = '', gender = '', number = '', selectedWord = '';
+
+    function checkSelectedWord() {
+      const word = document.getElementById("word-select").value;
+      selectedWord = word;
+      const verbStarters = ["ي", "ت", "أ", "اِ"];
+      if (verbStarters.some(prefix => word.startsWith(prefix)) || word.endsWith("َ")) {
+        wordType = "Verb";
+      } else {
+        wordType = "Noun";
+      }
+
+      document.getElementById("word-type-result").innerText = `✅ "${selectedWord}" is a **${wordType}**.`;
+      document.getElementById("step2").style.display = "block";
+      document.getElementById("step3").style.display = "none";
+      document.getElementById("final-result").style.display = "none";
+    }
+
+    function selectGender(g) {
+      gender = g;
+      document.getElementById("step3").style.display = "block";
+    }
+
+    function selectNumber(n) {
+      number = n;
+      document.getElementById("final-result").style.display = "block";
+      document.getElementById("summary-text").innerText = 
+        `You selected: "${selectedWord}" → Type: ${wordType}, Gender: ${gender}, Number: ${number}. ✅`;
+    }
+  </script>
+</body>
+</html>
