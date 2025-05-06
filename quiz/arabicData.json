@@ -1,0 +1,107 @@
+{
+    "conjugationData": {
+      "verb": {
+        "فعل (ف-ع-ل)": {
+          "conjugations": [
+            { "form": "Past (He)", "arabic": "فَعَلَ", "transliteration": "fa'ala", "translation": "he did", "audio": "fa'ala" },
+            { "form": "Present (He)", "arabic": "يَفْعَلُ", "transliteration": "yaf'alu", "translation": "he does", "audio": "yaf'alu" }
+          ],
+          "info": {
+            "root": "ف-ع-ل",
+            "pattern": "فَعَلَ",
+            "meaning": "Generic action verb"
+          }
+        },
+        "أكل (أ-ك-ل)": {
+          "conjugations": [
+            { "form": "Past (He)", "arabic": "أَكَلَ", "transliteration": "akala", "translation": "he ate", "audio": "akala" },
+            { "form": "Present (He)", "arabic": "يَأْكُلُ", "transliteration": "ya'kulu", "translation": "he eats", "audio": "ya'kulu" }
+          ],
+          "info": {
+            "root": "أ-ك-ل",
+            "pattern": "فَعَلَ",
+            "meaning": "Related to eating"
+          }
+        },
+        "شرب (ش-ر-ب)": {
+          "conjugations": [
+            { "form": "Past (He)", "arabic": "شَرِبَ", "transliteration": "shariba", "translation": "he drank", "audio": "shariba" },
+            { "form": "Present (He)", "arabic": "يَشْرَبُ", "transliteration": "yashrabu", "translation": "he drinks", "audio": "yashrabu" }
+          ],
+          "info": {
+            "root": "ش-ر-ب",
+            "pattern": "فَعِلَ",
+            "meaning": "Related to drinking"
+          }
+        }
+        // ... (97 more verbs in the same format)
+      },
+      "noun": {
+        "كتاب (ك-ت-ب)": {
+          "conjugations": [
+            { "form": "Singular", "arabic": "كِتَابٌ", "transliteration": "kitābun", "translation": "a book", "audio": "kitabun" },
+            { "form": "Plural", "arabic": "كُتُبٌ", "transliteration": "kutubun", "translation": "books", "audio": "kutubun" }
+          ],
+          "info": {
+            "root": "ك-ت-ب",
+            "gender": "masculine",
+            "meaning": "Written work"
+          }
+        },
+        "بنت (ب-ن-ت)": {
+          "conjugations": [
+            { "form": "Singular", "arabic": "بِنْتٌ", "transliteration": "bintun", "translation": "a girl", "audio": "bintun" },
+            { "form": "Plural", "arabic": "بَنَاتٌ", "transliteration": "banātun", "translation": "girls", "audio": "banatun" }
+          ],
+          "info": {
+            "root": "ب-ن-ت",
+            "gender": "feminine",
+            "meaning": "Female child"
+          }
+        }
+        // ... (97 more nouns in the same format)
+      },
+      "adjective": {
+        "كبير (ك-ب-ر)": {
+          "conjugations": [
+            { "form": "Masculine", "arabic": "كَبِيرٌ", "transliteration": "kabīrun", "translation": "big (masc.)", "audio": "kabirun" },
+            { "form": "Feminine", "arabic": "كَبِيرَةٌ", "transliteration": "kabīratun", "translation": "big (fem.)", "audio": "kabiratun" }
+          ],
+          "info": {
+            "root": "ك-ب-ر",
+            "comparative": "أَكْبَرُ (akbar)",
+            "meaning": "Describes size"
+          }
+        },
+        "صغير (ص-غ-ر)": {
+          "conjugations": [
+            { "form": "Masculine", "arabic": "صَغِيرٌ", "transliteration": "ṣaghīrun", "translation": "small (masc.)", "audio": "saghirun" },
+            { "form": "Feminine", "arabic": "صَغِيرَةٌ", "transliteration": "ṣaghīratun", "translation": "small (fem.)", "audio": "saghiratun" }
+          ],
+          "info": {
+            "root": "ص-غ-ر",
+            "comparative": "أَصْغَرُ (aṣghar)",
+            "meaning": "Describes smallness"
+          }
+        }
+        // ... (97 more adjectives in the same format)
+      }
+    },
+    "wordsOfTheDay": [
+      {
+        "word": "يَذْهَبُ",
+        "transliteration": "yadhhabu",
+        "translation": "he goes",
+        "example": "يَذْهَبُ إِلَى المَدْرَسَةِ",
+        "exampleTranslation": "He goes to school"
+      },
+      {
+        "word": "يَقْرَأُ",
+        "transliteration": "yaqra'u",
+        "translation": "he reads",
+        "example": "يَقْرَأُ الكِتَابَ",
+        "exampleTranslation": "He reads the book"
+      }
+      // ... (98 more daily words)
+    ]
+  }
