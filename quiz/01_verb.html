@@ -4,33 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Arabic Grammar – Verbs</title>
-  <link rel="stylesheet" href="css/styles.css" />
-  <style>
-    .quiz-box {
-      background: #f0f8ff;
-      padding: 20px;
-      border-radius: 10px;
-      margin-bottom: 30px;
-      border: 1px solid #ccc;
-    }
-    .quiz-box select,
-    .quiz-box button {
-      margin: 10px 5px;
-      padding: 5px 10px;
-    }
-    .quiz-box button {
-      background: #008cba;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .quiz-box button:hover {
-      background: #005f6b;
-    }
-    .arabic { font-family: 'Scheherazade', serif; font-size: 1.2em; direction: rtl; }
-    .arabic-large { font-size: 2em; direction: rtl; }
-  </style>
+  <link rel="stylesheet" href="../css/styles.css" />
 </head>
 <body>
   <div class="container">
@@ -39,52 +13,24 @@
     <div class="quiz-box">
       <h2>🎓 Quick Quiz: Analyze the Word</h2>
       <label for="word-select">Select a word:</label>
-      <select id="word-select">
-        <option value="" disabled selected>-- Choose a word --</option>
-        <option value="كَتَبَ">كَتَبَ</option>
-        <option value="كِتابٌ">كِتابٌ</option>
-        <option value="مَكْتَبٌ">مَكْتَبٌ</option>
-        <option value="مُعَلِّمٌ">مُعَلِّمٌ</option>
-        <option value="مُعَلِّمَةٌ">مُعَلِّمَةٌ</option>
-        <option value="طالِبٌ">طالِبٌ</option>
-        <option value="طالِبَةٌ">طالِبَةٌ</option>
-        <option value="يَكْتُبُ">يَكْتُبُ</option>
-        <option value="تَذْهَبُ">تَذْهَبُ</option>
-        <option value="ذَهَبَ">ذَهَبَ</option>
-        <option value="مَدْرَسَةٌ">مَدْرَسَةٌ</option>
-        <option value="قَلَمٌ">قَلَمٌ</option>
-        <option value="كُرْسِيٌّ">كُرْسِيٌّ</option>
-        <option value="مِفْتاحٌ">مِفْتاحٌ</option>
-        <option value="مِرْآةٌ">مِرْآةٌ</option>
-        <option value="بابٌ">بابٌ</option>
-        <option value="شُبَّاكٌ">شُبَّاكٌ</option>
-        <option value="يَدْرُسُ">يَدْرُسُ</option>
-        <option value="سَيّارَةٌ">سَيّارَةٌ</option>
-        <option value="رَجُلٌ">رَجُلٌ</option>
-        <option value="اِمْرَأَةٌ">اِمْرَأَةٌ</option>
-        <option value="بِنْتٌ">بِنْتٌ</option>
-        <option value="وَلَدٌ">وَلَدٌ</option>
-        <option value="يَذْهَبُ">يَذْهَبُ</option>
-        <option value="تَكْتُبُ">تَكْتُبُ</option>
-        <option value="مُهَنْدِسٌ">مُهَنْدِسٌ</option>
-        <option value="مُهَنْدِسَةٌ">مُهَنْدِسَةٌ</option>
-        <option value="اُكْتُبْ">اُكْتُبْ</option>
-        <option value="اِقْرَأْ">اِقْرَأْ</option>
+      <select id="word-select" aria-label="Select an Arabic word">
+        <option value="" disabled selected>-- Select a word --</option>
       </select>
-      <button onclick="checkSelectedWord()">Check Word Type</button>
+      <button onclick="checkSelectedWord()" aria-label="Check the selected word type">Check Word Type</button>
+      <button onclick="resetQuiz()" aria-label="Reset the quiz">Reset Quiz</button>
 
       <div id="step2" style="display:none;">
         <p id="word-type-result"></p>
         <p>➡️ What is the gender?</p>
-        <button onclick="selectGender('Masculine')">مذكّر</button>
-        <button onclick="selectGender('Feminine')">مؤنّث</button>
+        <button onclick="selectGender('Masculine')" aria-label="Select Masculine gender">مذكّر</button>
+        <button onclick="selectGender('Feminine')" aria-label="Select Feminine gender">مؤنّث</button>
       </div>
 
       <div id="step3" style="display:none;">
         <p>➡️ What is the number form?</p>
-        <button onclick="selectNumber('Singular')">مفرد</button>
-        <button onclick="selectNumber('Dual')">مثنّى</button>
-        <button onclick="selectNumber('Plural')">جمع</button>
+        <button onclick="selectNumber('Singular')" aria-label="Select Singular number">مفرد</button>
+        <button onclick="selectNumber('Dual')" aria-label="Select Dual number">مثنّى</button>
+        <button onclick="selectNumber('Plural')" aria-label="Select Plural number">جمع</button>
       </div>
 
       <div id="final-result" style="display:none;">
@@ -93,7 +39,7 @@
       </div>
     </div>
 
-    <!-- 👇 Your Original Lesson Content Starts Here -->
+    <!-- 👇 Lesson Content -->
     <h1>📌 Arabic Verbs (الأفعال)</h1>
     <p><strong>الماضي، المضارع، الأمر</strong> — Past, Present, Command</p>
     
@@ -253,19 +199,66 @@
 
   <!-- Quiz Logic -->
   <script>
+    const wordData = [
+      { word: "كَتَبَ", type: "Verb", tense: "Past", gender: "Masculine", number: "Singular" },
+      { word: "كِتابٌ", type: "Noun", gender: "Masculine", number: "Singular" },
+      { word: "مَكْتَبٌ", type: "Noun", gender: "Masculine", number: "Singular" },
+      { word: "مُعَلِّمٌ", type: "Noun", gender: "Masculine", number: "Singular" },
+      { word: "مُعَلِّمَةٌ", type: "Noun", gender: "Feminine", number: "Singular" },
+      { word: "طالِبٌ", type: "Noun", gender: "Masculine", number: "Singular" },
+      { word: "طالِبَةٌ", type: "Noun", gender: "Feminine", number: "Singular" },
+      { word: "يَكْتُبُ", type: "Verb", tense: "Present", gender: "Masculine", number: "Singular" },
+      { word: "تَذْهَبُ", type: "Verb", tense: "Present", gender: "Feminine", number: "Singular" },
+      { word: "ذَهَبَ", type: "Verb", tense: "Past", gender: "Masculine", number: "Singular" },
+      { word: "مَدْرَسَةٌ", type: "Noun", gender: "Feminine", number: "Singular" },
+      { word: "قَلَمٌ", type: "Noun", gender: "Masculine", number: "Singular" },
+      { word: "كُرْسِيٌّ", type: "Noun", gender: "Masculine", number: "Singular" },
+      { word: "مِفْتاحٌ", type: "Noun", gender: "Masculine", number: "Singular" },
+      { word: "مِرْآةٌ", type: "Noun", gender: "Feminine", number: "Singular" },
+      { word: "بابٌ", type: "Noun", gender: "Masculine", number: "Singular" },
+      { word: "شُبَّاكٌ", type: "Noun", gender: "Masculine", number: "Singular" },
+      { word: "يَدْرُسُ", type: "Verb", tense: "Present", gender: "Masculine", number: "Singular" },
+      { word: "سَيّارَةٌ", type: "Noun", gender: "Feminine", number: "Singular" },
+      { word: "رَجُلٌ", type: "Noun", gender: "Masculine", number: "Singular" },
+      { word: "اِمْرَأَةٌ", type: "Noun", gender: "Feminine", number: "Singular" },
+      { word: "بِنْتٌ", type: "Noun", gender: "Feminine", number: "Singular" },
+      { word: "وَلَدٌ", type: "Noun", gender: "Masculine", number: "Singular" },
+      { word: "يَذْهَبُ", type: "Verb", tense: "Present", gender: "Masculine", number: "Singular" },
+      { word: "تَكْتُبُ", type: "Verb", tense: "Present", gender: "Feminine", number: "Singular" },
+      { word: "مُهَنْدِسٌ", type: "Noun", gender: "Masculine", number: "Singular" },
+      { word: "مُهَنْدِسَةٌ", type: "Noun", gender: "Feminine", number: "Singular" },
+      { word: "اُكْتُبْ", type: "Verb", tense: "Command", gender: "Masculine", number: "Singular" },
+      { word: "اِقْرَأْ", type: "Verb", tense: "Command", gender: "Masculine", number: "Singular" }
+    ];
+
     let wordType = '', gender = '', number = '', selectedWord = '';
+
+    // Populate select dynamically
+    document.addEventListener("DOMContentLoaded", () => {
+      const wordSelect = document.getElementById("word-select");
+      wordData.forEach(item => {
+        const option = document.createElement("option");
+        option.value = item.word;
+        option.text = item.word;
+        wordSelect.appendChild(option);
+      });
+    });
 
     function checkSelectedWord() {
       const word = document.getElementById("word-select").value;
-      selectedWord = word;
-      const verbStarters = ["ي", "ت", "أ", "اِ"];
-      if (verbStarters.some(prefix => word.startsWith(prefix)) || word.endsWith("َ")) {
-        wordType = "Verb";
-      } else {
-        wordType = "Noun";
+      const wordInfo = wordData.find(item => item.word === word);
+      if (!wordInfo) {
+        document.getElementById("word-type-result").innerText = "⚠️ Please select a word.";
+        return;
       }
 
-      document.getElementById("word-type-result").innerText = `✅ "${selectedWord}" is a **${wordType}**.`;
+      selectedWord = word;
+      wordType = wordInfo.type;
+      const resultText = wordInfo.type === "Verb"
+        ? `✅ "${word}" is a **${wordInfo.type}** (${wordInfo.tense}).`
+        : `✅ "${word}" is a **${wordInfo.type}**.`;
+
+      document.getElementById("word-type-result").innerText = resultText;
       document.getElementById("step2").style.display = "block";
       document.getElementById("step3").style.display = "none";
       document.getElementById("final-result").style.display = "none";
@@ -273,14 +266,39 @@
 
     function selectGender(g) {
       gender = g;
+      const wordInfo = wordData.find(item => item.word === selectedWord);
+      if (wordInfo.gender !== g) {
+        document.getElementById("word-type-result").innerText += 
+          `\n⚠️ Incorrect gender. "${selectedWord}" is ${wordInfo.gender}. Hint: Feminine nouns often end with ة (ta marbuta).`;
+      }
       document.getElementById("step3").style.display = "block";
     }
 
     function selectNumber(n) {
       number = n;
+      const wordInfo = wordData.find(item => item.word === selectedWord);
+      let summary = `You selected: "${selectedWord}" → Type: ${wordType}`;
+      if (wordInfo.type === "Verb") summary += ` (${wordInfo.tense})`;
+      summary += `, Gender: ${gender}, Number: ${number}.`;
+
+      if (wordInfo.number !== n) {
+        summary += `\n⚠️ Incorrect number. "${selectedWord}" is ${wordInfo.number}. Hint: Plural nouns often have broken plural patterns.`;
+      } else {
+        summary += " ✅ All correct!";
+      }
+
       document.getElementById("final-result").style.display = "block";
-      document.getElementById("summary-text").innerText = 
-        `You selected: "${selectedWord}" → Type: ${wordType}, Gender: ${gender}, Number: ${number}. ✅`;
+      document.getElementById("summary-text").innerText = summary;
+    }
+
+    function resetQuiz() {
+      wordType = gender = number = selectedWord = "";
+      document.getElementById("word-select").value = "";
+      document.getElementById("word-type-result").innerText = "";
+      document.getElementById("summary-text").innerText = "";
+      document.getElementById("step2").style.display = "none";
+      document.getElementById("step3").style.display = "none";
+      document.getElementById("final-result").style.display = "none";
     }
   </script>
 </body>
