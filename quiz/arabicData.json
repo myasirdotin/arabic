@@ -1,107 +1,282 @@
 {
     "conjugationData": {
       "verb": {
-        "فعل (ف-ع-ل)": {
+        "كتب": {
           "conjugations": [
-            { "form": "Past (He)", "arabic": "فَعَلَ", "transliteration": "fa'ala", "translation": "he did", "audio": "fa'ala" },
-            { "form": "Present (He)", "arabic": "يَفْعَلُ", "transliteration": "yaf'alu", "translation": "he does", "audio": "yaf'alu" }
-          ],
-          "info": {
-            "root": "ف-ع-ل",
-            "pattern": "فَعَلَ",
-            "meaning": "Generic action verb"
-          }
-        },
-        "أكل (أ-ك-ل)": {
-          "conjugations": [
-            { "form": "Past (He)", "arabic": "أَكَلَ", "transliteration": "akala", "translation": "he ate", "audio": "akala" },
-            { "form": "Present (He)", "arabic": "يَأْكُلُ", "transliteration": "ya'kulu", "translation": "he eats", "audio": "ya'kulu" }
-          ],
-          "info": {
-            "root": "أ-ك-ل",
-            "pattern": "فَعَلَ",
-            "meaning": "Related to eating"
-          }
-        },
-        "شرب (ش-ر-ب)": {
-          "conjugations": [
-            { "form": "Past (He)", "arabic": "شَرِبَ", "transliteration": "shariba", "translation": "he drank", "audio": "shariba" },
-            { "form": "Present (He)", "arabic": "يَشْرَبُ", "transliteration": "yashrabu", "translation": "he drinks", "audio": "yashrabu" }
-          ],
-          "info": {
-            "root": "ش-ر-ب",
-            "pattern": "فَعِلَ",
-            "meaning": "Related to drinking"
-          }
-        }
-        // ... (97 more verbs in the same format)
-      },
-      "noun": {
-        "كتاب (ك-ت-ب)": {
-          "conjugations": [
-            { "form": "Singular", "arabic": "كِتَابٌ", "transliteration": "kitābun", "translation": "a book", "audio": "kitabun" },
-            { "form": "Plural", "arabic": "كُتُبٌ", "transliteration": "kutubun", "translation": "books", "audio": "kutubun" }
+            { "form": "Past (He)", "arabic": "كَتَبَ", "transliteration": "kataba", "translation": "he wrote", "audio": "kataba" },
+            { "form": "Past (She)", "arabic": "كَتَبَتْ", "transliteration": "katabat", "translation": "she wrote", "audio": "katabat" },
+            { "form": "Past (I)", "arabic": "كَتَبْتُ", "transliteration": "katabtu", "translation": "I wrote", "audio": "katabtu" },
+            { "form": "Past (They, masc.)", "arabic": "كَتَبُوا", "transliteration": "katabū", "translation": "they wrote", "audio": "kataboo" },
+            { "form": "Past (They, fem.)", "arabic": "كَتَبْنَ", "transliteration": "katabna", "translation": "they wrote", "audio": "katabna" },
+            { "form": "Present (He)", "arabic": "يَكْتُبُ", "transliteration": "yaktubu", "translation": "he writes", "audio": "yaktubu" },
+            { "form": "Present (She)", "arabic": "تَكْتُبُ", "transliteration": "taktubu", "translation": "she writes", "audio": "taktubu" },
+            { "form": "Present (I)", "arabic": "أَكْتُبُ", "transliteration": "aktubu", "translation": "I write", "audio": "aktubu" },
+            { "form": "Present (They, masc.)", "arabic": "يَكْتُبُونَ", "transliteration": "yaktubūna", "translation": "they write", "audio": "yaktuboona" },
+            { "form": "Imperative (You, masc.)", "arabic": "اُكْتُبْ", "transliteration": "uktub", "translation": "write!", "audio": "uktub" },
+            { "form": "Imperative (You, fem.)", "arabic": "اُكْتُبِي", "transliteration": "uktubī", "translation": "write!", "audio": "uktubee" }
           ],
           "info": {
             "root": "ك-ت-ب",
-            "gender": "masculine",
-            "meaning": "Written work"
+            "pattern": "فَعَلَ",
+            "meaning": "Related to writing",
+            "examples": [
+              "كَتَبَ الرِّسَالَةَ (He wrote the letter)",
+              "سَوْفَ أَكْتُبُ الكِتَابَ (I will write the book)"
+            ]
           }
         },
-        "بنت (ب-ن-ت)": {
+        "درس": {
           "conjugations": [
-            { "form": "Singular", "arabic": "بِنْتٌ", "transliteration": "bintun", "translation": "a girl", "audio": "bintun" },
-            { "form": "Plural", "arabic": "بَنَاتٌ", "transliteration": "banātun", "translation": "girls", "audio": "banatun" }
+            { "form": "Past (He)", "arabic": "دَرَسَ", "transliteration": "darasa", "translation": "he studied", "audio": "darasa" },
+            { "form": "Past (She)", "arabic": "دَرَسَتْ", "transliteration": "darasat", "translation": "she studied", "audio": "darasat" },
+            { "form": "Past (I)", "arabic": "دَرَسْتُ", "transliteration": "darastu", "translation": "I studied", "audio": "darastu" },
+            { "form": "Past (They, masc.)", "arabic": "دَرَسُوا", "transliteration": "darasū", "translation": "they studied", "audio": "darasoo" },
+            { "form": "Present (He)", "arabic": "يَدْرُسُ", "transliteration": "yadrusu", "translation": "he studies", "audio": "yadrusu" },
+            { "form": "Present (She)", "arabic": "تَدْرُسُ", "transliteration": "tadrusu", "translation": "she studies", "audio": "tadrusu" },
+            { "form": "Present (I)", "arabic": "أَدْرُسُ", "transliteration": "adrusu", "translation": "I study", "audio": "adrusu" },
+            { "form": "Present (They, masc.)", "arabic": "يَدْرُسُونَ", "transliteration": "yadrusūna", "translation": "they study", "audio": "yadrusoona" },
+            { "form": "Imperative (You, masc.)", "arabic": "اُدْرُسْ", "transliteration": "udrus", "translation": "study!", "audio": "udrus" },
+            { "form": "Imperative (You, fem.)", "arabic": "اُدْرُسِي", "transliteration": "udrusī", "translation": "study!", "audio": "udrusee" }
           ],
           "info": {
-            "root": "ب-ن-ت",
-            "gender": "feminine",
-            "meaning": "Female child"
+            "root": "د-ر-س",
+            "pattern": "فَعَلَ",
+            "meaning": "Related to studying or research",
+            "examples": [
+              "دَرَسَ الطَّالِبُ جَيِّدًا (The student studied well)",
+              "أَنَا أَدْرُسُ اللُّغَةَ العَرَبِيَّةَ (I study Arabic language)"
+            ]
+          }
+        },
+        "ذهب": {
+          "conjugations": [
+            { "form": "Past (He)", "arabic": "ذَهَبَ", "transliteration": "dhahaba", "translation": "he went", "audio": "dhahaba" },
+            { "form": "Past (She)", "arabic": "ذَهَبَتْ", "transliteration": "dahabat", "translation": "she went", "audio": "dahabat" },
+            { "form": "Past (I)", "arabic": "ذَهَبْتُ", "transliteration": "dahabtu", "translation": "I went", "audio": "dahabtu" },
+            { "form": "Past (They, masc.)", "arabic": "ذَهَبُوا", "transliteration": "dahabū", "translation": "they went", "audio": "dahaboo" },
+            { "form": "Present (He)", "arabic": "يَذْهَبُ", "transliteration": "yadhhabu", "translation": "he goes", "audio": "yadhhabu" },
+            { "form": "Present (She)", "arabic": "تَذْهَبُ", "transliteration": "tadhhabu", "translation": "she goes", "audio": "tadhhabu" },
+            { "form": "Present (I)", "arabic": "أَذْهَبُ", "transliteration": "adhhabu", "translation": "I go", "audio": "adhhabu" },
+            { "form": "Present (They, masc.)", "arabic": "يَذْهَبُونَ", "transliteration": "yadhhabūna", "translation": "they go", "audio": "yadhhaboona" },
+            { "form": "Imperative (You, masc.)", "arabic": "اِذْهَبْ", "transliteration": "idhhab", "translation": "go!", "audio": "idhhab" }
+          ],
+          "info": {
+            "root": "ذ-ه-ب",
+            "pattern": "فَعَلَ",
+            "meaning": "Related to going or departing",
+            "examples": [
+              "ذَهَبَ إِلَى المَدْرَسَةِ (He went to school)",
+              "سَأَذْهَبُ غَدًا (I will go tomorrow)"
+            ]
           }
         }
-        // ... (97 more nouns in the same format)
+      },
+      "noun": {
+        "كتاب": {
+          "conjugations": [
+            { "form": "Nominative Singular", "arabic": "كِتَابٌ", "transliteration": "kitābun", "translation": "a book", "audio": "kitabun" },
+            { "form": "Nominative Definite", "arabic": "الكِتَابُ", "transliteration": "al-kitābu", "translation": "the book", "audio": "alkitabu" },
+            { "form": "Nominative Dual", "arabic": "كِتَابَانِ", "transliteration": "kitābāni", "translation": "two books", "audio": "kitabani" },
+            { "form": "Nominative Plural", "arabic": "كُتُبٌ", "transliteration": "kutubun", "translation": "books", "audio": "kutubun" },
+            { "form": "Accusative Singular", "arabic": "كِتَابًا", "transliteration": "kitāban", "translation": "a book (object)", "audio": "kitaban" },
+            { "form": "Accusative Definite", "arabic": "الكِتَابَ", "transliteration": "al-kitāba", "translation": "the book (object)", "audio": "alkitaba" },
+            { "form": "Accusative Dual", "arabic": "كِتَابَيْنِ", "transliteration": "kitābayni", "translation": "two books (object)", "audio": "kitabayni" },
+            { "form": "Genitive Singular", "arabic": "كِتَابٍ", "transliteration": "kitābin", "translation": "a book (possessive)", "audio": "kitabin" },
+            { "form": "Genitive Definite", "arabic": "الكِتَابِ", "transliteration": "al-kitābi", "translation": "the book (possessive)", "audio": "alkitabi" }
+          ],
+          "info": {
+            "root": "ك-ت-ب",
+            "pluralType": "broken plural",
+            "gender": "masculine",
+            "meaning": "A written work or volume",
+            "examples": [
+              "هَذَا كِتَابٌ جَدِيدٌ (This is a new book)",
+              "قَرَأْتُ الكِتَابَ (I read the book)"
+            ]
+          }
+        },
+        "قلم": {
+    "conjugations": [
+      { "form": "Nominative Singular", "arabic": "قَلَمٌ", "transliteration": "qalamun", "translation": "a pen", "audio": "qalamun" },
+      { "form": "Nominative Definite", "arabic": "القَلَمُ", "transliteration": "al-qalamu", "translation": "the pen", "audio": "alqalamu" },
+      { "form": "Nominative Dual", "arabic": "قَلَمَانِ", "transliteration": "qalamāni", "translation": "two pens", "audio": "qalamani" },
+      { "form": "Nominative Plural", "arabic": "أَقْلَامٌ", "transliteration": "aqlāmun", "translation": "pens", "audio": "aqlamun" },
+      { "form": "Accusative Singular", "arabic": "قَلَمًا", "transliteration": "qalaman", "translation": "a pen (object)", "audio": "qalaman" },
+      { "form": "Accusative Definite", "arabic": "القَلَمَ", "transliteration": "al-qalama", "translation": "the pen (object)", "audio": "alqalama" },
+      { "form": "Accusative Dual", "arabic": "قَلَمَيْنِ", "transliteration": "qalamayni", "translation": "two pens (object)", "audio": "qalamayni" },
+      { "form": "Genitive Singular", "arabic": "قَلَمٍ", "transliteration": "qalamin", "translation": "a pen (possessive)", "audio": "qalamin" },
+      { "form": "Genitive Definite", "arabic": "القَلَمِ", "transliteration": "al-qalami", "translation": "the pen (possessive)", "audio": "alqalami" }
+    ],
+    "info": {
+      "root": "ق-ل-م",
+      "pluralType": "broken plural",
+      "gender": "masculine",
+      "meaning": "An instrument for writing",
+      "examples": [
+        "أَشْتَرَيْتُ قَلَمًا جَدِيدًا (I bought a new pen)",
+        "القَلَمُ عَلَى الطَّاوِلَةِ (The pen is on the table)"
+      ]
+    }
+  },
+
+  "مدرسة": {
+    "conjugations": [
+      { "form": "Nominative Singular", "arabic": "مَدْرَسَةٌ", "transliteration": "madrasaẗun", "translation": "a school", "audio": "madrasa" },
+      { "form": "Nominative Definite", "arabic": "المَدْرَسَةُ", "transliteration": "al-madrasaẗu", "translation": "the school", "audio": "almadrasa" },
+      { "form": "Nominative Dual", "arabic": "مَدْرَسَتَانِ", "transliteration": "madrasatāni", "translation": "two schools", "audio": "madrasatani" },
+      { "form": "Nominative Plural", "arabic": "مَدَارِسُ", "transliteration": "madārisu", "translation": "schools", "audio": "madarisu" },
+      { "form": "Accusative Singular", "arabic": "مَدْرَسَةً", "transliteration": "madrasatan", "translation": "a school (object)", "audio": "madrasatan" },
+      { "form": "Accusative Definite", "arabic": "المَدْرَسَةَ", "transliteration": "al-madrasaẗa", "translation": "the school (object)", "audio": "almadrasa" },
+      { "form": "Accusative Dual", "arabic": "مَدْرَسَتَيْنِ", "transliteration": "madrasatayni", "translation": "two schools (object)", "audio": "madrasatayni" },
+      { "form": "Genitive Singular", "arabic": "مَدْرَسَةٍ", "transliteration": "madrasatin", "translation": "a school (possessive)", "audio": "madrasatin" },
+      { "form": "Genitive Definite", "arabic": "المَدْرَسَةِ", "transliteration": "al-madrasaẗi", "translation": "the school (possessive)", "audio": "almadrasa" }
+    ],
+    "info": {
+      "root": "د-ر-س",
+      "pluralType": "broken plural",
+      "gender": "feminine",
+      "meaning": "An institution for learning",
+      "examples": [
+        "ذَهَبْتُ إِلَى المَدْرَسَةِ (I went to the school)",
+        "تِلْمِيذَةٌ فِي مَدْرَسَةٍ جَدِيدَةٍ (A student in a new school)"
+      ]
+    }
+  },
+
+  "بيت": {
+    "conjugations": [
+      { "form": "Nominative Singular", "arabic": "بَيْتٌ", "transliteration": "baytun", "translation": "a house", "audio": "baytun" },
+      { "form": "Nominative Definite", "arabic": "البَيْتُ", "transliteration": "al-baytu", "translation": "the house", "audio": "albaytu" },
+      { "form": "Nominative Dual", "arabic": "بَيْتَانِ", "transliteration": "baytāni", "translation": "two houses", "audio": "baytani" },
+      { "form": "Nominative Plural", "arabic": "بُيُوتٌ", "transliteration": "buyūtun", "translation": "houses", "audio": "buyutun" },
+      { "form": "Accusative Singular", "arabic": "بَيْتًا", "transliteration": "baytan", "translation": "a house (object)", "audio": "baytan" },
+      { "form": "Accusative Definite", "arabic": "البَيْتَ", "transliteration": "al-bayta", "translation": "the house (object)", "audio": "albayta" },
+      { "form": "Accusative Dual", "arabic": "بَيْتَيْنِ", "transliteration": "baytayni", "translation": "two houses (object)", "audio": "baytayni" },
+      { "form": "Genitive Singular", "arabic": "بَيْتٍ", "transliteration": "baytin", "translation": "a house (possessive)", "audio": "baytin" },
+      { "form": "Genitive Definite", "arabic": "البَيْتِ", "transliteration": "al-bayti", "translation": "the house (possessive)", "audio": "albayti" }
+    ],
+    "info": {
+      "root": "ب-ي-ت",
+      "pluralType": "broken plural",
+      "gender": "masculine",
+      "meaning": "A place to live",
+      "examples": [
+        "هَذَا بَيْتٌ جَمِيلٌ (This is a beautiful house)",
+        "دَخَلْتُ البَيْتَ (I entered the house)"
+      ]
+    }
+  },
+        "طالب": {
+          "conjugations": [
+            { "form": "Nominative Singular", "arabic": "طَالِبٌ", "transliteration": "ṭālibun", "translation": "a student", "audio": "talibun" },
+            { "form": "Nominative Definite", "arabic": "الطَّالِبُ", "transliteration": "aṭ-ṭālibu", "translation": "the student", "audio": "attalibu" },
+            { "form": "Nominative Dual", "arabic": "طَالِبَانِ", "transliteration": "ṭālibāni", "translation": "two students", "audio": "talibani" },
+            { "form": "Nominative Plural", "arabic": "طُلَّابٌ", "transliteration": "ṭullābun", "translation": "students", "audio": "tullabun" },
+            { "form": "Accusative Singular", "arabic": "طَالِبًا", "transliteration": "ṭāliban", "translation": "a student (object)", "audio": "taliban" },
+            { "form": "Accusative Definite", "arabic": "الطَّالِبَ", "transliteration": "aṭ-ṭāliba", "translation": "the student (object)", "audio": "attaliba" },
+            { "form": "Accusative Dual", "arabic": "طَالِبَيْنِ", "transliteration": "ṭālibayni", "translation": "two students (object)", "audio": "talibayni" },
+            { "form": "Genitive Singular", "arabic": "طَالِبٍ", "transliteration": "ṭālibin", "translation": "a student (possessive)", "audio": "talibin" },
+            { "form": "Genitive Definite", "arabic": "الطَّالِبِ", "transliteration": "aṭ-ṭālibi", "translation": "the student (possessive)", "audio": "attalibi" }
+          ],
+          "info": {
+            "root": "ط-ل-ب",
+            "pluralType": "broken plural",
+            "gender": "masculine",
+            "meaning": "Someone who seeks knowledge",
+            "examples": [
+              "الطَّالِبُ مُجْتَهِدٌ (The student is diligent)",
+              "رَأَيْتُ الطَّالِبَ (I saw the student)"
+            ]
+          }
+        },
+        
+        "مدرسة": {
+          "conjugations": [
+            { "form": "Nominative Singular", "arabic": "مَدْرَسَةٌ", "transliteration": "madrasatun", "translation": "a school", "audio": "madrasatun" },
+            { "form": "Nominative Definite", "arabic": "المَدْرَسَةُ", "transliteration": "al-madrasatu", "translation": "the school", "audio": "almadrasatu" },
+            { "form": "Nominative Dual", "arabic": "مَدْرَسَتَانِ", "transliteration": "madrasatāni", "translation": "two schools", "audio": "madrasatani" },
+            { "form": "Nominative Plural", "arabic": "مَدَارِسُ", "transliteration": "madārisu", "translation": "schools", "audio": "madarisu" },
+            { "form": "Accusative Singular", "arabic": "مَدْرَسَةً", "transliteration": "madrasatan", "translation": "a school (object)", "audio": "madrasatan" },
+            { "form": "Accusative Definite", "arabic": "المَدْرَسَةَ", "transliteration": "al-madrasata", "translation": "the school (object)", "audio": "almadrasata" },
+            { "form": "Genitive Singular", "arabic": "مَدْرَسَةٍ", "transliteration": "madrasatin", "translation": "a school (possessive)", "audio": "madrasatin" },
+            { "form": "Genitive Definite", "arabic": "المَدْرَسَةِ", "transliteration": "al-madrasati", "translation": "the school (possessive)", "audio": "almadrasati" }
+          ],
+          "info": {
+            "root": "د-ر-س",
+            "pluralType": "broken plural",
+            "gender": "feminine",
+            "meaning": "Place of study or learning",
+            "examples": [
+              "المَدْرَسَةُ كَبِيرَةٌ (The school is big)",
+              "ذَهَبَتْ إِلَى المَدْرَسَةِ (She went to school)"
+            ]
+          }
+        }
       },
       "adjective": {
-        "كبير (ك-ب-ر)": {
+        "كبير": {
           "conjugations": [
-            { "form": "Masculine", "arabic": "كَبِيرٌ", "transliteration": "kabīrun", "translation": "big (masc.)", "audio": "kabirun" },
-            { "form": "Feminine", "arabic": "كَبِيرَةٌ", "transliteration": "kabīratun", "translation": "big (fem.)", "audio": "kabiratun" }
+            { "form": "Masculine Singular", "arabic": "كَبِيرٌ", "transliteration": "kabīrun", "translation": "big (masc.)", "audio": "kabirun" },
+            { "form": "Feminine Singular", "arabic": "كَبِيرَةٌ", "transliteration": "kabīratun", "translation": "big (fem.)", "audio": "kabiratun" },
+            { "form": "Masculine Dual", "arabic": "كَبِيرَانِ", "transliteration": "kabīrāni", "translation": "big (dual masc.)", "audio": "kabirani" },
+            { "form": "Feminine Dual", "arabic": "كَبِيرَتَانِ", "transliteration": "kabīratāni", "translation": "big (dual fem.)", "audio": "kabiratani" },
+            { "form": "Masculine Plural", "arabic": "كِبَارٌ", "transliteration": "kibārun", "translation": "big (pl. masc.)", "audio": "kibarun" },
+            { "form": "Feminine Plural", "arabic": "كَبِيرَاتٌ", "transliteration": "kabīrātun", "translation": "big (pl. fem.)", "audio": "kabiratun" }
           ],
           "info": {
             "root": "ك-ب-ر",
-            "comparative": "أَكْبَرُ (akbar)",
-            "meaning": "Describes size"
+            "comparative": "أَكْبَرُ (akbar - bigger)",
+            "superlative": "الأَكْبَرُ (al-akbar - the biggest)",
+            "meaning": "Describing size or importance",
+            "examples": [
+              "البَيْتُ كَبِيرٌ (The house is big)",
+              "هَذِهِ شَجَرَةٌ كَبِيرَةٌ (This is a big tree)"
+            ]
           }
         },
-        "صغير (ص-غ-ر)": {
+        "جميل": {
           "conjugations": [
-            { "form": "Masculine", "arabic": "صَغِيرٌ", "transliteration": "ṣaghīrun", "translation": "small (masc.)", "audio": "saghirun" },
-            { "form": "Feminine", "arabic": "صَغِيرَةٌ", "transliteration": "ṣaghīratun", "translation": "small (fem.)", "audio": "saghiratun" }
+            { "form": "Masculine Singular", "arabic": "جَمِيلٌ", "transliteration": "jamīlun", "translation": "beautiful (masc.)", "audio": "jamilun" },
+            { "form": "Feminine Singular", "arabic": "جَمِيلَةٌ", "transliteration": "jamīlatun", "translation": "beautiful (fem.)", "audio": "jamilatun" },
+            { "form": "Masculine Dual", "arabic": "جَمِيلَانِ", "transliteration": "jamīlāni", "translation": "beautiful (dual masc.)", "audio": "jamilani" },
+            { "form": "Feminine Dual", "arabic": "جَمِيلَتَانِ", "transliteration": "jamīlatāni", "translation": "beautiful (dual fem.)", "audio": "jamilatani" },
+            { "form": "Masculine Plural", "arabic": "جَمِيلُونَ", "transliteration": "jamīlūna", "translation": "beautiful (pl. masc.)", "audio": "jamiloona" },
+            { "form": "Feminine Plural", "arabic": "جَمِيلَاتٌ", "transliteration": "jamīlātun", "translation": "beautiful (pl. fem.)", "audio": "jamilatun" }
           ],
           "info": {
-            "root": "ص-غ-ر",
-            "comparative": "أَصْغَرُ (aṣghar)",
-            "meaning": "Describes smallness"
+            "root": "ج-م-ل",
+            "comparative": "أَجْمَلُ (ajmal - more beautiful)",
+            "superlative": "الأَجْمَلُ (al-ajmal - the most beautiful)",
+            "meaning": "Describing beauty or attractiveness",
+            "examples": [
+              "الزَّهْرَةُ جَمِيلَةٌ (The flower is beautiful)",
+              "رَسَمَ صُورَةً جَمِيلَةً (He drew a beautiful picture)"
+            ]
           }
         }
-        // ... (97 more adjectives in the same format)
       }
     },
     "wordsOfTheDay": [
       {
-        "word": "يَذْهَبُ",
-        "transliteration": "yadhhabu",
-        "translation": "he goes",
-        "example": "يَذْهَبُ إِلَى المَدْرَسَةِ",
-        "exampleTranslation": "He goes to school"
+        "word": "يَدرُسُ",
+        "transliteration": "yadrusu",
+        "translation": "he studies",
+        "example": "الطَّالِبُ يَدرُسُ اللُّغَةَ العَرَبِيَّةَ",
+        "exampleTranslation": "The student studies the Arabic language"
+      },
+      {
+        "word": "يَكْتُبُ",
+        "transliteration": "yaktubu",
+        "translation": "he writes",
+        "example": "الكَاتِبُ يَكْتُبُ رِوَايَةً جَدِيدَةً",
+        "exampleTranslation": "The writer is writing a new novel"
       },
       {
         "word": "يَقْرَأُ",
         "transliteration": "yaqra'u",
         "translation": "he reads",
-        "example": "يَقْرَأُ الكِتَابَ",
-        "exampleTranslation": "He reads the book"
+        "example": "الوَلَدُ يَقْرَأُ القِصَّةَ قَبْلَ النَّوْمِ",
+        "exampleTranslation": "The boy reads the story before sleep"
       }
-      // ... (98 more daily words)
     ]
   }
