@@ -1,156 +1,568 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Practice other Arabic words and vocabulary." />
-    <title>Other Arabic Words | Practice Arabic Vocabulary</title>
-    <link rel="stylesheet" href="../css/styles.css" />
-    <link rel="stylesheet" href="../css/quiz.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
-  </head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Arabic Language Tool</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .arabic-text { direction: rtl; font-family: 'Amiri', serif; font-size: 1.4rem; line-height: 2; }
+        .arabic-ui { font-family: 'Tajawal', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+        .highlight { background-color: rgba(254, 240, 138, 0.5); }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <header class="text-center mb-10">
+            <h1 class="text-4xl font-bold text-gray-800 mb-2">Advanced Arabic Language Tool</h1>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">Master Arabic conjugation, declension, and pronunciation with this comprehensive learning tool</p>
+        </header>
 
-  <body>
-    <div class="container">
-      <header role="banner">
-        <div class="header-content">
-          <h1>Other Arabic Words</h1>
-          <p class="subtitle">Expand your Arabic vocabulary beyond verbs</p>
-        </div>
-      </header>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Main Tool Card -->
+            <div class="bg-white rounded-xl p-6 card-shadow lg:col-span-2">
+                <div class="flex flex-col space-y-6">
+                    <div class="flex items-center justify-between border-b pb-4">
+                        <h2 class="text-2xl font-semibold text-gray-800">Word Explorer</h2>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-sm text-gray-500">Theme:</span>
+                            <button id="themeToggle" class="p-1 rounded-full bg-gray-200 text-gray-700">
+                                <i class="fas fa-moon"></i>
+                            </button>
+                        </div>
+                    </div>
 
-      <main role="main">
-        <section class="quiz-intro">
-          <h2 class="visually-hidden">Words Introduction</h2>
-          <div class="intro-content">
-            <p>Practice your Arabic vocabulary with these common words and phrases. This section focuses on nouns, adjectives, and common expressions.</p>
-            <button id="fetch-words-btn" class="start-quiz-btn">Load Words</button>
-          </div>
-        </section>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="wordType" class="block text-sm font-medium text-gray-700 mb-1">Word Type</label>
+                            <select id="wordType" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 arabic-ui" onchange="updateWordDropdown()">
+                                <option value="verb">Verb (فعل)</option>
+                                <option value="noun">Noun (اسم)</option>
+                                <option value="adjective">Adjective (صفة)</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="wordSelect" class="block text-sm font-medium text-gray-700 mb-1">Select Word</label>
+                            <select id="wordSelect" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 arabic-text"></select>
+                        </div>
+                    </div>
 
-        <section class="words-container" id="words-container" hidden>
-          <div class="words-header">
-            <h2>Arabic Vocabulary Practice</h2>
-            <div class="words-controls">
-              <button id="shuffle-words-btn" class="nav-btn secondary-btn">Shuffle Words</button>
-              <button id="reset-words-btn" class="nav-btn warning-btn">Reset</button>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="wordForm" class="block text-sm font-medium text-gray-700 mb-1">Form Selection</label>
+                            <select id="wordForm" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                <option value="all">Show All Forms</option>
+                                <option value="past">Past Tense Only</option>
+                                <option value="present">Present Tense Only</option>
+                                <option value="imperative">Imperative Only</option>
+                            </select>
+                        </div>
+                        
+                        <div class="flex items-end">
+                            <button onclick="displayConjugation()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition duration-200 flex items-center justify-center space-x-2">
+                                <i class="fas fa-search"></i>
+                                <span>Analyze Word</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="conjugationTable" class="hidden">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-semibold text-gray-800">Conjugation Details</h3>
+                            <button onclick="playAllPronunciations()" class="text-sm bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded flex items-center space-x-1">
+                                <i class="fas fa-volume-up"></i>
+                                <span>Play All</span>
+                            </button>
+                        </div>
+                        
+                        <div class="overflow-x-auto">
+                            <table class="w-full border-collapse">
+                                <thead>
+                                    <tr class="bg-gray-100 text-left">
+                                        <th class="p-3 border-b-2 border-gray-200 font-medium">Form</th>
+                                        <th class="p-3 border-b-2 border-gray-200 font-medium text-right">Arabic</th>
+                                        <th class="p-3 border-b-2 border-gray-200 font-medium">Transliteration</th>
+                                        <th class="p-3 border-b-2 border-gray-200 font-medium">Translation</th>
+                                        <th class="p-3 border-b-2 border-gray-200 font-medium">Audio</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tableBody" class="divide-y divide-gray-200"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
 
-          <div class="words-list" id="words-list">
-            <!-- Words will be loaded here -->
-          </div>
-        </section>
-      </main>
-
-      <footer role="contentinfo">
-        <div class="footer-content">
-          <p>© 2023 Arabic Learning Tools. All rights reserved.</p>
-          <nav aria-label="Secondary navigation">
-            <ul>
-              <li><a href="../privacy.html">Privacy Policy</a></li>
-              <li><a href="../terms.html">Terms of Service</a></li>
-              <li><a href="../contact.html">Contact Us</a></li>
-            </ul>
-          </nav>
+            <!-- Learning Resources Card -->
+            <div class="bg-white rounded-xl p-6 card-shadow">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4 border-b pb-3">Learning Resources</h2>
+                
+                <div class="space-y-5">
+                    <div class="p-4 bg-blue-50 rounded-lg">
+                        <h3 class="font-medium text-blue-800 mb-2 flex items-center">
+                            <i class="fas fa-info-circle mr-2"></i>
+                            Word Information
+                        </h3>
+                        <div id="wordInfo" class="text-gray-700 text-sm">
+                            Select a word to see detailed information here.
+                        </div>
+                    </div>
+                    
+                    <div class="p-4 bg-yellow-50 rounded-lg">
+                        <h3 class="font-medium text-yellow-800 mb-2 flex items-center">
+                            <i class="fas fa-lightbulb mr-2"></i>
+                            Quick Tips
+                        </h3>
+                        <ul class="list-disc pl-5 text-sm text-gray-700 space-y-1">
+                            <li>Click the speaker icon to hear pronunciation</li>
+                            <li>Hover over Arabic text to see transliteration</li>
+                            <li>Use the form filter to focus on specific conjugations</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="p-4 bg-green-50 rounded-lg">
+                        <h3 class="font-medium text-green-800 mb-2 flex items-center">
+                            <i class="fas fa-book mr-2"></i>
+                            Practice Exercises
+                        </h3>
+                        <div class="text-sm text-gray-700 mb-3">
+                            Test your knowledge with these exercises:
+                        </div>
+                        <div class="space-y-2">
+                            <button class="w-full text-left bg-white hover:bg-gray-100 border border-gray-200 px-3 py-2 rounded text-sm flex items-center justify-between">
+                                <span>Flashcards</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                            <button class="w-full text-left bg-white hover:bg-gray-100 border border-gray-200 px-3 py-2 rounded text-sm flex items-center justify-between">
+                                <span>Quiz Mode</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </footer>
+
+        <!-- Word of the Day Section -->
+        <div class="mt-12 bg-indigo-50 rounded-xl p-6 card-shadow max-w-4xl mx-auto">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-2xl font-semibold text-indigo-800">Word of the Day</h2>
+                <button onclick="newWordOfTheDay()" class="text-sm bg-indigo-100 hover:bg-indigo-200 text-indigo-800 px-3 py-1 rounded">
+                    <i class="fas fa-sync-alt mr-1"></i> Refresh
+                </button>
+            </div>
+            
+            <div id="wordOfTheDay" class="text-center p-4">
+                <div class="arabic-text text-3xl mb-2" style="font-size: 2rem;">يَدرُسُ</div>
+                <div class="text-lg font-medium text-gray-700 mb-1">yadrusu</div>
+                <div class="text-gray-600">he studies</div>
+                <button onclick="pronounceWord('yadrusu')" class="mt-3 text-blue-600 hover:text-blue-800">
+                    <i class="fas fa-volume-up text-xl"></i>
+                </button>
+                
+                <div class="mt-4 text-sm text-gray-600 text-left">
+                    <p class="mb-2"><span class="font-medium">Example Sentence:</span> <span class="arabic-text">الطَّالِبُ يَدرُسُ اللُّغَةَ العَرَبِيَّةَ</span></p>
+                    <p><span class="font-medium">Translation:</span> The student studies the Arabic language.</p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
-      // Sample word data - in a real app, this would come from an API
-      const wordData = [
-        {
-          arabic: "كِتَاب",
-          translation: "book",
-          category: "noun",
-          example: "هَذَا كِتَابٌ جَدِيدٌ (This is a new book)"
-        },
-        {
-          arabic: "بَيْت",
-          translation: "house",
-          category: "noun",
-          example: "الْبَيْتُ كَبِيرٌ (The house is big)"
-        },
-        {
-          arabic: "جَمِيل",
-          translation: "beautiful",
-          category: "adjective",
-          example: "الْوَرْدُ جَمِيلٌ (The flower is beautiful)"
-        },
-        {
-          arabic: "طَبِيب",
-          translation: "doctor",
-          category: "noun",
-          example: "الطَّبِيبُ ذَاهِبٌ إِلَى الْمُسْتَشْفَى (The doctor is going to the hospital)"
-        },
-        {
-          arabic: "صَبَاح الْخَيْر",
-          translation: "good morning",
-          category: "phrase",
-          example: "صَبَاح الْخَيْر! كَيْفَ حَالُكَ؟ (Good morning! How are you?)"
-        },
-        {
-          arabic: "شُكْرًا",
-          translation: "thank you",
-          category: "phrase",
-          example: "شُكْرًا لَكَ عَلَى الْمُسَاعَدَة (Thank you for the help)"
-        },
-        {
-          arabic: "مَاء",
-          translation: "water",
-          category: "noun",
-          example: "أَنَا أَشْرَبُ الْمَاءَ (I drink water)"
-        },
-        {
-          arabic: "سَرِيع",
-          translation: "fast",
-          category: "adjective",
-          example: "الْقِطُّ سَرِيعٌ (The cat is fast)"
+        // Enhanced conjugation data with more words and additional information
+        const conjugationData = {
+            verb: {
+                'كتب': {
+                    conjugations: [
+                        { form: "Past (He)", arabic: "كَتَبَ", transliteration: "kataba", translation: "he wrote", audio: "kataba" },
+                        { form: "Past (She)", arabic: "كَتَبَتْ", transliteration: "katabat", translation: "she wrote", audio: "katabat" },
+                        { form: "Past (I)", arabic: "كَتَبْتُ", transliteration: "katabtu", translation: "I wrote", audio: "katabtu" },
+                        { form: "Past (They, masc.)", arabic: "كَتَبُوا", transliteration: "katabū", translation: "they wrote", audio: "kataboo" },
+                        { form: "Past (They, fem.)", arabic: "كَتَبْنَ", transliteration: "katabna", translation: "they wrote", audio: "katabna" },
+                        { form: "Present (He)", arabic: "يَكْتُبُ", transliteration: "yaktubu", translation: "he writes", audio: "yaktubu" },
+                        { form: "Present (She)", arabic: "تَكْتُبُ", transliteration: "taktubu", translation: "she writes", audio: "taktubu" },
+                        { form: "Present (I)", arabic: "أَكْتُبُ", transliteration: "aktubu", translation: "I write", audio: "aktubu" },
+                        { form: "Present (They, masc.)", arabic: "يَكْتُبُونَ", transliteration: "yaktubūna", translation: "they write", audio: "yaktuboona" },
+                        { form: "Imperative (You, masc.)", arabic: "اُكْتُبْ", transliteration: "uktub", translation: "write!", audio: "uktub" },
+                        { form: "Imperative (You, fem.)", arabic: "اُكْتُبِي", transliteration: "uktubī", translation: "write!", audio: "uktubee" }
+                    ],
+                    info: {
+                        root: "ك-ت-ب",
+                        pattern: "فَعَلَ",
+                        meaning: "Related to writing",
+                        examples: [
+                            "كَتَبَ الرِّسَالَةَ (He wrote the letter)",
+                            "سَوْفَ أَكْتُبُ الكِتَابَ (I will write the book)"
+                        ]
+                    }
+                },
+                'درس': {
+                    conjugations: [
+                        { form: "Past (He)", arabic: "دَرَسَ", transliteration: "darasa", translation: "he studied", audio: "darasa" },
+                        { form: "Past (She)", arabic: "دَرَسَتْ", transliteration: "darasat", translation: "she studied", audio: "darasat" },
+                        { form: "Past (I)", arabic: "دَرَسْتُ", transliteration: "darastu", translation: "I studied", audio: "darastu" },
+                        { form: "Past (They, masc.)", arabic: "دَرَسُوا", transliteration: "darasū", translation: "they studied", audio: "darasoo" },
+                        { form: "Present (He)", arabic: "يَدْرُسُ", transliteration: "yadrusu", translation: "he studies", audio: "yadrusu" },
+                        { form: "Present (She)", arabic: "تَدْرُسُ", transliteration: "tadrusu", translation: "she studies", audio: "tadrusu" },
+                        { form: "Present (I)", arabic: "أَدْرُسُ", transliteration: "adrusu", translation: "I study", audio: "adrusu" },
+                        { form: "Present (They, masc.)", arabic: "يَدْرُسُونَ", transliteration: "yadrusūna", translation: "they study", audio: "yadrusoona" },
+                        { form: "Imperative (You, masc.)", arabic: "اُدْرُسْ", transliteration: "udrus", translation: "study!", audio: "udrus" },
+                        { form: "Imperative (You, fem.)", arabic: "اُدْرُسِي", transliteration: "udrusī", translation: "study!", audio: "udrusee" }
+                    ],
+                    info: {
+                        root: "د-ر-س",
+                        pattern: "فَعَلَ",
+                        meaning: "Related to studying or research",
+                        examples: [
+                            "دَرَسَ الطَّالِبُ جَيِّدًا (The student studied well)",
+                            "أَنَا أَدْرُسُ اللُّغَةَ العَرَبِيَّةَ (I study Arabic language)"
+                        ]
+                    }
+                },
+                'ذهب': {
+                    conjugations: [
+                        { form: "Past (He)", arabic: "ذَهَبَ", transliteration: "dhahaba", translation: "he went", audio: "dhahaba" },
+                        { form: "Past (She)", arabic: "ذَهَبَتْ", transliteration: "dahabat", translation: "she went", audio: "dahabat" },
+                        { form: "Past (I)", arabic: "ذَهَبْتُ", transliteration: "dahabtu", translation: "I went", audio: "dahabtu" },
+                        { form: "Past (They, masc.)", arabic: "ذَهَبُوا", transliteration: "dahabū", translation: "they went", audio: "dahaboo" },
+                        { form: "Present (He)", arabic: "يَذْهَبُ", transliteration: "yadhhabu", translation: "he goes", audio: "yadhhabu" },
+                        { form: "Present (She)", arabic: "تَذْهَبُ", transliteration: "tadhhabu", translation: "she goes", audio: "tadhhabu" },
+                        { form: "Present (I)", arabic: "أَذْهَبُ", transliteration: "adhhabu", translation: "I go", audio: "adhhabu" },
+                        { form: "Present (They, masc.)", arabic: "يَذْهَبُونَ", transliteration: "yadhhabūna", translation: "they go", audio: "yadhhaboona" },
+                        { form: "Imperative (You, masc.)", arabic: "اِذْهَبْ", transliteration: "idhhab", translation: "go!", audio: "idhhab" }
+                    ],
+                    info: {
+                        root: "ذ-ه-ب",
+                        pattern: "فَعَلَ",
+                        meaning: "Related to going or departing",
+                        examples: [
+                            "ذَهَبَ إِلَى المَدْرَسَةِ (He went to school)",
+                            "سَأَذْهَبُ غَدًا (I will go tomorrow)"
+                        ]
+                    }
+                }
+            },
+            noun: {
+                'كتاب': {
+                    conjugations: [
+                        { form: "Nominative Singular", arabic: "كِتَابٌ", transliteration: "kitābun", translation: "a book", audio: "kitabun" },
+                        { form: "Nominative Definite", arabic: "الكِتَابُ", transliteration: "al-kitābu", translation: "the book", audio: "alkitabu" },
+                        { form: "Nominative Dual", arabic: "كِتَابَانِ", transliteration: "kitābāni", translation: "two books", audio: "kitabani" },
+                        { form: "Nominative Plural", arabic: "كُتُبٌ", transliteration: "kutubun", translation: "books", audio: "kutubun" },
+                        { form: "Accusative Singular", arabic: "كِتَابًا", transliteration: "kitāban", translation: "a book (object)", audio: "kitaban" },
+                        { form: "Accusative Definite", arabic: "الكِتَابَ", transliteration: "al-kitāba", translation: "the book (object)", audio: "alkitaba" },
+                        { form: "Accusative Dual", arabic: "كِتَابَيْنِ", transliteration: "kitābayni", translation: "two books (object)", audio: "kitabayni" },
+                        { form: "Genitive Singular", arabic: "كِتَابٍ", transliteration: "kitābin", translation: "a book (possessive)", audio: "kitabin" },
+                        { form: "Genitive Definite", arabic: "الكِتَابِ", transliteration: "al-kitābi", translation: "the book (possessive)", audio: "alkitabi" }
+                    ],
+                    info: {
+                        root: "ك-ت-ب",
+                        pluralType: "broken plural",
+                        gender: "masculine",
+                        meaning: "A written work or volume",
+                        examples: [
+                            "هَذَا كِتَابٌ جَدِيدٌ (This is a new book)",
+                            "قَرَأْتُ الكِتَابَ (I read the book)"
+                        ]
+                    }
+                },
+                'طالب': {
+                    conjugations: [
+                        { form: "Nominative Singular", arabic: "طَالِبٌ", transliteration: "ṭālibun", translation: "a student", audio: "talibun" },
+                        { form: "Nominative Definite", arabic: "الطَّالِبُ", transliteration: "aṭ-ṭālibu", translation: "the student", audio: "attalibu" },
+                        { form: "Nominative Dual", arabic: "طَالِبَانِ", transliteration: "ṭālibāni", translation: "two students", audio: "talibani" },
+                        { form: "Nominative Plural", arabic: "طُلَّابٌ", transliteration: "ṭullābun", translation: "students", audio: "tullabun" },
+                        { form: "Accusative Singular", arabic: "طَالِبًا", transliteration: "ṭāliban", translation: "a student (object)", audio: "taliban" },
+                        { form: "Accusative Definite", arabic: "الطَّالِبَ", transliteration: "aṭ-ṭāliba", translation: "the student (object)", audio: "attaliba" },
+                        { form: "Accusative Dual", arabic: "طَالِبَيْنِ", transliteration: "ṭālibayni", translation: "two students (object)", audio: "talibayni" },
+                        { form: "Genitive Singular", arabic: "طَالِبٍ", transliteration: "ṭālibin", translation: "a student (possessive)", audio: "talibin" },
+                        { form: "Genitive Definite", arabic: "الطَّالِبِ", transliteration: "aṭ-ṭālibi", translation: "the student (possessive)", audio: "attalibi" }
+                    ],
+                    info: {
+                        root: "ط-ل-ب",
+                        pluralType: "broken plural",
+                        gender: "masculine",
+                        meaning: "Someone who seeks knowledge",
+                        examples: [
+                            "الطَّالِبُ مُجْتَهِدٌ (The student is diligent)",
+                            "رَأَيْتُ الطَّالِبَ (I saw the student)"
+                        ]
+                    }
+                },
+                'مدرسة': {
+                    conjugations: [
+                        { form: "Nominative Singular", arabic: "مَدْرَسَةٌ", transliteration: "madrasatun", translation: "a school", audio: "madrasatun" },
+                        { form: "Nominative Definite", arabic: "المَدْرَسَةُ", transliteration: "al-madrasatu", translation: "the school", audio: "almadrasatu" },
+                        { form: "Nominative Dual", arabic: "مَدْرَسَتَانِ", transliteration: "madrasatāni", translation: "two schools", audio: "madrasatani" },
+                        { form: "Nominative Plural", arabic: "مَدَارِسُ", transliteration: "madārisu", translation: "schools", audio: "madarisu" },
+                        { form: "Accusative Singular", arabic: "مَدْرَسَةً", transliteration: "madrasatan", translation: "a school (object)", audio: "madrasatan" },
+                        { form: "Accusative Definite", arabic: "المَدْرَسَةَ", transliteration: "al-madrasata", translation: "the school (object)", audio: "almadrasata" },
+                        { form: "Genitive Singular", arabic: "مَدْرَسَةٍ", transliteration: "madrasatin", translation: "a school (possessive)", audio: "madrasatin" },
+                        { form: "Genitive Definite", arabic: "المَدْرَسَةِ", transliteration: "al-madrasati", translation: "the school (possessive)", audio: "almadrasati" }
+                    ],
+                    info: {
+                        root: "د-ر-س",
+                        pluralType: "broken plural",
+                        gender: "feminine",
+                        meaning: "Place of study or learning",
+                        examples: [
+                            "المَدْرَسَةُ كَبِيرَةٌ (The school is big)",
+                            "ذَهَبَتْ إِلَى المَدْرَسَةِ (She went to school)"
+                        ]
+                    }
+                }
+            },
+            adjective: {
+                'كبير': {
+                    conjugations: [
+                        { form: "Masculine Singular", arabic: "كَبِيرٌ", transliteration: "kabīrun", translation: "big (masc.)", audio: "kabirun" },
+                        { form: "Feminine Singular", arabic: "كَبِيرَةٌ", transliteration: "kabīratun", translation: "big (fem.)", audio: "kabiratun" },
+                        { form: "Masculine Dual", arabic: "كَبِيرَانِ", transliteration: "kabīrāni", translation: "big (dual masc.)", audio: "kabirani" },
+                        { form: "Feminine Dual", arabic: "كَبِيرَتَانِ", transliteration: "kabīratāni", translation: "big (dual fem.)", audio: "kabiratani" },
+                        { form: "Masculine Plural", arabic: "كِبَارٌ", transliteration: "kibārun", translation: "big (pl. masc.)", audio: "kibarun" },
+                        { form: "Feminine Plural", arabic: "كَبِيرَاتٌ", transliteration: "kabīrātun", translation: "big (pl. fem.)", audio: "kabiratun" }
+                    ],
+                    info: {
+                        root: "ك-ب-ر",
+                        comparative: "أَكْبَرُ (akbar - bigger)",
+                        superlative: "الأَكْبَرُ (al-akbar - the biggest)",
+                        meaning: "Describing size or importance",
+                        examples: [
+                            "البَيْتُ كَبِيرٌ (The house is big)",
+                            "هَذِهِ شَجَرَةٌ كَبِيرَةٌ (This is a big tree)"
+                        ]
+                    }
+                },
+                'جميل': {
+                    conjugations: [
+                        { form: "Masculine Singular", arabic: "جَمِيلٌ", transliteration: "jamīlun", translation: "beautiful (masc.)", audio: "jamilun" },
+                        { form: "Feminine Singular", arabic: "جَمِيلَةٌ", transliteration: "jamīlatun", translation: "beautiful (fem.)", audio: "jamilatun" },
+                        { form: "Masculine Dual", arabic: "جَمِيلَانِ", transliteration: "jamīlāni", translation: "beautiful (dual masc.)", audio: "jamilani" },
+                        { form: "Feminine Dual", arabic: "جَمِيلَتَانِ", transliteration: "jamīlatāni", translation: "beautiful (dual fem.)", audio: "jamilatani" },
+                        { form: "Masculine Plural", arabic: "جَمِيلُونَ", transliteration: "jamīlūna", translation: "beautiful (pl. masc.)", audio: "jamiloona" },
+                        { form: "Feminine Plural", arabic: "جَمِيلَاتٌ", transliteration: "jamīlātun", translation: "beautiful (pl. fem.)", audio: "jamilatun" }
+                    ],
+                    info: {
+                        root: "ج-م-ل",
+                        comparative: "أَجْمَلُ (ajmal - more beautiful)",
+                        superlative: "الأَجْمَلُ (al-ajmal - the most beautiful)",
+                        meaning: "Describing beauty or attractiveness",
+                        examples: [
+                            "الزَّهْرَةُ جَمِيلَةٌ (The flower is beautiful)",
+                            "رَسَمَ صُورَةً جَمِيلَةً (He drew a beautiful picture)"
+                        ]
+                    }
+                }
+            }
+        };
+
+        // Words of the day with examples
+        const wordsOfTheDay = [
+            {
+                word: "يَدرُسُ",
+                transliteration: "yadrusu",
+                translation: "he studies",
+                example: "الطَّالِبُ يَدرُسُ اللُّغَةَ العَرَبِيَّةَ",
+                exampleTranslation: "The student studies the Arabic language"
+            },
+            {
+                word: "يَكْتُبُ",
+                transliteration: "yaktubu",
+                translation: "he writes",
+                example: "الكَاتِبُ يَكْتُبُ رِوَايَةً جَدِيدَةً",
+                exampleTranslation: "The writer is writing a new novel"
+            },
+            {
+                word: "يَقْرَأُ",
+                transliteration: "yaqra'u",
+                translation: "he reads",
+                example: "الوَلَدُ يَقْرَأُ القِصَّةَ قَبْلَ النَّوْمِ",
+                exampleTranslation: "The boy reads the story before sleep"
+            }
+        ];
+
+        // Initialize the app
+        function initApp() {
+            updateWordDropdown();
+            setRandomWordOfTheDay();
+            setupThemeToggle();
         }
-      ];
 
-      document.addEventListener('DOMContentLoaded', () => {
-        const fetchWordsBtn = document.getElementById('fetch-words-btn');
-        const wordsContainer = document.getElementById('words-container');
-        const wordsList = document.getElementById('words-list');
-        const shuffleWordsBtn = document.getElementById('shuffle-words-btn');
-        const resetWordsBtn = document.getElementById('reset-words-btn');
+        // Update word dropdown based on selected word type
+        function updateWordDropdown() {
+            const wordType = document.getElementById("wordType").value;
+            const wordSelect = document.getElementById("wordSelect");
+            wordSelect.innerHTML = "";
+            
+            const words = Object.keys(conjugationData[wordType]);
+            words.forEach(word => {
+                const option = document.createElement("option");
+                option.value = word;
+                option.textContent = `${word} (${conjugationData[wordType][word].conjugations[0].translation})`;
+                wordSelect.appendChild(option);
+            });
 
-        // Fetch words button click handler
-        fetchWordsBtn.addEventListener('click', () => {
-          displayWords(wordData);
-          wordsContainer.hidden = false;
-          fetchWordsBtn.hidden = true;
-        });
-
-        // Shuffle words button click handler
-        shuffleWordsBtn.addEventListener('click', () => {
-          const shuffledWords = [...wordData].sort(() => Math.random() - 0.5);
-          displayWords(shuffledWords);
-        });
-
-        // Reset words button click handler
-        resetWordsBtn.addEventListener('click', () => {
-          displayWords(wordData);
-        });
-
-        // Display words function
-        function displayWords(words) {
-          wordsList.innerHTML = words.map(word => `
-            <div class="word-card">
-              <div class="word-arabic arabic-text">${word.arabic}</div>
-              <div class="word-details">
-                <div class="word-translation"><strong>Translation:</strong> ${word.translation}</div>
-                <div class="word-category"><strong>Category:</strong> ${word.category}</div>
-                <div class="word-example"><strong>Example:</strong> ${word.example}</div>
-              </div>
-            </div>
-          `).join('');
+            document.getElementById("conjugationTable").classList.add("hidden");
         }
-      });
+
+        // Display conjugation table
+        function displayConjugation() {
+            const wordType = document.getElementById("wordType").value;
+            const word = document.getElementById("wordSelect").value;
+            const formFilter = document.getElementById("wordForm").value;
+            const tableBody = document.getElementById("tableBody");
+            const conjugationTable = document.getElementById("conjugationTable");
+            
+            tableBody.innerHTML = "";
+            
+            if (!word) {
+                alert("Please select a word.");
+                conjugationTable.classList.add("hidden");
+                return;
+            }
+
+            const conjugations = conjugationData[wordType][word].conjugations;
+            const filteredConjugations = filterConjugations(conjugations, formFilter);
+            
+            filteredConjugations.forEach(({ form, arabic, transliteration, translation, audio }) => {
+                const row = document.createElement("tr");
+                row.className = "hover:bg-gray-50";
+                row.innerHTML = `
+                    <td class="p-3 border-b border-gray-200">${form}</td>
+                    <td class="p-3 border-b border-gray-200 text-right arabic-text" title="${transliteration}">${arabic}</td>
+                    <td class="p-3 border-b border-gray-200">${transliteration}</td>
+                    <td class="p-3 border-b border-gray-200">${translation}</td>
+                    <td class="p-3 border-b border-gray-200 text-center">
+                        <button onclick="pronounceWord('${audio}')" class="text-blue-600 hover:text-blue-800">
+                            <i class="fas fa-volume-up"></i>
+                        </button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+
+            updateWordInfo(wordType, word);
+            conjugationTable.classList.remove("hidden");
+        }
+
+        // Filter conjugations based on form selection
+        function filterConjugations(conjugations, formFilter) {
+            if (formFilter === "all") return conjugations;
+            
+            return conjugations.filter(conj => {
+                if (formFilter === "past") return conj.form.includes("Past");
+                if (formFilter === "present") return conj.form.includes("Present");
+                if (formFilter === "imperative") return conj.form.includes("Imperative");
+                return true;
+            });
+        }
+
+        // Update word information panel
+        function updateWordInfo(wordType, word) {
+            const wordInfo = conjugationData[wordType][word].info;
+            const infoPanel = document.getElementById("wordInfo");
+            
+            let infoHTML = `
+                <div class="mb-2"><span class="font-medium">Root Letters:</span> ${wordInfo.root}</div>
+            `;
+            
+            if (wordType === "verb") {
+                infoHTML += `
+                    <div class="mb-2"><span class="font-medium">Verb Pattern:</span> ${wordInfo.pattern}</div>
+                `;
+            } else if (wordType === "noun") {
+                infoHTML += `
+                    <div class="mb-2"><span class="font-medium">Plural Type:</span> ${wordInfo.pluralType}</div>
+                    <div class="mb-2"><span class="font-medium">Gender:</span> ${wordInfo.gender}</div>
+                `;
+            } else if (wordType === "adjective") {
+                infoHTML += `
+                    <div class="mb-2"><span class="font-medium">Comparative:</span> ${wordInfo.comparative}</div>
+                    <div class="mb-2"><span class="font-medium">Superlative:</span> ${wordInfo.superlative}</div>
+                `;
+            }
+            
+            infoHTML += `
+                <div class="mb-3"><span class="font-medium">Meaning:</span> ${wordInfo.meaning}</div>
+                <div class="font-medium mb-1">Examples:</div>
+                <ul class="list-disc pl-5 space-y-1">
+            `;
+            
+            wordInfo.examples.forEach(example => {
+                infoHTML += `<li>${example}</li>`;
+            });
+            
+            infoHTML += `</ul>`;
+            infoPanel.innerHTML = infoHTML;
+        }
+
+        // Pronounce a word (simulated - in a real app, you'd use a TTS API or pre-recorded audio)
+        function pronounceWord(word) {
+            // This is a simulation - in a real app, you would use actual audio files or TTS
+            console.log(`Pronouncing: ${word}`);
+            alert(`Playing pronunciation for: ${word}`);
+        }
+
+        // Play all pronunciations for the current word
+        function playAllPronunciations() {
+            const wordType = document.getElementById("wordType").value;
+            const word = document.getElementById("wordSelect").value;
+            
+            if (!word) {
+                alert("Please select a word first.");
+                return;
+            }
+            
+            const conjugations = conjugationData[wordType][word].conjugations;
+            const audioList = conjugations.map(c => c.audio).join(", ");
+            
+            alert(`Playing all pronunciations for ${word}: ${audioList}`);
+            // In a real app, you would queue up all audio files to play in sequence
+        }
+
+        // Set a random word of the day
+        function setRandomWordOfTheDay() {
+            const randomWord = wordsOfTheDay[Math.floor(Math.random() * wordsOfTheDay.length)];
+            const wordOfTheDayDiv = document.getElementById("wordOfTheDay");
+            
+            wordOfTheDayDiv.innerHTML = `
+                <div class="arabic-text text-3xl mb-2" style="font-size: 2rem;">${randomWord.word}</div>
+                <div class="text-lg font-medium text-gray-700 mb-1">${randomWord.transliteration}</div>
+                <div class="text-gray-600">${randomWord.translation}</div>
+                <button onclick="pronounceWord('${randomWord.transliteration}')" class="mt-3 text-blue-600 hover:text-blue-800">
+                    <i class="fas fa-volume-up text-xl"></i>
+                </button>
+                
+                <div class="mt-4 text-sm text-gray-600 text-left">
+                    <p class="mb-2"><span class="font-medium">Example Sentence:</span> <span class="arabic-text">${randomWord.example}</span></p>
+                    <p><span class="font-medium">Translation:</span> ${randomWord.exampleTranslation}</p>
+                </div>
+            `;
+        }
+
+        // Generate a new word of the day
+        function newWordOfTheDay() {
+            setRandomWordOfTheDay();
+        }
+
+        // Setup theme toggle functionality
+        function setupThemeToggle() {
+            const themeToggle = document.getElementById("themeToggle");
+            const body = document.body;
+            
+            themeToggle.addEventListener("click", () => {
+                body.classList.toggle("dark");
+                themeToggle.querySelector("i").classList.toggle("fa-sun");
+                themeToggle.querySelector("i").classList.toggle("fa-moon");
+            });
+        }
+        // Initialize the app on page load
+        window.addEventListener("load", initApp);
     </script>
-  </body>
-</html>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    
