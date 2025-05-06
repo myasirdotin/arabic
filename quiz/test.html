@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Arabic Verb Quiz</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <style>
+    /* Additional CSS for new features */
+    .progress-container {
+      width: 100%;
+      background-color: #f3f3f3;
+      border-radius: 5px;
+      margin: 15px 0;
+    }
+    
+    .progress-bar {
+      height: 20px;
+      background-color: #4CAF50;
+      border-radius: 5px;
+      width: 0%;
+      transition: width 0.3s;
+    }
+    
+    .question-counter {
+      text-align: center;
+      margin: 10px 0;
+      font-weight: bold;
+    }
+    
+    .feedback {
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 5px;
+      display: none;
+    }
+    
+    .correct {
+      background-color: #d4edda;
+      color: #155724;
+    }
+    
+    .incorrect {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+    
+    .option-label {
+      transition: all 0.2s;
+    }
+    
+    .option-label:hover {
+      background-color: #f0f0f0;
+      transform: scale(1.02);
+    }
+    
+    .timer {
+      text-align: center;
+      font-size: 1.2em;
+      margin: 10px 0;
+    }
+    
+    .difficulty-selector {
+      margin: 15px 0;
+      text-align: center;
+    }
+    
+    .verb-info {
+      margin-bottom: 10px;
+      font-style: italic;
+      color: #555;
+    }
+    
+    @media (max-width: 600px) {
+      .navigation-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+      }
+      
+      .navigation-buttons button {
+        flex: 1 1 45%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="header-content">
+        <h1>Arabic Verb Quiz</h1>
+        <p class="subtitle">Test your knowledge of Arabic verb conjugations</p>
+      </div>
+    </header>
+    
+    <div class="quiz-intro" id="quiz-intro">
+      <p>Welcome to the Arabic Verb Quiz. Choose the correct conjugation for each English phrase.</p>
+      <div class="difficulty-selector">
+        <label for="difficulty">Select difficulty:</label>
+        <select id="difficulty">
+          <option value="all">All verbs</option>
+          <option value="basic">Basic verbs</option>
+          <option value="intermediate">Intermediate verbs</option>
+          <option value="advanced">Advanced verbs</option>
+        </select>
+      </div>
+      <button id="start-quiz-btn" class="start-quiz-btn">Start Quiz</button>
+    </div>
+
+    <div class="quiz-form" id="quiz-form" style="display: none;">
+      <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+      <div class="question-counter" id="question-counter"></div>
+      <div class="timer" id="timer">Time: 0:00</div>
+      
+      <div id="question-container">
+        <!-- Question will be injected here -->
+      </div>
+      
+      <div class="feedback" id="feedback"></div>
+      
+      <div class="navigation-buttons">
+        <button id="prev-btn" class="nav-btn">Previous</button>
+        <button id="next-btn" class="nav-btn">Next</button>
+        <button id="hint-btn" class="nav-btn">Hint</button>
+        <button id="reset-btn" class="nav-btn">Reset</button>
+      </div>
+    </div>
+
+    <div class="quiz-result" id="quiz-result" style="display: none;">
+      <h2 class="result-title">Quiz Completed!</h2>
+      <p class="score-display">Your Score: <span id="score"></span></p>
+      <p id="time-taken">Time taken: <span id="time-display">0:00</span></p>
+      <div id="performance-feedback"></div>
+      <button class="try-again-btn" id="try-again-btn">Try Again</button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      let verbsData = [];
+      let currentQuestionIndex = 0;
+      let score = 0;
+      let questions = [];
+      let quizStarted = false;
+      let startTime = 0;
+      let timerInterval;
+      let selectedOptions = {}; // Track selected options for each question
+
+      // DOM elements
+      const questionContainer = document.getElementById('question-container');
+      const prevBtn = document.getElementById('prev-btn');
+      const nextBtn = document.getElementById('next-btn');
+      const hintBtn = document.getElementById('hint-btn');
+      const resetBtn = document.getElementById('reset-btn');
+      const quizResult = document.getElementById('quiz-result');
+      const scoreDisplay = document.getElementById('score');
+      const tryAgainBtn = document.getElementById('try-again-btn');
+      const quizIntro = document.getElementById('quiz-intro');
+      const quizForm = document.getElementById('quiz-form');
+      const startQuizBtn = document.getElementById('start-quiz-btn');
+      const progressBar = document.getElementById('progress-bar');
+      const questionCounter = document.getElementById('question-counter');
+      const timerElement = document.getElementById('timer');
+      const feedbackElement = document.getElementById('feedback');
+      const difficultySelector = document.getElementById('difficulty');
+      const timeDisplay = document.getElementById('time-display');
+      const performanceFeedback = document.getElementById('performance-feedback');
+
+      // Fetch verb data from other_words.html
+      fetch('other_words.html')
+        .then(response => response.text())
+        .then(htmlText => {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(htmlText, 'text/html');
+          const dataScript = doc.getElementById('verbsData');
+          verbsData = JSON.parse(dataScript.textContent);
+        })
+        .catch(error => console.error('Error loading verb data:', error));
+
+      function startQuiz() {
+        const difficulty = difficultySelector.value;
+        let filteredVerbs = verbsData;
+        
+        if (difficulty !== 'all') {
+          filteredVerbs = verbsData.filter(verb => verb.difficulty === difficulty);
+        }
+        
+        if (filteredVerbs.length === 0) {
+          alert('No verbs available for the selected difficulty. Using all verbs instead.');
+          filteredVerbs = verbsData;
+        }
+        
+        generateQuestions(filteredVerbs);
+        quizStarted = true;
+        quizIntro.style.display = 'none';
+        quizForm.style.display = 'block';
+        currentQuestionIndex = 0;
+        score = 0;
+        selectedOptions = {};
+        startTimer();
+        displayQuestion();
+      }
+
+      function generateQuestions(verbs) {
+        questions = [];
+        verbs.forEach(verb => {
+          verb.conjugations.forEach(conj => {
+            questions.push({
+              verb: verb.verb,
+              meaning: verb.meaning,
+              english: conj.english,
+              correctArabic: conj.arabic,
+              explanation: conj.explanation,
+              options: generateOptions(verb.conjugations, conj.arabic)
+            });
+          });
+        });
+        questions = shuffleArray(questions);
+      }
+
+      function generateOptions(conjugations, correctAnswer) {
+        const options = [correctAnswer];
+        while (options.length < 4) {
+          const randomConj = conjugations[Math.floor(Math.random() * conjugations.length)].arabic;
+          if (!options.includes(randomConj)) {
+            options.push(randomConj);
+          }
+        }
+        return shuffleArray(options);
+      }
+
+      function shuffleArray(array) {
+        return array.sort(() => Math.random() - 0.5);
+      }
+
+      function displayQuestion() {
+        const question = questions[currentQuestionIndex];
+        const selectedOption = selectedOptions[currentQuestionIndex] || '';
+        
+        questionContainer.innerHTML = `
+          <div class="verb-info">
+            <p>Verb: ${question.verb} (${question.meaning})</p>
+          </div>
+          <div class="question-text">
+            <p><strong>${question.english}</strong></p>
+          </div>
+          <div class="options-container">
+            ${question.options.map(option => `
+              <label class="option-label ${selectedOption === option ? 'selected' : ''}">
+                <input type="radio" name="option" value="${option}" 
+                  ${selectedOption === option ? 'checked' : ''} />
+                <span class="arabic">${option}</span>
+              </label>
+            `).join('')}
+          </div>
+          <div class="hint" id="hint" style="display: none;">
+            <p><em>Hint:</em> ${question.explanation}</p>
+          </div>
+        `;
+        
+        // Update progress
+        const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+        progressBar.style.width = `${progress}%`;
+        
+        // Update question counter
+        questionCounter.textContent = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
+        
+        // Update button states
+        prevBtn.disabled = currentQuestionIndex === 0;
+        nextBtn.textContent = currentQuestionIndex === questions.length - 1 ? 'Finish' : 'Next';
+      }
+
+      function showHint() {
+        const hint = document.getElementById('hint');
+        if (hint) {
+          hint.style.display = hint.style.display === 'none' ? 'block' : 'none';
+        }
+      }
+
+      function checkAnswer() {
+        const selectedOption = document.querySelector('input[name="option"]:checked');
+        if (!selectedOption) return false;
+
+        const answer = selectedOption.value;
+        const question = questions[currentQuestionIndex];
+        
+        // Store the selected option
+        selectedOptions[currentQuestionIndex] = answer;
+        
+        // Check if correct
+        const isCorrect = answer === question.correctArabic;
+        
+        // Show feedback
+        feedbackElement.innerHTML = isCorrect 
+          ? `<div class="correct">Correct! Well done.</div>`
+          : `<div class="incorrect">Incorrect. The correct answer is: <strong>${question.correctArabic}</strong><br>
+             Explanation: ${question.explanation}</div>`;
+        feedbackElement.style.display = 'block';
+        
+        return isCorrect;
+      }
+
+      function startTimer() {
+        startTime = Date.now();
+        clearInterval(timerInterval);
+        timerInterval = setInterval(updateTimer, 1000);
+      }
+
+      function updateTimer() {
+        const elapsed = Math.floor((Date.now() - startTime) / 1000);
+        const minutes = Math.floor(elapsed / 60);
+        const seconds = elapsed % 60;
+        timerElement.textContent = `Time: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+      }
+
+      function stopTimer() {
+        clearInterval(timerInterval);
+        const elapsed = Math.floor((Date.now() - startTime) / 1000);
+        const minutes = Math.floor(elapsed / 60);
+        const seconds = elapsed % 60;
+        timeDisplay.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        return elapsed;
+      }
+
+      function calculateScore() {
+        score = 0;
+        for (let i = 0; i < questions.length; i++) {
+          if (selectedOptions[i] && selectedOptions[i] === questions[i].correctArabic) {
+            score++;
+          }
+        }
+        return score;
+      }
+
+      function displayResult() {
+        const totalTime = stopTimer();
+        const finalScore = calculateScore();
+        const percentage = Math.round((finalScore / questions.length) * 100);
+        
+        quizForm.style.display = 'none';
+        quizResult.style.display = 'block';
+        scoreDisplay.textContent = `${finalScore} / ${questions.length}`;
+        
+        // Performance feedback
+        let feedback = '';
+        if (percentage >= 90) {
+          feedback = 'Excellent! You have a strong command of these verb conjugations.';
+        } else if (percentage >= 70) {
+          feedback = 'Good job! You know most of these conjugations well.';
+        } else if (percentage >= 50) {
+          feedback = 'Not bad! With some more practice, you\'ll master these conjugations.';
+        } else {
+          feedback = 'Keep practicing! Review the conjugations and try again.';
+        }
+        
+        performanceFeedback.innerHTML = `
+          <p>${feedback}</p>
+          <p>Score: ${percentage}%</p>
+          <p>Average time per question: ${Math.round(totalTime / questions.length)} seconds</p>
+        `;
+      }
+
+      // Event listeners
+      startQuizBtn.addEventListener('click', startQuiz);
+
+      prevBtn.addEventListener('click', () => {
+        if (currentQuestionIndex > 0) {
+          currentQuestionIndex--;
+          displayQuestion();
+          feedbackElement.style.display = 'none';
+        }
+      });
+
+      nextBtn.addEventListener('click', () => {
+        const isCorrect = checkAnswer();
+        
+        if (isCorrect && !selectedOptions[currentQuestionIndex]) {
+          score++;
+        }
+        
+        if (currentQuestionIndex < questions.length - 1) {
+          currentQuestionIndex++;
+          displayQuestion();
+          feedbackElement.style.display = 'none';
+        } else {
+          displayResult();
+        }
+      });
+
+      hintBtn.addEventListener('click', showHint);
+
+      resetBtn.addEventListener('click', () => {
+        if (confirm('Are you sure you want to reset the quiz? All progress will be lost.')) {
+          clearInterval(timerInterval);
+          quizStarted = false;
+          quizForm.style.display = 'none';
+          quizResult.style.display = 'none';
+          quizIntro.style.display = 'block';
+        }
+      });
+
+      tryAgainBtn.addEventListener('click', () => {
+        quizResult.style.display = 'none';
+        startQuiz();
+      });
+
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (!quizStarted) return;
+        
+        if (e.key === 'ArrowRight' || e.key === 'n') {
+          nextBtn.click();
+        } else if (e.key === 'ArrowLeft' || e.key === 'p') {
+          prevBtn.click();
+        } else if (e.key === 'h') {
+          hintBtn.click();
+        } else if (e.key >= 1 && e.key <= 4) {
+          // Select option with number keys 1-4
+          const options = document.querySelectorAll('input[name="option"]');
+          if (options.length >= e.key) {
+            options[e.key - 1].checked = true;
+            options[e.key - 1].dispatchEvent(new Event('change'));
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
