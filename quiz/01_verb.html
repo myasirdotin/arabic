@@ -2,330 +2,401 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Arabic Grammar – Verbs</title>
-  <link rel="stylesheet" href="../css/styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arabic Grammar Quiz - Verbs & Nouns</title>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
   <style>
+    :root {
+      --primary: #2c5282;
+      --secondary: #ed8936;
+      --success: #48bb78;
+      --danger: #f56565;
+      --light: #edf2f7;
+      --dark: #2d3748;
+      --font-main: 'Amiri', serif;
+      --shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      background: linear-gradient(135deg, #e2e8f0 0%, #edf2f7 100%);
+      font-family: var(--font-main);
+      color: var(--dark);
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
     .quiz-box {
-      background: #f0f8ff;
-      padding: 20px;
-      border-radius: 10px;
+      background: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      animation: fadeIn 0.5s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      font-size: 2em;
+      color: var(--primary);
+      text-align: center;
       margin-bottom: 30px;
-      border: 1px solid #ccc;
+      font-weight: 700;
     }
-    .quiz-box select,
-    .quiz-box button {
-      margin: 10px 5px;
-      padding: 5px 10px;
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: 700;
+      font-size: 1.2em;
     }
-    .quiz-box button {
-      background: #008cba;
-      color: white;
+
+    input, select {
+      width: 100%;
+      padding: 12px;
+      font-size: 1.1em;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      transition: border-color 0.3s;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .quiz-controls {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .quiz-controls button {
+      flex: 1;
+      padding: 14px;
+      font-size: 1.1em;
+      background: var(--primary);
       border: none;
-      border-radius: 5px;
+      color: white;
+      border-radius: 8px;
       cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
     }
-    .quiz-box button:hover {
-      background: #005f6b;
+
+    .quiz-controls button:hover {
+      background: #2b6cb0;
+      transform: translateY(-2px);
     }
-    .arabic { font-family: 'Scheherazade', serif; font-size: 1.2em; direction: rtl; }
-    .arabic-large { font-size: 2em; direction: rtl; }
+
+    .quiz-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .quiz-options button {
+      padding: 14px;
+      font-size: 1.1em;
+      background: var(--secondary);
+      border: none;
+      color: var(--dark);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.3s;
+    }
+
+    .quiz-options button:hover {
+      transform: scale(1.05);
+      background: #dd6b20;
+    }
+
+    button.correct {
+      background: var(--success) !important;
+      color: white !important;
+      transform: scale(1.1);
+    }
+
+    button.incorrect {
+      background: var(--danger) !important;
+      color: white !important;
+      transform: scale(0.95);
+    }
+
+    .hint {
+      margin-top: 15px;
+      font-style: italic;
+      color: var(--dark);
+      font-size: 1em;
+    }
+
+    .summary {
+      background: var(--light);
+      padding: 25px;
+      border-left: 6px solid var(--primary);
+      border-radius: 8px;
+      font-size: 1.1em;
+      margin-top: 25px;
+      animation: slideIn 0.5s ease-in;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 10px;
+      background: #e2e8f0;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+
+    .progress {
+      height: 100%;
+      background: var(--success);
+      width: 0;
+      transition: width 0.5s ease-in-out;
+    }
+
+    .score {
+      text-align: center;
+      font-size: 1.2em;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
   </style>
 </head>
 <body>
   <div class="container">
+    <section class="quiz-box" aria-labelledby="quiz-title">
+      <h2 id="quiz-title">🎓 Quick Quiz: Analyze the Word</h2>
+      <label for="user-name">Your Name:</label>
+      <input type="text" id="user-name" placeholder="Enter your name" />
+      <label for="word-select">Select a Word:</label>
+      <select id="word-select"><option value="" disabled selected>-- Select a word --</option></select>
 
-    <!-- 🔍 Quiz Section -->
-    <div class="quiz-box">
-      <h2>🎓 Quick Quiz: Analyze the Word</h2>
-      <label for="word-select">Select a word:</label>
-      <select id="word-select" aria-label="Select an Arabic word">
-        <option value="" disabled selected>-- Select a word --</option>
-      </select>
-      <button onclick="checkSelectedWord()" aria-label="Check the selected word type">Check Word Type</button>
-      <button onclick="resetQuiz()" aria-label="Reset the quiz">Reset Quiz</button>
+      <div class="score" id="score">Score: 0</div>
+      <div class="progress-bar"><div class="progress" id="progress"></div></div>
 
-      <div id="step2" style="display:none;">
+      <div class="quiz-controls">
+        <button id="check-btn">Start Quiz</button>
+        <button id="reset-btn">Reset Quiz</button>
+      </div>
+
+      <p id="word-meaning" class="hint"></p>
+
+      <div id="stepType" hidden>
+        <p>➡️ Is it a noun or a verb?</p>
+        <div class="quiz-options" id="type-options">
+          <button data-ans-type="Verb">Verb</button>
+          <button data-ans-type="Noun">Noun</button>
+        </div>
+        <p id="type-hint" class="hint"></p>
+      </div>
+
+      <div id="step2" hidden>
         <p id="word-type-result"></p>
         <p>➡️ What is the gender?</p>
-        <button onclick="selectGender('Masculine')" aria-label="Select Masculine gender">مذكّر</button>
-        <button onclick="selectGender('Feminine')" aria-label="Select Feminine gender">مؤنّث</button>
+        <div class="quiz-options" id="gender-options">
+          <button data-gender="Masculine">Masculine</button>
+          <button data-gender="Feminine">Feminine</button>
+        </div>
+        <p id="gender-hint" class="hint"></p>
       </div>
 
-      <div id="step3" style="display:none;">
-        <p>➡️ What is the number form?</p>
-        <button onclick="selectNumber('Singular')" aria-label="Select Singular number">مفرد</button>
-        <button onclick="selectNumber('Dual')" aria-label="Select Dual number">مثنّى</button>
-        <button onclick="selectNumber('Plural')" aria-label="Select Plural number">جمع</button>
+      <div id="step3" hidden>
+        <p>➡️ What is the number?</p>
+        <div class="quiz-options" id="number-options">
+          <button data-number="Singular">Singular</button>
+          <button data-number="Dual">Dual</button>
+          <button data-number="Plural">Plural</button>
+        </div>
+        <p id="number-hint" class="hint"></p>
       </div>
 
-      <div id="final-result" style="display:none;">
+      <div id="final-result" hidden>
         <h3>🧾 Summary:</h3>
-        <p id="summary-text"></p>
+        <div id="summary-text" class="summary"></div>
+        <p id="final-msg" class="hint"></p>
       </div>
-    </div>
-
-    <!-- 👇 Lesson Content -->
-    <h1>📌 Arabic Verbs (الأفعال)</h1>
-    <p><strong>الماضي، المضارع، الأمر</strong> — Past, Present, Command</p>
-    
-    <div class="note">
-      Arabic verbs are built on root systems (usually 3 letters) and change form based on tense, person, gender, and number.
-    </div>
-
-    <h2>✅ The Three Main Tenses:</h2>
-    <table>
-      <tr>
-        <th>Tense</th>
-        <th>Arabic</th>
-        <th>Example</th>
-        <th>Meaning</th>
-      </tr>
-      <tr>
-        <td>Past</td>
-        <td class="arabic">ماضي</td>
-        <td class="arabic">كَتَبَ</td>
-        <td>He wrote</td>
-      </tr>
-      <tr>
-        <td>Present</td>
-        <td class="arabic">مضارع</td>
-        <td class="arabic">يَكْتُبُ</td>
-        <td>He writes/is writing</td>
-      </tr>
-      <tr>
-        <td>Command</td>
-        <td class="arabic">أمر</td>
-        <td class="arabic">اُكْتُبْ</td>
-        <td>Write! (masc.)</td>
-      </tr>
-    </table>
-
-    <h2>🎯 Root System (الجذر):</h2>
-    <div class="root-box">
-      <p>Most verbs derive from <strong>3-letter roots</strong>:</p>
-      <div class="arabic-large">ك - ت - ب</div>
-      <p>This root gives us words related to "writing":</p>
-      <ul>
-        <li><span class="arabic">كَتَبَ</span> (he wrote)</li>
-        <li><span class="arabic">كِتابٌ</span> (book)</li>
-        <li><span class="arabic">مَكْتَبَةٌ</span> (library)</li>
-      </ul>
-    </div>
-
-    <h2>📘 Past Tense Conjugation:</h2>
-    <table>
-      <tr>
-        <th>Person</th>
-        <th>Arabic</th>
-        <th>Example (كَتَبَ)</th>
-      </tr>
-      <tr>
-        <td>I</td>
-        <td class="arabic">تُ</td>
-        <td class="arabic">كَتَبْتُ</td>
-      </tr>
-      <tr>
-        <td>You (masc.)</td>
-        <td class="arabic">تَ</td>
-        <td class="arabic">كَتَبْتَ</td>
-      </tr>
-      <tr>
-        <td>You (fem.)</td>
-        <td class="arabic">تِ</td>
-        <td class="arabic">كَتَبْتِ</td>
-      </tr>
-      <tr>
-        <td>He</td>
-        <td class="arabic">َ</td>
-        <td class="arabic">كَتَبَ</td>
-      </tr>
-      <tr>
-        <td>She</td>
-        <td class="arabic">َتْ</td>
-        <td class="arabic">كَتَبَتْ</td>
-      </tr>
-    </table>
-
-    <h2>📝 Present Tense Prefixes/Suffixes:</h2>
-    <table>
-      <tr>
-        <th>Person</th>
-        <th>Prefix</th>
-        <th>Example (يَكْتُبُ)</th>
-      </tr>
-      <tr>
-        <td>I</td>
-        <td class="arabic">أ</td>
-        <td class="arabic">أَكْتُبُ</td>
-      </tr>
-      <tr>
-        <td>You (masc.)</td>
-        <td class="arabic">ت</td>
-        <td class="arabic">تَكْتُبُ</td>
-      </tr>
-      <tr>
-        <td>You (fem.)</td>
-        <td class="arabic">ت</td>
-        <td class="arabic">تَكْتُبِينَ</td>
-      </tr>
-      <tr>
-        <td>He</td>
-        <td class="arabic">ي</td>
-        <td class="arabic">يَكْتُبُ</td>
-      </tr>
-      <tr>
-        <td>She</td>
-        <td class="arabic">ت</td>
-        <td class="arabic">تَكْتُبُ</td>
-      </tr>
-    </table>
-
-    <h3>🧠 Verb Sentence Examples:</h3>
-    <div class="example-box">
-      <p><span class="arabic">كَتَبَ الرِّسالَةَ</span> (He wrote the letter)</p>
-      <p><span class="arabic">تَكْتُبُ الواجِبَ</span> (You [fem.] are writing the homework)</p>
-      <p><span class="arabic">اِقْرَأِ الكِتابَ</span> (Read the book! [masc.])</p>
-    </div>
-
-    <div class="tip-box warning">
-      <h3>⚠️ Important Notes:</h3>
-      <ol>
-        <li>Present tense often implies <strong>continuous</strong> action ("is writing")</li>
-        <li>Command forms change based on <strong>gender/number</strong></li>
-        <li>Verbs agree with subjects in <strong>gender/number</strong></li>
-      </ol>
-    </div>
-
-    <div class="practice-box">
-      <h3>✍️ Practice:</h3>
-      <p>Conjugate these verbs:</p>
-      <ol>
-        <li>He ate (أَكَلَ) → <span class="arabic hint">أَكَلَ</span></li>
-        <li>I study (يَدْرُسُ) → <span class="arabic hint">أَدْرُسُ</span></li>
-        <li>You (masc.) write! → <span class="arabic hint">اُكْتُبْ</span></li>
-      </ol>
-    </div>
-
-    <div class="nav-buttons">
-      <a href="09_pronouns.html">⬅️ Previous Lesson</a>
-      <a href="index.html">📚 View All Lessons</a>
-      <a href="11_verb_types.html">Next Lesson ➡️</a>
-    </div>
+    </section>
   </div>
 
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-E8RSVHS80Z"></script>
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-E8RSVHS80Z');
-  </script>
-
-  <!-- Quiz Logic -->
-  <script>
-    const wordData = [
-      { word: "كَتَبَ", type: "Verb", tense: "Past", gender: "Masculine", number: "Singular" },
-      { word: "كِتابٌ", type: "Noun", gender: "Masculine", number: "Singular" },
-      { word: "مَكْتَبٌ", type: "Noun", gender: "Masculine", number: "Singular" },
-      { word: "مُعَلِّمٌ", type: "Noun", gender: "Masculine", number: "Singular" },
-      { word: "مُعَلِّمَةٌ", type: "Noun", gender: "Feminine", number: "Singular" },
-      { word: "طالِبٌ", type: "Noun", gender: "Masculine", number: "Singular" },
-      { word: "طالِبَةٌ", type: "Noun", gender: "Feminine", number: "Singular" },
-      { word: "يَكْتُبُ", type: "Verb", tense: "Present", gender: "Masculine", number: "Singular" },
-      { word: "تَذْهَبُ", type: "Verb", tense: "Present", gender: "Feminine", number: "Singular" },
-      { word: "ذَهَبَ", type: "Verb", tense: "Past", gender: "Masculine", number: "Singular" },
-      { word: "مَدْرَسَةٌ", type: "Noun", gender: "Feminine", number: "Singular" },
-      { word: "قَلَمٌ", type: "Noun", gender: "Masculine", number: "Singular" },
-      { word: "كُرْسِيٌّ", type: "Noun", gender: "Masculine", number: "Singular" },
-      { word: "مِفْتاحٌ", type: "Noun", gender: "Masculine", number: "Singular" },
-      { word: "مِرْآةٌ", type: "Noun", gender: "Feminine", number: "Singular" },
-      { word: "بابٌ", type: "Noun", gender: "Masculine", number: "Singular" },
-      { word: "شُبَّاكٌ", type: "Noun", gender: "Masculine", number: "Singular" },
-      { word: "يَدْرُسُ", type: "Verb", tense: "Present", gender: "Masculine", number: "Singular" },
-      { word: "سَيّارَةٌ", type: "Noun", gender: "Feminine", number: "Singular" },
-      { word: "رَجُلٌ", type: "Noun", gender: "Masculine", number: "Singular" },
-      { word: "اِمْرَأَةٌ", type: "Noun", gender: "Feminine", number: "Singular" },
-      { word: "بِنْتٌ", type: "Noun", gender: "Feminine", number: "Singular" },
-      { word: "وَلَدٌ", type: "Noun", gender: "Masculine", number: "Singular" },
-      { word: "يَذْهَبُ", type: "Verb", tense: "Present", gender: "Masculine", number: "Singular" },
-      { word: "تَكْتُبُ", type: "Verb", tense: "Present", gender: "Feminine", number: "Singular" },
-      { word: "مُهَنْدِسٌ", type: "Noun", gender: "Masculine", number: "Singular" },
-      { word: "مُهَنْدِسَةٌ", type: "Noun", gender: "Feminine", number: "Singular" },
-      { word: "اُكْتُبْ", type: "Verb", tense: "Command", gender: "Masculine", number: "Singular" },
-      { word: "اِقْرَأْ", type: "Verb", tense: "Command", gender: "Masculine", number: "Singular" }
+    const verbs = ["كَتَبَ","قَرَأَ","ذَهَبَ","جَاءَ","عَمِلَ","دَرَسَ","فَهِمَ","شَاهَدَ","نَظَرَ","أَخْبَرَ","سَمِعَ","أَكَلَ","شَرِبَ","جَلَسَ","قَامَ","رَكِضَ","سَبَحَ","نَامَ","اسْتَيْقَظَ","تَحَدَّثَ","اسْتَمَعَ","اشْتَرَى","بَاعَ","فَتَحَ","أَغْلَقَ","قَالَ","سَأَلَ","أَجَابَ","سَافَرَ","رَجَعَ","ضَحِكَ","بَكَى","غَسَلَ","لَبِسَ","رَقَصَ","غَنَّى","رَسَمَ","قَتَلَ","بَنَى","تَقَرَّرَ","حَكَى","بَحَثَ","وَجَدَ","فَقَدَ","عَرَفَ","نَسِيَ","رَكِبَ","صَحَا"];
+    const nouns = ["كِتَابٌ","مَدْرَسَةٌ","بَيْتٌ","سَيَّارَةٌ","قِطَّةٌ","كَلْبٌ","بَابٌ","نَافِذَةٌ","هَاتِفٌ","قَلَمٌ","مَنْزِلٌ","طَاوِلَةٌ","كُرْسِيٌّ","غُرْفَةٌ","شَجَرَةٌ","بَحْرٌ","سَمَاءٌ","أَرْضٌ","وَقْتٌ","يَوْمٌ","لَيْلَةٌ","أُسْبُوعٌ","شَهْرٌ","سَنَةٌ","مَاءٌ","طَعَامٌ","سَاعَةٌ","حَاسُوبٌ","تِلْفَازٌ","صُورَةٌ","شَارِعٌ","سُوقٌ","عَمَلٌ","جَامِعَةٌ","قِصَّةٌ","رِسَالَةٌ","كَوْكَبٌ","حَيَاةٌ","عَالَمٌ","قَلْبٌ","رَأسٌ","يَدٌ","قَدَمٌ","عَيْنٌ","أُذُنٌ","فَمٌ","وَجْعٌ","حِذَاءٌ","تُفَّاحَةٌ","مِفْتَاحٌ","سِكِّينٌ","زَهْرَةٌ"];
+    const meanings = [
+      "he wrote","he read","he went","he came","he worked","he studied","he understood","he watched","he looked","he informed",
+      "he heard","he ate","he drank","he sat","he stood","he ran","he swam","he slept","he woke up","he spoke",
+      "he listened","he bought","he sold","he opened","he closed","he said","he asked","he answered","he traveled","he returned",
+      "he laughed","he cried","he washed","he dressed","he danced","he sang","he drew","he killed","he built","it was decided",
+      "he told","he searched","he found","he lost","he knew","he forgot","he rode","he woke up again"
     ];
 
-    let wordType = '', gender = '', number = '', selectedWord = '';
+    const explainVerb = {
+      type: 'Verbs express actions; past verbs often end with a fatḥa.',
+      gender: 'Verbs agree with subject gender: feminine past verbs add تْ.',
+      number: 'Verbs agree with subject number: dual adds تَما, plural adds وا/كن.'
+    };
 
-    // Populate select dynamically
-    document.addEventListener("DOMContentLoaded", () => {
-      const wordSelect = document.getElementById("word-select");
-      wordData.forEach(item => {
-        const option = document.createElement("option");
-        option.value = item.word;
-        option.text = item.word;
-        wordSelect.appendChild(option);
+    const explainNoun = {
+      type: 'Nouns name people, places, things, or concepts.',
+      gender: 'Feminine nouns often end with ة; others are masculine.',
+      number: 'Singular stands alone; dual adds ان; plurals use sound/broken patterns.'
+    };
+
+    const wordData = [
+      ...verbs.map((w, i) => ({
+        word: w,
+        meaning: meanings[i],
+        type: 'Verb',
+        tense: 'Past',
+        gender: 'Masculine',
+        number: 'Singular',
+        explain: explainVerb
+      })),
+      ...nouns.map(n => ({
+        word: n,
+        meaning: `"${n}"`,
+        type: 'Noun',
+        gender: n.includes('ة') ? 'Feminine' : 'Masculine',
+        number: 'Singular',
+        explain: explainNoun
+      }))
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const nameInput = document.getElementById('user-name');
+      const wordSelect = document.getElementById('word-select');
+      const checkBtn = document.getElementById('check-btn');
+      const resetBtn = document.getElementById('reset-btn');
+      const wordMeaning = document.getElementById('word-meaning');
+      const stepType = document.getElementById('stepType');
+      const typeOptions = document.getElementById('type-options');
+      const typeHint = document.getElementById('type-hint');
+      const step2 = document.getElementById('step2');
+      const genderOptions = document.getElementById('gender-options');
+      const genderHint = document.getElementById('gender-hint');
+      const step3 = document.getElementById('step3');
+      const numberOptions = document.getElementById('number-options');
+      const numberHint = document.getElementById('number-hint');
+      const finalResult = document.getElementById('final-result');
+      const summaryText = document.getElementById('summary-text');
+      const finalMsg = document.getElementById('final-msg');
+      const scoreDisplay = document.getElementById('score');
+      const progressBar = document.getElementById('progress');
+
+      // Randomize word selection
+      const shuffledWords = wordData.sort(() => Math.random() - 0.5).slice(0, 10);
+      shuffledWords.forEach(item => wordSelect.add(new Option(item.word, item.word)));
+
+      let state = {};
+      let score = 0;
+      let currentStep = 0;
+      const totalSteps = 3;
+
+      const updateProgress = () => {
+        const progress = (currentStep / totalSteps) * 100;
+        progressBar.style.width = `${progress}%`;
+      };
+
+      const updateScore = (points) => {
+        score += points;
+        scoreDisplay.textContent = `Score: ${score}`;
+      };
+
+      resetBtn.addEventListener('click', () => location.reload());
+
+      checkBtn.addEventListener('click', () => {
+        if (!nameInput.value.trim()) return alert('Please enter your name.');
+        const sel = wordSelect.value;
+        const info = wordData.find(i => i.word === sel);
+        if (!info) return alert('⚠️ Please select a word.');
+        state = { ...info, user: nameInput.value.trim() };
+        wordMeaning.textContent = `Meaning: ${info.meaning}`;
+        stepType.hidden = false;
+        step2.hidden = step3.hidden = finalResult.hidden = true;
+        typeHint.textContent = '';
+        currentStep = 1;
+        updateProgress();
+        typeOptions.querySelectorAll('button').forEach(b => b.className = '');
+      });
+
+      typeOptions.addEventListener('click', e => {
+        if (!e.target.dataset.ansType) return;
+        const choice = e.target.dataset.ansType;
+        const correct = state.type;
+        e.target.classList.add(choice === correct ? 'correct' : 'incorrect');
+        typeHint.textContent = choice === correct
+          ? '✅ Correct!'
+          : `⚠️ Incorrect! ${state.explain.type} Suggestion: review word categories.`;
+        if (choice === correct) updateScore(10);
+        typeOptions.querySelectorAll('button').forEach(b => b.disabled = true);
+        typeOptions.querySelector(`[data-ans-type="${correct}"]`).classList.add('correct');
+        setTimeout(() => {
+          step2.hidden = false;
+          currentStep = 2;
+          updateProgress();
+        }, 800);
+      });
+
+      genderOptions.addEventListener('click', e => {
+        if (!e.target.dataset.gender) return;
+        const choice = e.target.dataset.gender;
+        const correct = state.gender;
+        e.target.classList.add(choice === correct ? 'correct' : 'incorrect');
+        genderHint.textContent = choice === correct
+          ? '✅ Correct!'
+          : `⚠️ Incorrect! ${state.explain.gender} Suggestion: review gender markers.`;
+        if (choice === correct) updateScore(10);
+        genderOptions.querySelectorAll('button').forEach(b => b.disabled = true);
+        genderOptions.querySelector(`[data-gender="${correct}"]`).classList.add('correct');
+        setTimeout(() => {
+          step3.hidden = false;
+          currentStep = 3;
+          updateProgress();
+        }, 800);
+      });
+
+      numberOptions.addEventListener('click', e => {
+        if (!e.target.dataset.number) return;
+        const choice = e.target.dataset.number;
+        const correct = state.number;
+        e.target.classList.add(choice === correct ? 'correct' : 'incorrect');
+        numberHint.textContent = choice === correct
+          ? '✅ Correct!'
+          : `⚠️ Incorrect! ${state.explain.number} Suggestion: review number forms.`;
+        if (choice === correct) updateScore(10);
+        numberOptions.querySelectorAll('button').forEach(b => b.disabled = true);
+        numberOptions.querySelector(`[data-number="${correct}"]`).classList.add('correct');
+        setTimeout(() => {
+          summaryText.innerHTML = `
+            <ul>
+              <li>Word: ${state.word}</li>
+              <li>Meaning: ${state.meaning}</li>
+              <li>Type: ${state.type}${state.tense ? ` (${state.tense})` : ''}</li>
+              <li>Gender: ${state.gender}</li>
+              <li>Number: ${state.number}</li>
+            </ul>`;
+          finalMsg.textContent = `Great job, ${state.user}! You completed the quiz with a score of ${score}.`;
+          finalResult.hidden = false;
+        }, 800);
       });
     });
-
-    function checkSelectedWord() {
-      const word = document.getElementById("word-select").value;
-      const wordInfo = wordData.find(item => item.word === word);
-      if (!wordInfo) {
-        document.getElementById("word-type-result").innerText = "⚠️ Please select a word.";
-        return;
-      }
-
-      selectedWord = word;
-      wordType = wordInfo.type;
-      const resultText = wordInfo.type === "Verb"
-        ? `✅ "${word}" is a **${wordInfo.type}** (${wordInfo.tense}).`
-        : `✅ "${word}" is a **${wordInfo.type}**.`;
-
-      document.getElementById("word-type-result").innerText = resultText;
-      document.getElementById("step2").style.display = "block";
-      document.getElementById("step3").style.display = "none";
-      document.getElementById("final-result").style.display = "none";
-    }
-
-    function selectGender(g) {
-      gender = g;
-      const wordInfo = wordData.find(item => item.word === selectedWord);
-      if (wordInfo.gender !== g) {
-        document.getElementById("word-type-result").innerText += 
-          `\n⚠️ Incorrect gender. "${selectedWord}" is ${wordInfo.gender}. Hint: Feminine nouns often end with ة (ta marbuta).`;
-      }
-      document.getElementById("step3").style.display = "block";
-    }
-
-    function selectNumber(n) {
-      number = n;
-      const wordInfo = wordData.find(item => item.word === selectedWord);
-      let summary = `You selected: "${selectedWord}" → Type: ${wordType}`;
-      if (wordInfo.type === "Verb") summary += ` (${wordInfo.tense})`;
-      summary += `, Gender: ${gender}, Number: ${number}.`;
-
-      if (wordInfo.number !== n) {
-        summary += `\n⚠️ Incorrect number. "${selectedWord}" is ${wordInfo.number}. Hint: Plural nouns often have broken plural patterns.`;
-      } else {
-        summary += " ✅ All correct!";
-      }
-
-      document.getElementById("final-result").style.display = "block";
-      document.getElementById("summary-text").innerText = summary;
-    }
-
-    function resetQuiz() {
-      wordType = gender = number = selectedWord = "";
-      document.getElementById("word-select").value = "";
-      document.getElementById("word-type-result").innerText = "";
-      document.getElementById("summary-text").innerText = "";
-      document.getElementById("step2").style.display = "none";
-      document.getElementById("step3").style.display = "none";
-      document.getElementById("final-result").style.display = "none";
-    }
   </script>
 </body>
 </html>
