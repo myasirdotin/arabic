@@ -1,0 +1,30 @@
+{
+    "nouns": [
+        {
+            "arabic": "كِتَاب",
+            "translation": {
+                "en": "book",
+                "ur": "کتاب",
+                "ar": "كتاب"
+            },
+            "gender": "masculine",
+            "conjugations": {
+                "singular": {
+                    "nominative": "كِتَابٌ",
+                    "accusative": "كِتَابًا",
+                    "genitive": "كِتَابٍ"
+                },
+                "dual": {
+                    "nominative": "كِتَابَانِ",
+                    "accusative": "كِتَابَيْنِ",
+                    "genitive": "كِتَابَيْنِ"
+                },
+                "plural": {
+                    "nominative": "كُتُبٌ",
+                    "accusative": "كُتُبًا",
+                    "genitive": "كُتُبٍ"
+                }
+            }
+        }
+    ]
+}

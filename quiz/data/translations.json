@@ -1,0 +1,34 @@
+{
+    "ui": {
+        "level": {
+            "ar": "المستوى",
+            "en": "Level",
+            "ur": "لیول"
+        },
+        "nextExercise": {
+            "ar": "التمرين التالي",
+            "en": "Next Exercise",
+            "ur": "اگلا مشق"
+        },
+        "practice": {
+            "ar": "تمارين",
+            "en": "Practice",
+            "ur": "مشق"
+        },
+        "progress": {
+            "ar": "تقدمي",
+            "en": "Progress",
+            "ur": "ترقی"
+        },
+        "rewards": {
+            "ar": "جوائز",
+            "en": "Rewards",
+            "ur": "انعامات"
+        },
+        "hint": {
+            "ar": "تلميح",
+            "en": "Hint",
+            "ur": "اشارہ"
+        }
+    }
+}
