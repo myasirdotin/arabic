@@ -2,9 +2,9 @@
 export async function loadData() {
     try {
         const [verbsRes, nounsRes, translationsRes] = await Promise.all([
-            fetch('data/verbs.json'),
-            fetch('data/nouns.json'),
-            fetch('data/translations.json')
+            fetch('data/verb.json'),
+            fetch('data/noun.json'),
+            fetch('data/translate.json')
         ]);
         
         if (!verbsRes.ok || !nounsRes.ok || !translationsRes.ok) {
