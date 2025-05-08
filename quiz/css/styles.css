@@ -417,3 +417,20 @@ progress::-webkit-progress-value {
     color: white;
     border-color: var(--error-color);
 }
+#question-count, #start-quiz {
+    padding: 8px 12px;
+    margin: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+#start-quiz {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#start-quiz:hover {
+    background-color: #45a049;
+}
