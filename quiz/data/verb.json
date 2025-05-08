@@ -1,0 +1,142 @@
+{
+    "verbs": [
+      {
+        "arabic": "كَتَبَ",
+        "root": "ك-ت-ب",
+        "translation": {
+          "en": "to write",
+          "ur": "لکھنا"
+        },
+        "conjugations": {
+          "past": {
+            "masculine": {
+              "singular": "كَتَبَ",
+              "dual": "كَتَبَا",
+              "plural": "كَتَبُوا"
+            },
+            "feminine": {
+              "singular": "كَتَبَتْ",
+              "dual": "كَتَبَتَا",
+              "plural": "كَتَبْنَ"
+            }
+          },
+          "present": {
+            "masculine": {
+              "singular": "يَكْتُبُ",
+              "dual": "يَكْتُبَانِ",
+              "plural": "يَكْتُبُونَ"
+            },
+            "feminine": {
+              "singular": "تَكْتُبُ",
+              "dual": "تَكْتُبَانِ",
+              "plural": "يَكْتُبْنَ"
+            }
+          },
+          "future": {
+            "masculine": {
+              "singular": "سَيَكْتُبُ",
+              "dual": "سَيَكْتُبَانِ",
+              "plural": "سَيَكْتُبُونَ"
+            },
+            "feminine": {
+              "singular": "سَتَكْتُبُ",
+              "dual": "سَتَكْتُبَانِ",
+              "plural": "سَيَكْتُبْنَ"
+            }
+          }
+        }
+      },
+      {
+        "arabic": "قَرَأَ",
+        "root": "ق-ر-أ",
+        "translation": {
+          "en": "to read",
+          "ur": "پڑھنا"
+        },
+        "conjugations": {
+          "past": {
+            "masculine": {
+              "singular": "قَرَأَ",
+              "dual": "قَرَأَا",
+              "plural": "قَرَأُوا"
+            },
+            "feminine": {
+              "singular": "قَرَأَتْ",
+              "dual": "قَرَأَتَا",
+              "plural": "قَرَأْنَ"
+            }
+          },
+          "present": {
+            "masculine": {
+              "singular": "يَقْرَأُ",
+              "dual": "يَقْرَأَانِ",
+              "plural": "يَقْرَأُونَ"
+            },
+            "feminine": {
+              "singular": "تَقْرَأُ",
+              "dual": "تَقْرَأَانِ",
+              "plural": "يَقْرَأْنَ"
+            }
+          },
+          "future": {
+            "masculine": {
+              "singular": "سَيَقْرَأُ",
+              "dual": "سَيَقْرَأَانِ",
+              "plural": "سَيَقْرَأُونَ"
+            },
+            "feminine": {
+              "singular": "سَتَقْرَأُ",
+              "dual": "سَتَقْرَأَانِ",
+              "plural": "سَيَقْرَأْنَ"
+            }
+          }
+        }
+      },
+      {
+        "arabic": "ذَهَبَ",
+        "root": "ذ-ه-ب",
+        "translation": {
+          "en": "to go",
+          "ur": "جانا"
+        },
+        "conjugations": {
+          "past": {
+            "masculine": {
+              "singular": "ذَهَبَ",
+              "dual": "ذَهَبَا",
+              "plural": "ذَهَبُوا"
+            },
+            "feminine": {
+              "singular": "ذَهَبَتْ",
+              "dual": "ذَهَبَتَا",
+              "plural": "ذَهَبْنَ"
+            }
+          },
+          "present": {
+            "masculine": {
+              "singular": "يَذْهَبُ",
+              "dual": "يَذْهَبَانِ",
+              "plural": "يَذْهَبُونَ"
+            },
+            "feminine": {
+              "singular": "تَذْهَبُ",
+              "dual": "تَذْهَبَانِ",
+              "plural": "يَذْهَبْنَ"
+            }
+          },
+          "future": {
+            "masculine": {
+              "singular": "سَيَذْهَبُ",
+              "dual": "سَيَذْهَبَانِ",
+              "plural": "سَيَذْهَبُونَ"
+            },
+            "feminine": {
+              "singular": "سَتَذْهَبُ",
+              "dual": "سَتَذْهَبَانِ",
+              "plural": "سَيَذْهَبْنَ"
+            }
+          }
+        }
+      }
+    ]
+  }

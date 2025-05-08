@@ -1,0 +1,79 @@
+{
+    "nouns": [
+      {
+        "arabic": "كِتَاب",
+        "translation": {
+          "en": "book",
+          "ur": "کتاب"
+        },
+        "gender": "masculine",
+        "conjugations": {
+          "singular": {
+            "nominative": "كِتَابٌ",
+            "accusative": "كِتَابًا",
+            "genitive": "كِتَابٍ"
+          },
+          "dual": {
+            "nominative": "كِتَابَانِ",
+            "accusative": "كِتَابَيْنِ",
+            "genitive": "كِتَابَيْنِ"
+          },
+          "plural": {
+            "nominative": "كُتُبٌ",
+            "accusative": "كُتُبًا",
+            "genitive": "كُتُبٍ"
+          }
+        }
+      },
+      {
+        "arabic": "قَلَم",
+        "translation": {
+          "en": "pen",
+          "ur": "قلم"
+        },
+        "gender": "masculine",
+        "conjugations": {
+          "singular": {
+            "nominative": "قَلَمٌ",
+            "accusative": "قَلَمًا",
+            "genitive": "قَلَمٍ"
+          },
+          "dual": {
+            "nominative": "قَلَمَانِ",
+            "accusative": "قَلَمَيْنِ",
+            "genitive": "قَلَمَيْنِ"
+          },
+          "plural": {
+            "nominative": "أَقْلَامٌ",
+            "accusative": "أَقْلَامًا",
+            "genitive": "أَقْلَامٍ"
+          }
+        }
+      },
+      {
+        "arabic": "مَدْرَسَة",
+        "translation": {
+          "en": "school",
+          "ur": "اسکول"
+        },
+        "gender": "feminine",
+        "conjugations": {
+          "singular": {
+            "nominative": "مَدْرَسَةٌ",
+            "accusative": "مَدْرَسَةً",
+            "genitive": "مَدْرَسَةٍ"
+          },
+          "dual": {
+            "nominative": "مَدْرَسَتَانِ",
+            "accusative": "مَدْرَسَتَيْنِ",
+            "genitive": "مَدْرَسَتَيْنِ"
+          },
+          "plural": {
+            "nominative": "مَدَارِسُ",
+            "accusative": "مَدَارِسَ",
+            "genitive": "مَدَارِسَ"
+          }
+        }
+      }
+    ]
+  }

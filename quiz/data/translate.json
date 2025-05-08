@@ -1,0 +1,130 @@
+{
+    "ui": {
+        
+        "questions": {
+            "ar": "عدد الأسئلة",
+            "en": "Number of questions",
+            "ur": "سوالوں کی تعداد"
+        },
+        "start": {
+            "ar": "ابدأ",
+            "en": "Start",
+            "ur": "شروع کریں"
+        },
+        "sessionComplete": {
+            "ar": "إكتملت الجلسة!",
+            "en": "Session complete!",
+            "ur": "سیشن مکمل ہوگیا!"
+        },
+        "newSession": {
+            "ar": "ابدأ جلسة جديدة",
+            "en": "Start new session",
+            "ur": "نیا سیشن شروع کریں"
+        },
+      "practice": {
+        "ar": "تمرين",
+        "en": "Practice",
+        "ur": "مشق"
+      },
+      "progress": {
+        "ar": "تقدم",
+        "en": "Progress",
+        "ur": "ترقی"
+      },
+      "rewards": {
+        "ar": "مكافآت",
+        "en": "Rewards",
+        "ur": "انعامات"
+      },
+      "hint": {
+        "ar": "تلميح",
+        "en": "Hint",
+        "ur": "اشارہ"
+      },
+      "nextExercise": {
+        "ar": "التمرين التالي",
+        "en": "Next Exercise",
+        "ur": "اگلا مشق"
+      },
+      "level": {
+        "ar": "مستوى",
+        "en": "Level",
+        "ur": "لیول"
+      },
+      "correct": {
+        "ar": "صحيح!",
+        "en": "Correct!",
+        "ur": "صحیح!"
+      },
+      "incorrect": {
+        "ar": "خطأ!",
+        "en": "Incorrect!",
+        "ur": "غلط!"
+      }
+    },
+    "terms": {
+      "tense": {
+        "past": {
+          "ar": "الماضي",
+          "en": "past",
+          "ur": "ماضی"
+        },
+        "present": {
+          "ar": "المضارع",
+          "en": "present",
+          "ur": "حال"
+        },
+        "future": {
+          "ar": "المستقبل",
+          "en": "future",
+          "ur": "مستقبل"
+        }
+      },
+      "gender": {
+        "masculine": {
+          "ar": "المذكر",
+          "en": "masculine",
+          "ur": "مذکر"
+        },
+        "feminine": {
+          "ar": "المؤنث",
+          "en": "feminine",
+          "ur": "مونث"
+        }
+      },
+      "number": {
+        "singular": {
+          "ar": "المفرد",
+          "en": "singular",
+          "ur": "واحد"
+        },
+        "dual": {
+          "ar": "المثنى",
+          "en": "dual",
+          "ur": "دو"
+        },
+        "plural": {
+          "ar": "المجموعة",
+          "en": "plural",
+          "ur": "چند"
+        }
+      },
+      "case": {
+        "nominative": {
+          "ar": "الرفع",
+          "en": "nominative",
+          "ur": "رفع"
+        },
+        "accusative": {
+          "ar": "النصب",
+          "en": "accusative",
+          "ur": "نصب"
+        },
+        "genitive": {
+          "ar": "الجر",
+          "en": "genitive",
+          "ur": "جر"
+        }
+      }
+    }
+  }
