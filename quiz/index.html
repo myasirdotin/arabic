@@ -1,110 +1,210 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تعلم اللغة العربية - Learn Arabic</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>تعلم اللغة العربية - Learn Arabic</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+  
+  <!-- Bootstrap RTL -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <!-- Meta tags for SEO -->
+  <meta name="description" content="تعلم اللغة العربية بطريقة تفاعلية مع عربيك - دروس، تمارين، وتتبع التقدم">
+  <meta name="keywords" content="تعلم العربية, اللغة العربية, دروس عربية, Arabic learning">
 </head>
 <body>
-    <header class="app-header">
-        <div class="logo-container">
-            <h1>عربيك</h1>
-            <p>تعلم اللغة العربية بطريقة تفاعلية</p>
+  <!-- Header Section -->
+  <header class="app-header">
+    <div class="container header-flex">
+      <div class="logo-container">
+        <h1 class="logo-text">عربيك</h1>
+        <p class="logo-subtext">بوابتك لتعلم اللغة العربية</p>
+      </div>
+      
+      <div class="header-controls">
+        <!-- Language Switcher -->
+        <div class="language-switcher btn-group">
+          <button class="lang-btn active" data-lang="ar" aria-label="Arabic">
+            <span class="flag-icon">🇸🇦</span> العربية
+          </button>
+          <button class="lang-btn" data-lang="en" aria-label="English">
+            <span class="flag-icon">🇬🇧</span> English
+          </button>
+          <button class="lang-btn" data-lang="ur" aria-label="Urdu">
+            <span class="flag-icon">🇵🇰</span> اردو
+          </button>
         </div>
         
-        <div class="language-switcher">
-            <button class="lang-btn active" data-lang="ar">العربية</button>
-            <button class="lang-btn" data-lang="en">English</button>
-            <button class="lang-btn" data-lang="ur">اردو</button>
-        </div>
-    </header>
-
-    <main class="app-container">
-        <section class="exercise-section">
-            <div class="progress-display">
-                <div class="level-info">
-                    <span id="level-display">المستوى 1: الماضي - المفرد</span>
-                    <progress id="level-progress" value="0" max="100"></progress>
-                </div>
-                
-                <div class="stats">
-                    <div class="stat-item">
-                        <span class="stat-label">المتابعة</span>
-                        <span id="streak-count" class="stat-value">0</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-label">النقاط</span>
-                        <span id="xp-count" class="stat-value">0</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="settings-panel">
-                <div class="form-group">
-                    <label for="question-count">عدد الأسئلة:</label>
-                    <select id="question-count" class="form-control">
-                        <option value="5">5</option>
-                        <option value="10" selected>10</option>
-                        <option value="15">15</option>
-                        <option value="20">20</option>
-                    </select>
-                </div>
-                <button id="start-btn" class="btn start-btn">
-                    <i class="fas fa-play"></i> ابدأ
-                </button>
-            </div>
-            
-            <div class="exercise-content">
-                <h2 id="arabic-word" class="arabic-word">كلمة</h2>
-                
-                <div class="exercise-question">
-                    <p id="question-text">سؤال عن تصريف الفعل</p>
-                    <p id="english-prompt" class="english-prompt">English prompt will appear here</p>
-                </div>
-                
-                <div id="answer-options" class="answer-options">
-                    <!-- Answer options will be dynamically inserted here -->
-                </div>
-                
-                <div class="exercise-actions">
-                    <button id="hint-btn" class="btn hint-btn">
-                        <i class="fas fa-lightbulb"></i> تلميح
-                    </button>
-                    <button id="pronounce-btn" class="btn pronounce-btn">
-                        <i class="fas fa-volume-up"></i> نطق
-                    </button>
-                </div>
-            </div>
-        </section>
-        
-        <nav class="app-navigation">
-            <button id="practice-btn" class="nav-btn active">
-                <i class="fas fa-book-open"></i> تمارين
-            </button>
-            <button id="progress-btn" class="nav-btn">
-                <i class="fas fa-chart-line"></i> تقدمي
-            </button>
-            <button id="rewards-btn" class="nav-btn">
-                <i class="fas fa-trophy"></i> جوائز
-            </button>
-        </nav>
-    </main>
-
-    <!-- Feedback Modal -->
-    <div id="feedback-modal" class="modal hidden">
-        <div class="modal-content">
-            <div id="feedback-content">
-                <!-- Feedback content will be dynamically inserted here -->
-            </div>
-        </div>
+      </div>
     </div>
+  </header>
 
-    <!-- JavaScript Files -->
-    <script type="module" src="js/dataLoader.js"></script>
-    <script type="module" src="js/app.js"></script>
+  <!-- Main Content -->
+  <main class="app-container container">
+    <!-- Progress Section -->
+    <section class="card progress-section">
+      <div class="progress-display">
+        <div class="level-info">
+          <div class="level-header">
+            <span id="level-display" class="level-title">المستوى 1: الماضي - المفرد</span>
+            <span id="question-counter" class="question-counter">السؤال 1 من 10</span>
+          </div>
+          <div class="progress-container">
+            <progress id="level-progress" value="0" max="100" aria-label="مستوى التقدم"></progress>
+            <span class="progress-value">0%</span>
+          </div>
+        </div>
+        
+        <div class="stats">
+          <div class="stat-item streak">
+            <div class="stat-icon">
+              <i class="fas fa-fire"></i>
+            </div>
+            <div class="stat-content">
+              <span class="stat-label">المتابعة</span>
+              <span id="streak-count" class="stat-value">0</span>
+            </div>
+          </div>
+          
+          <div class="stat-item xp">
+            <div class="stat-icon">
+              <i class="fas fa-star"></i>
+            </div>
+            <div class="stat-content">
+              <span class="stat-label">النقاط</span>
+              <span id="xp-count" class="stat-value">0</span>
+            </div>
+          </div>
+          
+          <div class="stat-item accuracy">
+            <div class="stat-icon">
+              <i class="fas fa-bullseye"></i>
+            </div>
+            <div class="stat-content">
+              <span class="stat-label">الدقة</span>
+              <span id="accuracy-count" class="stat-value">0%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Settings Panel -->
+    <section class="card settings-panel">
+      <h2 class="section-title">إعدادات الدرس</h2>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="question-count" class="form-label">
+            <i class="fas fa-question-circle"></i> عدد الأسئلة:
+          </label>
+          <select id="question-count" class="form-select">
+            <option value="5">5 أسئلة</option>
+            <option value="10" selected>10 أسئلة</option>
+            <option value="15">15 سؤالاً</option>
+            <option value="20">20 سؤالاً</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="level-select" class="form-label">
+            <i class="fas fa-layer-group"></i> المستوى:
+          </label>
+          <select id="level-select" class="form-select">
+            <option value="1" selected>المبتدئ</option>
+            <option value="2">المستوى 2</option>
+            <option value="3">المستوى 3</option>
+            <option value="4">المستوى 4</option>
+            <option value="5">المتوسط</option>
+            <option value="6">المستوى 6</option>
+            <option value="7">المستوى 7</option>
+            <option value="8">المستوى 8</option>
+            <option value="9">المستوى 9</option>
+            <option value="10">المتقدم</option>
+          </select>
+        </div>
+        
+        <div class="form-group start-btn-container">
+          <button id="start-btn" class="btn btn-primary start-btn">
+            <i class="fas fa-play"></i> ابدأ التمرين
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Exercise Content (initially hidden) -->
+    <section id="exercise-section" class="card exercise-content" style="display: none;">
+      <div class="word-display">
+        <h2 id="arabic-word" class="arabic-word">كلمة</h2>
+        <button id="pronounce-btn" class="btn pronounce-btn" aria-label="نطق الكلمة">
+          <i class="fas fa-volume-up"></i>
+        </button>
+      </div>
+      
+      <div class="exercise-question">
+        <p id="question-text" class="question-text">سؤال عن تصريف الفعل</p>
+        <p id="english-prompt" class="english-prompt">English prompt will appear here</p>
+      </div>
+      
+      <div id="answer-options" class="answer-options">
+        <!-- Options will be inserted here by JavaScript -->
+      </div>
+      
+      <div class="exercise-actions">
+        <button id="hint-btn" class="btn hint-btn">
+          <i class="fas fa-lightbulb"></i> تلميح
+        </button>
+        <button id="skip-btn" class="btn skip-btn">
+          <i class="fas fa-forward"></i> تخطي
+        </button>
+      </div>
+    </section>
+
+    <!-- Navigation -->
+    <nav class="app-navigation">
+      <button id="practice-btn" class="nav-btn active" aria-label="تمارين">
+        <i class="fas fa-book-open"></i>
+        <span class="nav-text">تمارين</span>
+      </button>
+      <button id="progress-btn" class="nav-btn" aria-label="تقدمي">
+        <i class="fas fa-chart-line"></i>
+        <span class="nav-text">تقدمي</span>
+      </button>
+      <button id="rewards-btn" class="nav-btn" aria-label="جوائز">
+        <i class="fas fa-trophy"></i>
+        <span class="nav-text">جوائز</span>
+      </button>
+    </nav>
+  </main>
+
+  <!-- Feedback Modal -->
+  <div id="feedback-modal" class="modal hidden" role="dialog" aria-labelledby="feedback-content">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+      <button id="close-modal" class="close-modal" aria-label="إغلاق">
+        <i class="fas fa-times"></i>
+      </button>
+      <div id="feedback-content" class="feedback-content">
+        <!-- Feedback content will be inserted here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="module" src="js/dataLoader.js"></script>
+  <script type="module" src="js/appnew.js"></script>
 </body>
 </html>

@@ -1,130 +1,174 @@
 {
-    "ui": {
-        
-        "questions": {
-            "ar": "عدد الأسئلة",
-            "en": "Number of questions",
-            "ur": "سوالوں کی تعداد"
-        },
-        "start": {
-            "ar": "ابدأ",
-            "en": "Start",
-            "ur": "شروع کریں"
-        },
-        "sessionComplete": {
-            "ar": "إكتملت الجلسة!",
-            "en": "Session complete!",
-            "ur": "سیشن مکمل ہوگیا!"
-        },
-        "newSession": {
-            "ar": "ابدأ جلسة جديدة",
-            "en": "Start new session",
-            "ur": "نیا سیشن شروع کریں"
-        },
-      "practice": {
-        "ar": "تمرين",
-        "en": "Practice",
-        "ur": "مشق"
+  "ui": {
+    "level": {
+      "ar": "المستوى",
+      "en": "Level",
+      "ur": "لیول"
+    },
+    "practice": {
+      "ar": "تمارين",
+      "en": "Practice",
+      "ur": "پریکٹس"
+    },
+    "progress": {
+      "ar": "تقدمي",
+      "en": "Progress",
+      "ur": "پروگریس"
+    },
+    "rewards": {
+      "ar": "جوائز",
+      "en": "Rewards",
+      "ur": "انعامات"
+    },
+    "hint": {
+      "ar": "تلميح",
+      "en": "Hint",
+      "ur": "اشارہ"
+    },
+    "skip": {
+      "ar": "تخطي",
+      "en": "Skip",
+      "ur": "چھوڑیں"
+    },
+    "start": {
+      "ar": "ابدأ",
+      "en": "Start",
+      "ur": "شروع کریں"
+    },
+    "nextQuestion": {
+      "ar": "السؤال التالي",
+      "en": "Next Question",
+      "ur": "اگلا سوال"
+    },
+    "finish": {
+      "ar": "إنهاء",
+      "en": "Finish",
+      "ur": "ختم کریں"
+    },
+    "settings": {
+      "ar": "إعدادات الدرس",
+      "en": "Lesson Settings",
+      "ur": "سبق کی ترتیبات"
+    },
+    "questionCount": {
+      "ar": "عدد الأسئلة",
+      "en": "Number of Questions",
+      "ur": "سوالات کی تعداد"
+    },
+    "levelSelect": {
+      "ar": "المستوى",
+      "en": "Level",
+      "ur": "لیول"
+    },
+    "correctAnswer": {
+      "ar": "إجابة صحيحة!",
+      "en": "Correct Answer!",
+      "ur": "صحیح جواب!"
+    },
+    "incorrectAnswer": {
+      "ar": "إجابة خاطئة",
+      "en": "Incorrect Answer",
+      "ur": "غلط جواب"
+    },
+    "exerciseCompleted": {
+      "ar": "اكتمل التمرين!",
+      "en": "Exercise Completed!",
+      "ur": "مشق مکمل ہوگئی!"
+    },
+    "newExercise": {
+      "ar": "ابدأ تمرينًا جديدًا",
+      "en": "Start New Exercise",
+      "ur": "نیا مشق شروع کریں"
+    },
+    "pronounce": {
+      "ar": "نطق الكلمة",
+      "en": "Pronounce Word",
+      "ur": "لفظ بولیں"
+    },
+    "closeModal": {
+      "ar": "إغلاق",
+      "en": "Close",
+      "ur": "بند کریں"
+    },
+    "streak": {
+      "ar": "المتابعة",
+      "en": "Streak",
+      "ur": "سلسلہ"
+    },
+    "xp": {
+      "ar": "النقاط",
+      "en": "XP",
+      "ur": "پوائنٹس"
+    },
+    "accuracy": {
+      "ar": "الدقة",
+      "en": "Accuracy",
+      "ur": "درستگی"
+    }
+  },
+  "terms": {
+    "tense": {
+      "past": {
+        "ar": "الماضي",
+        "en": "past",
+        "ur": "ماضی"
       },
-      "progress": {
-        "ar": "تقدم",
-        "en": "Progress",
-        "ur": "ترقی"
+      "present": {
+        "ar": "المضارع",
+        "en": "present",
+        "ur": "حال"
       },
-      "rewards": {
-        "ar": "مكافآت",
-        "en": "Rewards",
-        "ur": "انعامات"
-      },
-      "hint": {
-        "ar": "تلميح",
-        "en": "Hint",
-        "ur": "اشارہ"
-      },
-      "nextExercise": {
-        "ar": "التمرين التالي",
-        "en": "Next Exercise",
-        "ur": "اگلا مشق"
-      },
-      "level": {
-        "ar": "مستوى",
-        "en": "Level",
-        "ur": "لیول"
-      },
-      "correct": {
-        "ar": "صحيح!",
-        "en": "Correct!",
-        "ur": "صحیح!"
-      },
-      "incorrect": {
-        "ar": "خطأ!",
-        "en": "Incorrect!",
-        "ur": "غلط!"
+      "future": {
+        "ar": "المستقبل",
+        "en": "future",
+        "ur": "مستقبل"
       }
     },
-    "terms": {
-      "tense": {
-        "past": {
-          "ar": "الماضي",
-          "en": "past",
-          "ur": "ماضی"
-        },
-        "present": {
-          "ar": "المضارع",
-          "en": "present",
-          "ur": "حال"
-        },
-        "future": {
-          "ar": "المستقبل",
-          "en": "future",
-          "ur": "مستقبل"
-        }
+    "gender": {
+      "masculine": {
+        "ar": "المذكر",
+        "en": "masculine",
+        "ur": "مذکر"
       },
-      "gender": {
-        "masculine": {
-          "ar": "المذكر",
-          "en": "masculine",
-          "ur": "مذکر"
-        },
-        "feminine": {
-          "ar": "المؤنث",
-          "en": "feminine",
-          "ur": "مونث"
-        }
+      "feminine": {
+        "ar": "المؤنث",
+        "en": "feminine",
+        "ur": "مونث"
+      }
+    },
+    "number": {
+      "singular": {
+        "ar": "المفرد",
+        "en": "singular",
+        "ur": "واحد"
       },
-      "number": {
-        "singular": {
-          "ar": "المفرد",
-          "en": "singular",
-          "ur": "واحد"
-        },
-        "dual": {
-          "ar": "المثنى",
-          "en": "dual",
-          "ur": "دو"
-        },
-        "plural": {
-          "ar": "المجموعة",
-          "en": "plural",
-          "ur": "چند"
-        }
+      "dual": {
+        "ar": "المثنى",
+        "en": "dual",
+        "ur": "دو"
       },
-      "case": {
-        "nominative": {
-          "ar": "الرفع",
-          "en": "nominative",
-          "ur": "رفع"
-        },
-        "accusative": {
-          "ar": "النصب",
-          "en": "accusative",
-          "ur": "نصب"
-        },
-        "genitive": {
-          "ar": "الجر",
-          "en": "genitive",
-          "ur": "جر"
-        }
+      "plural": {
+        "ar": "المجموعة",
+        "en": "plural",
+        "ur": "چند"
+      }
+    },
+    "case": {
+      "nominative": {
+        "ar": "الرفع",
+        "en": "nominative",
+        "ur": "رفع"
+      },
+      "accusative": {
+        "ar": "النصب",
+        "en": "accusative",
+        "ur": "نصب"
+      },
+      "genitive": {
+        "ar": "الجر",
+        "en": "genitive",
+        "ur": "جر"
       }
     }
   }
+}
