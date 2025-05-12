@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arabic Verb Conjugation Quiz</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary-color: #2d6a4f;
@@ -17,6 +18,7 @@
             --dark-text: #333;
             --error-color: #e63946;
             --warning-color: #ffbe0b;
+            --success-color: #2ecc71;
             --border-radius: 15px;
             --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
@@ -39,6 +41,7 @@
             margin: 0;
             padding-bottom: 80px;
             line-height: 1.6;
+            min-height: 100vh;
         }
 
         .hidden {
@@ -74,6 +77,9 @@
             color: var(--light-text);
             padding: 20px 0;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .header-flex {
@@ -193,6 +199,7 @@
             font-size: 1rem;
             background-color: white;
             transition: var(--transition);
+            cursor: pointer;
         }
 
         .form-select:focus {
@@ -205,11 +212,10 @@
             display: flex;
             gap: 10px;
             margin-top: 20px;
+            flex-wrap: wrap;
         }
 
-        .start-btn,
-        .submit-btn,
-        .reset-btn {
+        .btn {
             width: 100%;
             padding: 12px;
             border: none;
@@ -224,35 +230,35 @@
             gap: 8px;
         }
 
-        .start-btn,
-        .submit-btn {
+        .btn-primary {
             background-color: var(--primary-color);
             color: white;
         }
 
-        .reset-btn {
+        .btn-warning {
             background-color: var(--warning-color);
             color: var(--dark-text);
         }
 
-        .start-btn:hover,
-        .submit-btn:hover,
-        .reset-btn:hover {
-            transform: translateY(-2px);
+        .btn-success {
+            background-color: var(--success-color);
+            color: white;
         }
 
-        .start-btn:active,
-        .submit-btn:active,
-        .reset-btn:active {
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:active {
             transform: translateY(0);
         }
 
-        .start-btn:disabled,
-        .submit-btn:disabled,
-        .reset-btn:disabled {
+        .btn:disabled {
             background-color: #ccc;
             cursor: not-allowed;
             transform: none;
+            box-shadow: none;
         }
 
         .question {
@@ -264,13 +270,30 @@
             animation: fadeIn 0.5s ease-in;
         }
 
-        .correct {
-            color: green;
-            font-weight: bold;
+        .question.correct {
+            border-color: var(--success-color);
+            background-color: rgba(46, 204, 113, 0.1);
         }
 
-        .incorrect {
-            color: red;
+        .question.incorrect {
+            border-color: var(--error-color);
+            background-color: rgba(230, 57, 70, 0.1);
+        }
+
+        .question-feedback {
+            margin-top: 8px;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .question-feedback.correct {
+            color: var(--success-color);
+            display: block;
+        }
+
+        .question-feedback.incorrect {
+            color: var(--error-color);
+            display: block;
         }
 
         #quiz {
@@ -290,12 +313,12 @@
             animation: slideIn 0.5s ease-in;
         }
 
-        .correct .result-item {
-            border-left-color: green;
+        .result-item.correct {
+            border-left-color: var(--success-color);
         }
 
-        .incorrect .result-item {
-            border-left-color: red;
+        .result-item.incorrect {
+            border-left-color: var(--error-color);
         }
 
         .progress-container {
@@ -310,6 +333,100 @@
             background: var(--primary-light);
             border-radius: 10px;
             transition: width 0.3s ease;
+            position: relative;
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: bold;
+            text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 10px;
+            border-radius: var(--border-radius);
+            background: rgba(255, 255, 255, 0.7);
+            flex: 1;
+            margin: 0 5px;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-dark);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--dark-text);
+        }
+
+        .feedback {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 15px 0;
+            padding: 10px;
+            border-radius: var(--border-radius);
+            text-align: center;
+        }
+
+        .excellent {
+            background-color: rgba(46, 204, 113, 0.2);
+            color: var(--success-color);
+        }
+
+        .good {
+            background-color: rgba(52, 152, 219, 0.2);
+            color: #3498db;
+        }
+
+        .average {
+            background-color: rgba(241, 196, 15, 0.2);
+            color: #f1c40f;
+        }
+
+        .poor {
+            background-color: rgba(231, 76, 60, 0.2);
+            color: #e74c3c;
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
         }
 
         @keyframes fadeIn {
@@ -320,6 +437,12 @@
         @keyframes slideIn {
             from { transform: translateX(-20px); opacity: 0; }
             to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
 
         [dir="rtl"] {
@@ -349,6 +472,7 @@
             .card {
                 background: #2d2d2d;
                 color: white;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             }
 
             .form-select {
@@ -359,6 +483,42 @@
 
             .question {
                 background-color: #2a2a2a;
+            }
+
+            .progress-container {
+                background-color: #333;
+            }
+
+            .stat-box {
+                background: rgba(0, 0, 0, 0.3);
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 576px) {
+            .logo-text {
+                font-size: 1.5rem;
+            }
+            
+            .logo-subtext {
+                font-size: 0.9rem;
+            }
+            
+            .btn-container {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .stats-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .stat-box {
+                margin: 5px 0;
             }
         }
     </style>
@@ -385,8 +545,10 @@
         <div class="card">
             <div class="progress-container" id="progress-container" style="display: none;">
                 <h3 id="progress-title">Your Progress</h3>
-                <div style="background: #ddd; border-radius: 10px;">
-                    <div id="progress-bar" class="progress-bar" style="width: 0%;"></div>
+                <div style="background: #ddd; border-radius: 10px; position: relative;">
+                    <div id="progress-bar" class="progress-bar" style="width: 0%;">
+                        <span class="progress-text" id="progress-percentage">0%</span>
+                    </div>
                 </div>
                 <p id="progress-text">0/5 quizzes completed</p>
             </div>
@@ -395,11 +557,14 @@
                 <h2 class="section-title" id="select-verb-title">1. Select a verb:</h2>
                 <select id="verb" class="form-select">
                     <option value="">Select a verb</option>
-                    <option value="كتب">كتب (يكتب)</option>
-                    <option value="ذهب">ذهب (يذهب)</option>
-                    <option value="أكل">أكل (يأكل)</option>
-                    <option value="شرب">شرب (يشرب)</option>
-                    <option value="قرأ">قرأ (يقرأ)</option>
+                    <option value="كتب">كتب (يكتب) - to write</option>
+                    <option value="ذهب">ذهب (يذهب) - to go</option>
+                    <option value="أكل">أكل (يأكل) - to eat</option>
+                    <option value="شرب">شرب (يشرب) - to drink</option>
+                    <option value="قرأ">قرأ (يقرأ) - to read</option>
+                    <option value="درس">درس (يدرس) - to study</option>
+                    <option value="عمل">عمل (يعمل) - to work</option>
+                    <option value="نام">نام (ينام) - to sleep</option>
                 </select>
 
                 <h2 class="section-title" id="select-gender-title">2. Select gender:</h2>
@@ -408,15 +573,26 @@
                     <option value="m">Masculine (مذكر)</option>
                     <option value="f">Feminine (مؤنث)</option>
                 </select>
+                
+                <div class="tooltip" style="margin-top: 10px;">
+                    <i class="fas fa-info-circle"></i> <span id="hint-text">Click here for tips</span>
+                    <span class="tooltiptext" id="tooltip-content">Select a verb and gender to start the quiz. You'll be tested on different conjugations.</span>
+                </div>
             </div>
 
             <div id="quiz" style="display: none;"></div>
         </div>
 
         <div class="btn-container">
-            <button class="start-btn" onclick="startQuiz()" id="start-btn" disabled>Start Quiz</button>
-            <button class="submit-btn hidden" onclick="submitQuiz()" id="submit-btn">Submit Answers</button>
-            <button class="reset-btn" onclick="resetQuiz()" id="reset-btn">Reset Quiz</button>
+            <button class="btn btn-primary" onclick="startQuiz()" id="start-btn" disabled>
+                <i class="fas fa-play"></i> <span id="start-btn-text">Start Quiz</span>
+            </button>
+            <button class="btn btn-success hidden" onclick="submitQuiz()" id="submit-btn">
+                <i class="fas fa-check"></i> <span id="submit-btn-text">Submit Answers</span>
+            </button>
+            <button class="btn btn-warning" onclick="resetQuiz()" id="reset-btn">
+                <i class="fas fa-redo"></i> <span id="reset-btn-text">Reset Quiz</span>
+            </button>
         </div>
         <div id="result" class="card hidden"></div>
     </main>
@@ -427,9 +603,12 @@
     <audio id="incorrect-sound" preload="auto">
         <source src="https://assets.mixkit.co/active_storage/sfx/2570/2570-preview.mp3" type="audio/mpeg">
     </audio>
+    <audio id="complete-sound" preload="auto">
+        <source src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" type="audio/mpeg">
+    </audio>
 
     <script>
-        // Questions array (temporarily embedded to rule out loading issues)
+        // Questions array
         const questions = [
             { 
                 correctSuffix: "َ",
@@ -532,11 +711,18 @@
                 feminine: "Feminine",
                 progressTitle: "Your Progress",
                 progressText: "{completed}/5 quizzes completed",
+                hintText: "Click here for tips",
+                tooltipContent: "Select a verb and gender to start the quiz. You'll be tested on different conjugations.",
                 feedback: {
                     excellent: "Excellent! You're a verb conjugation master!",
                     good: "Good job! Keep practicing to improve!",
                     average: "Not bad! Try again to boost your score!",
                     poor: "Keep studying! You'll get better with practice!"
+                },
+                stats: {
+                    currentScore: "Current Score",
+                    bestScore: "Best Score",
+                    quizzesCompleted: "Quizzes Completed"
                 }
             },
             ar: {
@@ -553,18 +739,26 @@
                 feminine: "مؤنث",
                 progressTitle: "تقدمك",
                 progressText: "تم إكمال {completed}/5 اختبارات",
+                hintText: "انقر هنا للحصول على نصائح",
+                tooltipContent: "اختر فعلاً وجنساً لبدء الاختبار. سيتم اختبارك على تصريفات مختلفة.",
                 feedback: {
                     excellent: "ممتاز! أنت سيد تصريف الأفعال!",
                     good: "عمل جيد! استمر في التدرب لتحسين أدائك!",
                     average: "ليس سيئًا! حاول مجددًا لتحسين درجاتك!",
                     poor: "استمر في الدراسة! ستتحسن بالممارسة!"
+                },
+                stats: {
+                    currentScore: "النتيجة الحالية",
+                    bestScore: "أفضل نتيجة",
+                    quizzesCompleted: "الاختبارات المكتملة"
                 }
             }
         };
 
         let progress = JSON.parse(localStorage.getItem('quizProgress')) || {
             completed: 0,
-            scores: []
+            scores: [],
+            bestScore: 0
         };
 
         function setLanguage(lang) {
@@ -582,10 +776,12 @@
             document.getElementById('app-subtitle').textContent = t.appSubtitle;
             document.getElementById('select-verb-title').textContent = t.selectVerb;
             document.getElementById('select-gender-title').textContent = t.selectGender;
-            document.getElementById('start-btn').textContent = t.startBtn;
-            document.getElementById('submit-btn').textContent = t.submitBtn;
-            document.getElementById('reset-btn').textContent = t.resetBtn;
+            document.getElementById('start-btn-text').textContent = t.startBtn;
+            document.getElementById('submit-btn-text').textContent = t.submitBtn;
+            document.getElementById('reset-btn-text').textContent = t.resetBtn;
             document.getElementById('progress-title').textContent = t.progressTitle;
+            document.getElementById('hint-text').textContent = t.hintText;
+            document.getElementById('tooltip-content').textContent = t.tooltipContent;
             
             updateProgressDisplay(lang);
             
@@ -593,14 +789,26 @@
                 const verb = document.getElementById('verb').value;
                 showQuestions(verb, lang);
             }
+            
+            // Update any existing results display
+            if (!document.getElementById('result').classList.contains('hidden')) {
+                const verb = document.getElementById('verb').value;
+                const gender = document.getElementById('gender').value;
+                const score = parseInt(document.getElementById('result').getAttribute('data-score'));
+                const results = JSON.parse(document.getElementById('result').getAttribute('data-results'));
+                displayResults(score, results, verb, lang);
+            }
         }
 
         function updateProgressDisplay(lang = 'en') {
             console.log('Updating progress display for language:', lang);
             const t = translations[lang];
             const progressContainer = document.getElementById('progress-container');
-            progressContainer.style.display = 'block';
-            document.getElementById('progress-bar').style.width = `${(progress.completed / 5) * 100}%`;
+            const percentage = Math.round((progress.completed / 5) * 100);
+            
+            progressContainer.style.display = progress.completed > 0 ? 'block' : 'none';
+            document.getElementById('progress-bar').style.width = `${percentage}%`;
+            document.getElementById('progress-percentage').textContent = `${percentage}%`;
             document.getElementById('progress-text').textContent = t.progressText.replace('{completed}', progress.completed);
         }
 
@@ -620,6 +828,7 @@
             console.log('Verb changed to:', document.getElementById('verb').value);
             updateButtonStates();
         });
+        
         document.getElementById('gender').addEventListener('change', () => {
             console.log('Gender changed to:', document.getElementById('gender').value);
             updateButtonStates();
@@ -667,6 +876,7 @@
                 console.log('Rendering question', index + 1, ':', q[lang]);
                 const questionDiv = document.createElement('div');
                 questionDiv.className = 'question';
+                questionDiv.id = `question-${index}`;
                 
                 const shuffledOptions = shuffleArray([...q.options]);
                 const optionsHtml = shuffledOptions.map(opt => {
@@ -676,16 +886,52 @@
                 
                 questionDiv.innerHTML = `
                     <p>${q[lang]}</p>
-                    <select id="q${index + 1}" class="form-select">
+                    <select id="q${index + 1}" class="form-select" onchange="checkAnswer(${index}, '${q.correctSuffix}', '${root}')">
                         <option value="">${lang === 'ar' ? 'اختر الإجابة الصحيحة' : 'Select the correct answer'}</option>
                         ${optionsHtml}
                     </select>
+                    <div class="question-feedback" id="feedback-${index}"></div>
                 `;
                 quizDiv.appendChild(questionDiv);
             });
             
             console.log('All questions rendered successfully');
             updateButtonStates();
+            
+            // Scroll to quiz section
+            quizDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function checkAnswer(questionIndex, correctSuffix, root) {
+            const select = document.getElementById(`q${questionIndex + 1}`);
+            const selectedSuffix = select.value;
+            const questionDiv = document.getElementById(`question-${questionIndex}`);
+            const feedbackDiv = document.getElementById(`feedback-${questionIndex}`);
+            const lang = document.documentElement.lang || 'en';
+            
+            if (!selectedSuffix) {
+                questionDiv.classList.remove('correct', 'incorrect');
+                feedbackDiv.style.display = 'none';
+                return;
+            }
+            
+            const isCorrect = selectedSuffix === correctSuffix;
+            
+            if (isCorrect) {
+                questionDiv.classList.add('correct');
+                questionDiv.classList.remove('incorrect');
+                feedbackDiv.textContent = lang === 'ar' ? "✓ إجابة صحيحة!" : "✓ Correct answer!";
+                feedbackDiv.className = 'question-feedback correct';
+                document.getElementById('correct-sound').play();
+            } else {
+                questionDiv.classList.add('incorrect');
+                questionDiv.classList.remove('correct');
+                feedbackDiv.textContent = lang === 'ar' 
+                    ? `✗ غير صحيح. الجواب الصحيح هو: ${root + correctSuffix}` 
+                    : `✗ Incorrect. The correct answer is: ${root + correctSuffix}`;
+                feedbackDiv.className = 'question-feedback incorrect';
+                document.getElementById('incorrect-sound').play();
+            }
         }
 
         function submitQuiz() {
@@ -703,19 +949,20 @@
             const root = verb.slice(0, -1);
             let score = 0;
             const results = [];
+            let allAnswered = true;
 
             questions.forEach((q, index) => {
                 const select = document.getElementById(`q${index + 1}`);
                 const selectedSuffix = select.value;
-                const isCorrect = selectedSuffix === q.correctSuffix;
                 
-                console.log('Checking question', index + 1, ': selected=', selectedSuffix, 'correct=', q.correctSuffix, 'isCorrect=', isCorrect);
+                if (!selectedSuffix) {
+                    allAnswered = false;
+                }
+                
+                const isCorrect = selectedSuffix === q.correctSuffix;
                 
                 if (isCorrect) {
                     score++;
-                    document.getElementById('correct-sound').play();
-                } else if (selectedSuffix) {
-                    document.getElementById('incorrect-sound').play();
                 }
                 
                 results.push({
@@ -726,13 +973,32 @@
                 });
             });
 
+            if (!allAnswered) {
+                const confirmSubmit = confirm(lang === 'ar' 
+                    ? "لم تجب على جميع الأسئلة. هل أنت متأكد أنك تريد التقديم؟" 
+                    : "You haven't answered all questions. Are you sure you want to submit?");
+                if (!confirmSubmit) return;
+            }
+
+            // Update progress
             progress.completed = Math.min(progress.completed + 1, 5);
             progress.scores.push(score);
+            
+            // Update best score
+            if (score > progress.bestScore) {
+                progress.bestScore = score;
+            }
+            
             localStorage.setItem('quizProgress', JSON.stringify(progress));
             updateProgressDisplay(lang);
             displayResults(score, results, verb, lang);
+            
+            // Play completion sound if score is good
+            if (score >= questions.length * 0.7) {
+                document.getElementById('complete-sound').play();
+            }
         }
-
+        // Reset quiz
         function resetQuiz() {
             console.log('Resetting quiz');
             document.getElementById('verb').value = '';
