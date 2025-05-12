@@ -1,165 +1,788 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>تعلم اللغة العربية - Learn Arabic</title>
-  
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-  
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
-  
-  <!-- Bootstrap RTL -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
-  
- <link rel="stylesheet" href="css/styles.css">
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="images/favicon.png" sizes="16x16"/>
-  
-  <!-- Accessibility Features -->
-  <meta name="description" content="تعلم اللغة العربية بطريقة ممتعة وتفاعلية. ابدأ الآن!"/>
-  <meta name="keywords" content="تعلم, لغة, عربية, تفاعلية, تعليم"/>
-  <meta name="author" content="Your Name"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arabic Verb Conjugation Quiz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2d6a4f;
+            --primary-dark: #1b4332;
+            --primary-light: #52b788;
+            --secondary-color: #40916c;
+            --accent-color: #74c69d;
+            --light-bg: #e6f4ec;
+            --light-text: #f8f9fa;
+            --dark-text: #333;
+            --error-color: #e63946;
+            --warning-color: #ffbe0b;
+            --border-radius: 15px;
+            --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(to right, var(--light-bg), #d4f2d2);
+            color: var(--dark-text);
+            margin: 0;
+            padding-bottom: 80px;
+            line-height: 1.6;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .container {
+            width: 100%;
+            padding: 0 15px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                max-width: 750px;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .container {
+                max-width: 970px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1170px;
+            }
+        }
+
+        .app-header {
+            background: var(--primary-dark);
+            color: var(--light-text);
+            padding: 20px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo-container {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .logo-text {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0;
+            color: white;
+        }
+
+        .logo-subtext {
+            font-size: 1rem;
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        .language-switcher {
+            display: flex;
+            gap: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px;
+            border-radius: 50px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 50px;
+            color: rgba(255, 255, 255, 0.8);
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Tajawal', sans-serif;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .lang-btn.active {
+            background: var(--primary-light);
+            color: white;
+            font-weight: 500;
+        }
+
+        .lang-btn:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 20px;
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-dark);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary-light);
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .form-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--primary-dark);
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1rem;
+            background-color: white;
+            transition: var(--transition);
+        }
+
+        .form-select:focus {
+            outline: none;
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(116, 198, 157, 0.3);
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .start-btn,
+        .submit-btn,
+        .reset-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .start-btn,
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .reset-btn {
+            background-color: var(--warning-color);
+            color: var(--dark-text);
+        }
+
+        .start-btn:hover,
+        .submit-btn:hover,
+        .reset-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .start-btn:active,
+        .submit-btn:active,
+        .reset-btn:active {
+            transform: translateY(0);
+        }
+
+        .start-btn:disabled,
+        .submit-btn:disabled,
+        .reset-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            background-color: #f9f9f9;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .correct {
+            color: green;
+            font-weight: bold;
+        }
+
+        .incorrect {
+            color: red;
+        }
+
+        #quiz {
+            margin-top: 20px;
+        }
+
+        .arabic {
+            font-size: 18px;
+            font-weight: bold;
+            color: #8e44ad;
+        }
+
+        .result-item {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-left: 4px solid #3498db;
+            animation: slideIn 0.5s ease-in;
+        }
+
+        .correct .result-item {
+            border-left-color: green;
+        }
+
+        .incorrect .result-item {
+            border-left-color: red;
+        }
+
+        .progress-container {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f0f0f0;
+            border-radius: var(--border-radius);
+        }
+
+        .progress-bar {
+            height: 20px;
+            background: var(--primary-light);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        [dir="rtl"] {
+            text-align: right;
+        }
+
+        [dir="ltr"] {
+            text-align: left;
+        }
+
+        [dir="rtl"] .section-title::after {
+            right: auto;
+            left: 0;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --light-bg: #1a1a1a;
+                --dark-text: #f8f9fa;
+            }
+
+            body {
+                background: linear-gradient(to right, #1a1a1a, #2d2d2d);
+                color: var(--dark-text);
+            }
+
+            .card {
+                background: #2d2d2d;
+                color: white;
+            }
+
+            .form-select {
+                background-color: #333;
+                color: white;
+                border-color: #444;
+            }
+
+            .question {
+                background-color: #2a2a2a;
+            }
+        }
+    </style>
 </head>
 <body>
-  <!-- Header Section -->
-  <header class="app-header">
-    <div class="container header-flex">
-      <div class="logo-container">
-        <h1 class="logo-text">عربيك</h1>
-        <p class="logo-subtext">بوابتك لتعلم اللغة العربية</p>
-      </div>
-      <div class="language-switcher btn-group">
-        <button class="lang-btn active" data-lang="ar" aria-label="Arabic">
-          <span class="flag-icon">🇸🇦</span> العربية
-        </button>
-        <button class="lang-btn" data-lang="en" aria-label="English">
-          <span class="flag-icon">🇬🇧</span> English
-        </button>
-        <button class="lang-btn" data-lang="ur" aria-label="Urdu">
-          <span class="flag-icon">🇵🇰</span> اردو
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <!-- Main Content -->
-  <main class="app-container container">
-    <!-- Progress Section -->
-    <section class="card progress-section">
-      <div class="progress-display">
-        <div class="level-info">
-          <div class="level-header">
-            <span id="level-display" class="level-title">المستوى 1</span>
-            <span id="question-counter" class="question-counter">السؤال 1 من 10</span>
-          </div>
-          <div class="progress-container">
-            <progress id="level-progress" value="0" max="100" aria-label="مستوى التقدم"></progress>
-            <span class="progress-value">0%</span>
-          </div>
-        </div>
-        <div class="stats">
-          <div class="stat-item streak">
-            <div class="stat-icon"><i class="fas fa-fire"></i></div>
-            <div class="stat-content">
-              <span class="stat-label">المتابعة</span>
-              <span id="streak-count" class="stat-value">0</span>
+    <header class="app-header">
+        <div class="container header-flex">
+            <div class="logo-container">
+                <h1 class="logo-text" id="app-title">Arabic Verb Conjugation Quiz</h1>
+                <p class="logo-subtext" id="app-subtitle">Test your knowledge of Arabic verb forms</p>
             </div>
-          </div>
-          <div class="stat-item xp">
-            <div class="stat-icon"><i class="fas fa-star"></i></div>
-            <div class="stat-content">
-              <span class="stat-label">النقاط</span>
-              <span id="xp-count" class="stat-value">0</span>
+            <div class="language-switcher">
+                <button class="lang-btn active" onclick="setLanguage('en')">
+                    <span>English</span>
+                </button>
+                <button class="lang-btn" onclick="setLanguage('ar')">
+                    <span>العربية</span>
+                </button>
             </div>
-          </div>
-          <div class="stat-item accuracy">
-            <div class="stat-icon"><i class="fas fa-bullseye"></i></div>
-            <div class="stat-content">
-              <span class="stat-label">الدقة</span>
-              <span id="accuracy-count" class="stat-value">0%</span>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="card">
+            <div class="progress-container" id="progress-container" style="display: none;">
+                <h3 id="progress-title">Your Progress</h3>
+                <div style="background: #ddd; border-radius: 10px;">
+                    <div id="progress-bar" class="progress-bar" style="width: 0%;"></div>
+                </div>
+                <p id="progress-text">0/5 quizzes completed</p>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- Settings Panel -->
-    <section class="card settings-panel">
-      <h2 class="section-title">إعدادات الدرس</h2>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="question-count" class="form-label">
-            <i class="fas fa-question-circle"></i> عدد الأسئلة:
-          </label>
-          <select id="question-count" class="form-select">
-            <option value="5">5 أسئلة</option>
-            <option value="10" selected>10 أسئلة</option>
-            <option value="15">15 سؤالاً</option>
-            <option value="20">20 سؤالاً</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="level-select" class="form-label">
-            <i class="fas fa-layer-group"></i> المستوى:
-          </label>
-          <select id="level-select" class="form-select">
-            <option value="1" selected>المبتدئ</option>
-            <option value="2">المتوسط</option>
-            <option value="3">المتقدم</option>
-          </select>
-        </div>
-        <div class="form-group start-btn-container">
-          <button id="start-btn" class="btn btn-primary start-btn">
-            <i class="fas fa-play"></i> ابدأ التمرين
-          </button>
-        </div>
-      </div>
-    </section>
+            <div id="verbSelection">
+                <h2 class="section-title" id="select-verb-title">1. Select a verb:</h2>
+                <select id="verb" class="form-select">
+                    <option value="">Select a verb</option>
+                    <option value="كتب">كتب (يكتب)</option>
+                    <option value="ذهب">ذهب (يذهب)</option>
+                    <option value="أكل">أكل (يأكل)</option>
+                    <option value="شرب">شرب (يشرب)</option>
+                    <option value="قرأ">قرأ (يقرأ)</option>
+                </select>
 
-    <!-- Exercise Content -->
-    <section id="exercise-section" class="card exercise-content" style="display: none;">
-      <div class="word-display">
-        <h2 id="arabic-word" class="arabic-word">كلمة</h2>
-        <button id="pronounce-btn" class="btn pronounce-btn" aria-label="نطق الكلمة">
-          <i class="fas fa-volume-up"></i>
-        </button>
-      </div>
-      <div class="exercise-question">
-        <p id="question-text" class="question-text">سؤال عن تصريف الفعل</p>
-        <p id="english-prompt" class="english-prompt">English prompt will appear here</p>
-      </div>
-      <div id="answer-options" class="answer-options"></div>
-      <div class="exercise-actions">
-        <button id="hint-btn" class="btn hint-btn">
-          <i class="fas fa-lightbulb"></i> تلميح
-        </button>
-        <button id="skip-btn" class="btn skip-btn">
-          <i class="fas fa-forward"></i> تخطي
-        </button>
-        <button id="next-btn" class="btn next-btn">
-          <i class="fas fa-arrow-right"></i> السؤال التالي
-        </button>
-      </div>
-    </section>
-  </main>
+                <h2 class="section-title" id="select-gender-title">2. Select gender:</h2>
+                <select id="gender" class="form-select">
+                    <option value="">Select gender</option>
+                    <option value="m">Masculine (مذكر)</option>
+                    <option value="f">Feminine (مؤنث)</option>
+                </select>
+            </div>
 
-  <!-- Feedback Modal -->
-  <div id="feedback-modal" class="modal hidden" role="dialog" aria-labelledby="feedback-content">
-    <div class="modal-overlay"></div>
-    <div class="modal-content">
-      <button id="close-modal" class="close-modal" aria-label="إغلاق">
-        <i class="fas fa-times"></i>
-      </button>
-      <div id="feedback-content" class="feedback-content"></div>
-    </div>
-  </div>
+            <div id="quiz" style="display: none;"></div>
+        </div>
 
-  <!-- JavaScript -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="js/appnew.js"></script>
+        <div class="btn-container">
+            <button class="start-btn" onclick="startQuiz()" id="start-btn" disabled>Start Quiz</button>
+            <button class="submit-btn hidden" onclick="submitQuiz()" id="submit-btn">Submit Answers</button>
+            <button class="reset-btn" onclick="resetQuiz()" id="reset-btn">Reset Quiz</button>
+        </div>
+        <div id="result" class="card hidden"></div>
+    </main>
+
+    <audio id="correct-sound" preload="auto">
+        <source src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="incorrect-sound" preload="auto">
+        <source src="https://assets.mixkit.co/active_storage/sfx/2570/2570-preview.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Questions array (temporarily embedded to rule out loading issues)
+        const questions = [
+            { 
+                correctSuffix: "َ",
+                options: ["َ", "َتْ", "َتا", "ُوا"],
+                en: "3. Select the correct singular past form (He wrote):",
+                ar: "3. اختر صيغة الماضي المفرد المذكر (هو كتب):"
+            },
+            { 
+                correctSuffix: "َتا",
+                options: ["َتا", "َا", "ُوا", "ْنَ"],
+                en: "4. Select the correct dual past form (They two m. wrote):",
+                ar: "4. اختر صيغة الماضي المثنى المذكر (هما كتبا):"
+            },
+            { 
+                correctSuffix: "ُوا",
+                options: ["ُوا", "ْنَ", "َتا", "َ"],
+                en: "5. Select the correct plural past form (They m. pl. wrote):",
+                ar: "5. اختر صيغة الماضي الجمع المذكر (هم كتبوا):"
+            },
+            { 
+                correctSuffix: "َتْ",
+                options: ["َتْ", "َ", "َتا", "ْنَ"],
+                en: "6. Select the correct female singular past form (She wrote):",
+                ar: "6. اختر صيغة الماضي المفرد المؤنث (هي كتبتْ):"
+            },
+            { 
+                correctSuffix: "َتا",
+                options: ["َتا", "َتْ", "َا", "ُوا"],
+                en: "7. Select the correct female dual past form (They two f. wrote):",
+                ar: "7. اختر صيغة الماضي المثنى المؤنث (هما كتبتا):"
+            },
+            { 
+                correctSuffix: "ْنَ",
+                options: ["ْنَ", "ُوا", "َتا", "َ"],
+                en: "8. Select the correct female plural past form (They f. pl. wrote):",
+                ar: "8. اختر صيغة الماضي الجمع المؤنث (هن كتبْنَ):"
+            },
+            { 
+                correctSuffix: "ْتَ",
+                options: ["ْتَ", "ْتِ", "ْتُمَا", "ْتُمْ"],
+                en: "9. Select the correct masculine singular past form (You m. wrote):",
+                ar: "9. اختر صيغة الماضي المفرد المذكر للمخاطب (أنتَ كتبتَ):"
+            },
+            { 
+                correctSuffix: "ْتُمَا",
+                options: ["ْتُمَا", "ْتَ", "ْتُمْ", "ْتُنَّ"],
+                en: "10. Select the correct masculine dual past form (You two m. wrote):",
+                ar: "10. اختر صيغة الماضي المثنى المذكر للمخاطب (أنتما كتبتما):"
+            },
+            { 
+                correctSuffix: "ْتُمْ",
+                options: ["ْتُمْ", "ْتُمَا", "ْتَ", "ْتِ"],
+                en: "11. Select the correct masculine plural past form (You m. pl. wrote):",
+                ar: "11. اختر صيغة الماضي الجمع المذكر للمخاطب (أنتم كتبتم):"
+            },
+            { 
+                correctSuffix: "ْتِ",
+                options: ["ْتِ", "ْتَ", "ْتُمَا", "ْتُنَّ"],
+                en: "12. Select the correct female singular past form (You f. wrote):",
+                ar: "12. اختر صيغة الماضي المفرد المؤنث للمخاطب (أنتِ كتبتِ):"
+            },
+            { 
+                correctSuffix: "ْتُمَا",
+                options: ["ْتُمَا", "ْتِ", "ْتُمْ", "ْتُنَّ"],
+                en: "13. Select the correct female dual past form (You two f. wrote):",
+                ar: "13. اختر صيغة الماضي المثنى المؤنث للمخاطب (أنتما كتبتما):"
+            },
+            { 
+                correctSuffix: "ْتُنَّ",
+                options: ["ْتُنَّ", "ْتُمَا", "ْتُمْ", "ْتِ"],
+                en: "14. Select the correct female plural past form (You f. pl. wrote):",
+                ar: "14. اختر صيغة الماضي الجمع المؤنث للمخاطب (أنتنّ كتبتنّ):"
+            },
+            { 
+                correctSuffix: "ْتُ",
+                options: ["ْتُ", "ْنا", "ْتَ", "ْتِ"],
+                en: "15. Select the correct 'I' past form (I wrote):",
+                ar: "15. اختر صيغة الماضي للمتكلم المفرد (أنا كتبتُ):"
+            },
+            { 
+                correctSuffix: "ْنا",
+                options: ["ْنا", "ْتُ", "ْتُمْ", "ْنَ"],
+                en: "16. Select the correct 'We' past form (We wrote):",
+                ar: "16. اختر صيغة الماضي للمتكلم الجمع (نحن كتبنا):"
+            }
+        ];
+
+        const translations = {
+            en: {
+                appTitle: "Arabic Verb Conjugation Quiz",
+                appSubtitle: "Test your knowledge of Arabic verb forms",
+                selectVerb: "1. Select a verb:",
+                selectGender: "2. Select gender:",
+                startBtn: "Start Quiz",
+                submitBtn: "Submit Answers",
+                resetBtn: "Reset Quiz",
+                resultsTitle: "Results",
+                verbSelected: "Selected verb:",
+                masculine: "Masculine",
+                feminine: "Feminine",
+                progressTitle: "Your Progress",
+                progressText: "{completed}/5 quizzes completed",
+                feedback: {
+                    excellent: "Excellent! You're a verb conjugation master!",
+                    good: "Good job! Keep practicing to improve!",
+                    average: "Not bad! Try again to boost your score!",
+                    poor: "Keep studying! You'll get better with practice!"
+                }
+            },
+            ar: {
+                appTitle: "اختبار تصريف الأفعال العربية",
+                appSubtitle: "اختبر معرفتك بصيغ الأفعال العربية",
+                selectVerb: "1. اختر الفعل:",
+                selectGender: "2. اختر الجنس:",
+                startBtn: "بدء الاختبار",
+                submitBtn: "تصحيح الإجابات",
+                resetBtn: "إعادة تعيين الاختبار",
+                resultsTitle: "النتائج",
+                verbSelected: "الفعل المختار:",
+                masculine: "مذكر",
+                feminine: "مؤنث",
+                progressTitle: "تقدمك",
+                progressText: "تم إكمال {completed}/5 اختبارات",
+                feedback: {
+                    excellent: "ممتاز! أنت سيد تصريف الأفعال!",
+                    good: "عمل جيد! استمر في التدرب لتحسين أدائك!",
+                    average: "ليس سيئًا! حاول مجددًا لتحسين درجاتك!",
+                    poor: "استمر في الدراسة! ستتحسن بالممارسة!"
+                }
+            }
+        };
+
+        let progress = JSON.parse(localStorage.getItem('quizProgress')) || {
+            completed: 0,
+            scores: []
+        };
+
+        function setLanguage(lang) {
+            console.log('Setting language to:', lang);
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+            
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            const t = translations[lang];
+            document.getElementById('app-title').textContent = t.appTitle;
+            document.getElementById('app-subtitle').textContent = t.appSubtitle;
+            document.getElementById('select-verb-title').textContent = t.selectVerb;
+            document.getElementById('select-gender-title').textContent = t.selectGender;
+            document.getElementById('start-btn').textContent = t.startBtn;
+            document.getElementById('submit-btn').textContent = t.submitBtn;
+            document.getElementById('reset-btn').textContent = t.resetBtn;
+            document.getElementById('progress-title').textContent = t.progressTitle;
+            
+            updateProgressDisplay(lang);
+            
+            if (document.getElementById('quiz').style.display !== 'none') {
+                const verb = document.getElementById('verb').value;
+                showQuestions(verb, lang);
+            }
+        }
+
+        function updateProgressDisplay(lang = 'en') {
+            console.log('Updating progress display for language:', lang);
+            const t = translations[lang];
+            const progressContainer = document.getElementById('progress-container');
+            progressContainer.style.display = 'block';
+            document.getElementById('progress-bar').style.width = `${(progress.completed / 5) * 100}%`;
+            document.getElementById('progress-text').textContent = t.progressText.replace('{completed}', progress.completed);
+        }
+
+        function updateButtonStates() {
+            const verb = document.getElementById('verb').value;
+            const gender = document.getElementById('gender').value;
+            const startBtn = document.getElementById('start-btn');
+            const submitBtn = document.getElementById('submit-btn');
+            
+            console.log('Updating button states: verb=', verb, 'gender=', gender);
+            startBtn.disabled = !(verb && gender);
+            submitBtn.classList.toggle('hidden', document.getElementById('quiz').style.display !== 'block');
+            startBtn.classList.toggle('hidden', document.getElementById('quiz').style.display === 'block');
+        }
+
+        document.getElementById('verb').addEventListener('change', () => {
+            console.log('Verb changed to:', document.getElementById('verb').value);
+            updateButtonStates();
+        });
+        document.getElementById('gender').addEventListener('change', () => {
+            console.log('Gender changed to:', document.getElementById('gender').value);
+            updateButtonStates();
+        });
+
+        function startQuiz() {
+            const verb = document.getElementById('verb').value;
+            const gender = document.getElementById('gender').value;
+            const lang = document.documentElement.lang || 'en';
+            
+            if (!verb || !gender) {
+                console.error('Cannot start quiz: verb or gender missing');
+                alert(lang === 'ar' ? "الرجاء اختيار فعل وجنس أولاً" : "Please select a verb and gender first");
+                return;
+            }
+            
+            console.log('Starting quiz with verb:', verb, 'gender:', gender, 'language:', lang);
+            showQuestions(verb, lang);
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function showQuestions(verb, lang = 'en') {
+            console.log('Showing questions for verb:', verb, 'language:', lang);
+            const quizDiv = document.getElementById('quiz');
+            quizDiv.style.display = 'block';
+            quizDiv.innerHTML = ''; // Clear previous content
+            
+            if (!questions || questions.length === 0) {
+                console.error('Questions array is empty or undefined');
+                alert(lang === 'ar' ? "خطأ: لم يتم تحميل الأسئلة" : "Error: Questions failed to load");
+                return;
+            }
+            
+            const root = verb.slice(0, -1);
+            console.log('Rendering', questions.length, 'questions with root:', root);
+            
+            questions.forEach((q, index) => {
+                console.log('Rendering question', index + 1, ':', q[lang]);
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                
+                const shuffledOptions = shuffleArray([...q.options]);
+                const optionsHtml = shuffledOptions.map(opt => {
+                    const conjugated = root + opt;
+                    return `<option value="${opt}"><span class="arabic">${conjugated}</span> (${conjugated})</option>`;
+                }).join('');
+                
+                questionDiv.innerHTML = `
+                    <p>${q[lang]}</p>
+                    <select id="q${index + 1}" class="form-select">
+                        <option value="">${lang === 'ar' ? 'اختر الإجابة الصحيحة' : 'Select the correct answer'}</option>
+                        ${optionsHtml}
+                    </select>
+                `;
+                quizDiv.appendChild(questionDiv);
+            });
+            
+            console.log('All questions rendered successfully');
+            updateButtonStates();
+        }
+
+        function submitQuiz() {
+            const verb = document.getElementById('verb').value;
+            const lang = document.documentElement.lang || 'en';
+            const t = translations[lang];
+            
+            console.log('Submitting quiz for verb:', verb);
+            if (!verb) {
+                console.error('Cannot submit quiz: no verb selected');
+                alert(lang === 'ar' ? "الرجاء اختيار فعل وجنس أولاً" : "Please select a verb and gender first");
+                return;
+            }
+            
+            const root = verb.slice(0, -1);
+            let score = 0;
+            const results = [];
+
+            questions.forEach((q, index) => {
+                const select = document.getElementById(`q${index + 1}`);
+                const selectedSuffix = select.value;
+                const isCorrect = selectedSuffix === q.correctSuffix;
+                
+                console.log('Checking question', index + 1, ': selected=', selectedSuffix, 'correct=', q.correctSuffix, 'isCorrect=', isCorrect);
+                
+                if (isCorrect) {
+                    score++;
+                    document.getElementById('correct-sound').play();
+                } else if (selectedSuffix) {
+                    document.getElementById('incorrect-sound').play();
+                }
+                
+                results.push({
+                    question: q[lang],
+                    correctAnswer: root + q.correctSuffix,
+                    userAnswer: selectedSuffix ? root + selectedSuffix : lang === 'ar' ? "لم يتم الاختيار" : "Not selected",
+                    isCorrect: isCorrect
+                });
+            });
+
+            progress.completed = Math.min(progress.completed + 1, 5);
+            progress.scores.push(score);
+            localStorage.setItem('quizProgress', JSON.stringify(progress));
+            updateProgressDisplay(lang);
+            displayResults(score, results, verb, lang);
+        }
+
+        function resetQuiz() {
+            console.log('Resetting quiz');
+            document.getElementById('verb').value = '';
+            document.getElementById('gender').value = '';
+            document.getElementById('quiz').style.display = 'none';
+            document.getElementById('result').classList.add('hidden');
+            progress = { completed: 0, scores: [] };
+            localStorage.setItem('quizProgress', JSON.stringify(progress));
+            updateProgressDisplay(document.documentElement.lang || 'en');
+            updateButtonStates();
+        }
+
+        function displayResults(score, results, verb, lang = 'en') {
+            console.log('Displaying results: score=', score, 'verb=', verb);
+            const resultDiv = document.getElementById('result');
+            resultDiv.classList.remove('hidden');
+            const percentage = Math.round((score / questions.length) * 100);
+            const t = translations[lang];
+            
+            let feedback;
+            if (percentage >= 90) feedback = t.feedback.excellent;
+            else if (percentage >= 70) feedback = t.feedback.good;
+            else if (percentage >= 50) feedback = t.feedback.average;
+            else feedback = t.feedback.poor;
+
+            let html = `
+                <h2>${t.resultsTitle}: ${score}/${questions.length} (${percentage}%)</h2>
+                <p class="feedback">${feedback}</p>
+                <p>${t.verbSelected} <span class="arabic">${verb}</span></p>
+                <p>${document.getElementById('gender').value === 'm' ? t.masculine : t.feminine}</p>
+            `;
+            
+            results.forEach((r, index) => {
+                html += `
+                    <div class="result-item ${r.isCorrect ? 'correct' : 'incorrect'}">
+                        <p><strong>${lang === 'ar' ? 'السؤال' : 'Question'} ${index + 1}:</strong> ${r.question}</p>
+                        <p>${lang === 'ar' ? 'إجابتك' : 'Your answer'}: <span class="arabic">${r.userAnswer}</span> ${r.isCorrect ? '✓' : '✗'}</p>
+                        <p>${lang === 'ar' ? 'الإجابة الصحيحة' : 'Correct answer'}: <span class="arabic">${r.correctAnswer}</span></p>
+                    </div>
+                `;
+            });
+
+            resultDiv.innerHTML = html;
+            resultDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Initialize
+        console.log('Initializing quiz with', questions.length, 'questions');
+        updateProgressDisplay();
+        updateButtonStates();
+    </script>
 </body>
 </html>
