@@ -4,82 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arabic Verb Conjugation Quiz</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #2d6a4f;
-            --primary-dark: #1b4332;
-            --primary-light: #52b788;
-            --secondary-color: #40916c;
-            --accent-color: #74c69d;
-            --light-bg: #e6f4ec;
-            --light-text: #f8f9fa;
-            --dark-text: #333;
-            --error-color: #e63946;
-            --warning-color: #ffbe0b;
-            --success-color: #2ecc71;
-            --border-radius: 15px;
-            --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
+            --primary-green: #4CAF50;
+            --dark-green: #388E3C;
+            --light-green: #E8F5E9;
+            --primary-yellow: #FFEB3B;
+            --dark-yellow: #FBC02D;
+            --text-color: #212121;
+            --card-bg: #FFFFFF;
+            --border-color: #c8e6c9;
+            --correct-color: #4CAF50;
+            --incorrect-color: #F44336;
+            --button-text-color: #212121;
         }
 
         body {
-            font-family: 'Tajawal', sans-serif;
-            background: linear-gradient(to right, var(--light-bg), #d4f2d2);
-            color: var(--dark-text);
-            margin: 0;
-            padding-bottom: 80px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             line-height: 1.6;
-            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--light-green);
+            color: var(--text-color);
+            /* Initial direction, will be set by JS */
+            direction: ltr;
+            text-align: left;
         }
 
-        .hidden {
-            display: none !important;
+        body[dir="rtl"] {
+            direction: rtl;
+            text-align: right;
+        }
+
+        .arabic, .urdu {
+            font-family: 'Arial', 'Times New Roman', 'Tahoma', sans-serif;
+            font-size: 1.1em;
         }
 
         .container {
-            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
             padding: 0 15px;
-            margin: 0 auto;
-        }
-
-        @media (min-width: 768px) {
-            .container {
-                max-width: 750px;
-            }
-        }
-
-        @media (min-width: 992px) {
-            .container {
-                max-width: 970px;
-            }
-        }
-
-        @media (min-width: 1200px) {
-            .container {
-                max-width: 1170px;
-            }
         }
 
         .app-header {
-            background: var(--primary-dark);
-            color: var(--light-text);
-            padding: 20px 0;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            background: var(--dark-green);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .header-flex {
@@ -87,324 +60,306 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 15px;
         }
 
-        .logo-container {
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .logo-text {
-            font-size: 2rem;
-            font-weight: 700;
+        .logo-container h1 {
             margin: 0;
-            color: white;
+            font-size: 1.8em;
         }
 
-        .logo-subtext {
-            font-size: 1rem;
-            margin: 0;
+        .logo-container p {
+            margin: 2px 0 0;
+            font-size: 0.9em;
             opacity: 0.9;
         }
 
-        .language-switcher {
-            display: flex;
-            gap: 5px;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 5px;
-            border-radius: 50px;
-        }
-
-        .lang-btn {
-            background: transparent;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 50px;
-            color: rgba(255, 255, 255, 0.8);
-            cursor: pointer;
-            transition: var(--transition);
-            font-family: 'Tajawal', sans-serif;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .lang-btn.active {
-            background: var(--primary-light);
+        .language-switcher button {
+            background: none;
+            border: 1px solid rgba(255, 255, 255, 0.5);
             color: white;
-            font-weight: 500;
+            padding: 5px 10px;
+            margin-left: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease;
         }
 
-        .lang-btn:hover:not(.active) {
-            background: rgba(255, 255, 255, 0.2);
+        .language-switcher button:hover:not(.active),
+        .language-switcher button:focus:not(.active) { /* Added focus state */
+            background-color: rgba(255, 255, 255, 0.1);
+            outline: none; /* Remove default outline */
+        }
+
+        .language-switcher button.active {
+            background-color: white;
+            color: var(--dark-green);
+            border-color: white;
+            font-weight: bold; /* Added visual distinction */
+        }
+
+        /* Add focus styles for general buttons */
+        .btn:focus {
+            outline: 2px solid var(--primary-yellow); /* Example focus style */
+            outline-offset: 2px;
         }
 
         .card {
-            background: white;
-            border-radius: var(--border-radius);
-            padding: 25px;
-            box-shadow: var(--box-shadow);
+            background: var(--card-bg);
+            padding: 20px;
             margin-bottom: 20px;
-            transition: var(--transition);
-        }
-
-        .card:hover {
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .section-title {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            color: var(--primary-dark);
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 50px;
-            height: 3px;
-            background: var(--primary-light);
-        }
-
-        .form-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .form-group {
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: var(--primary-dark);
-        }
-
-        .form-select {
-            width: 100%;
-            padding: 10px 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-family: 'Tajawal', sans-serif;
-            font-size: 1rem;
-            background-color: white;
-            transition: var(--transition);
-            cursor: pointer;
-        }
-
-        .form-select:focus {
-            outline: none;
-            border-color: var(--primary-light);
-            box-shadow: 0 0 0 3px rgba(116, 198, 157, 0.3);
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: var(--dark-green);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
         }
 
         .btn-container {
+            text-align: center;
+            margin-bottom: 20px;
             display: flex;
-            gap: 10px;
-            margin-top: 20px;
             flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
         }
 
         .btn {
-            width: 100%;
-            padding: 12px;
+            padding: 10px 20px;
             border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: 500;
+            border-radius: 5px;
             cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+            font-weight: bold;
+            min-width: 120px;
+        }
+
+        @media (max-width: 600px) {
+            .btn {
+                padding: 8px 12px;
+                font-size: 0.9em;
+                min-width: 100px;
+            }
         }
 
         .btn-primary {
-            background-color: var(--primary-color);
+            background-color: var(--primary-green);
             color: white;
         }
 
-        .btn-warning {
-            background-color: var(--warning-color);
-            color: var(--dark-text);
+        .btn-primary:hover:not(:disabled) {
+            background-color: var(--dark-green);
         }
 
         .btn-success {
-            background-color: var(--success-color);
+            background-color: var(--primary-yellow);
+            color: var(--button-text-color);
+        }
+
+        .btn-success:hover:not(:disabled) {
+            background-color: var(--dark-yellow);
+        }
+
+        .btn-danger {
+            background-color: var(--incorrect-color);
             color: white;
         }
 
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        .btn-danger:hover:not(:disabled) {
+            background-color: #d32f2f;
         }
 
-        .btn:active {
-            transform: translateY(0);
+        .btn-warning {
+            background-color: #e0e0e0;
+            color: var(--text-color);
+        }
+
+        .btn-warning:hover {
+            background-color: #bdbdbd;
         }
 
         .btn:disabled {
-            background-color: #ccc;
+            opacity: 0.6;
             cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
         }
 
-        .question {
-            margin-bottom: 20px;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: var(--border-radius);
-            background-color: #f9f9f9;
-            animation: fadeIn 0.5s ease-in;
-        }
-
-        .question.correct {
-            border-color: var(--success-color);
-            background-color: rgba(46, 204, 113, 0.1);
-        }
-
-        .question.incorrect {
-            border-color: var(--error-color);
-            background-color: rgba(230, 57, 70, 0.1);
-        }
-
-        .question-feedback {
-            margin-top: 8px;
-            font-size: 0.9rem;
+        .hidden {
             display: none;
         }
 
+        .quiz-question {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background-color: #ffffff;
+        }
+
+        .quiz-question .question-prompt {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .option-item input[type="radio"] {
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        body[dir="rtl"] .option-item input[type="radio"] {
+            /* Adjust margin for RTL */
+            margin-right: 0;
+            margin-left: 10px;
+        }
+
+        .option-item label {
+            flex-grow: 1;
+            cursor: pointer;
+            padding: 8px;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+            background-color: #f9f9f9;
+        }
+
+        /* Added focus state for labels linked to radio inputs */
+        .option-item input[type="radio"]:focus + label {
+             outline: 2px solid var(--primary-yellow);
+             outline-offset: 2px;
+        }
+
+
+        .option-item label:hover {
+            background-color: #f0f0f0;
+            border-color: #ccc;
+        }
+
+        .option-item input[type="radio"]:checked + label {
+            background-color: var(--light-green);
+            border-color: var(--primary-green);
+            font-weight: bold;
+        }
+
+        .question-feedback {
+            margin-top: 10px;
+            padding: 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            /* Added aria-live for screen readers */
+            aria-live: polite;
+        }
+
         .question-feedback.correct {
-            color: var(--success-color);
-            display: block;
+            background-color: #d4edda;
+            color: var(--correct-color);
+            border-color: #c3e6cb;
         }
 
         .question-feedback.incorrect {
-            color: var(--error-color);
-            display: block;
-        }
-
-        #quiz {
-            margin-top: 20px;
-        }
-
-        .arabic {
-            font-size: 18px;
-            font-weight: bold;
-            color: #8e44ad;
+            background-color: #f8d7da;
+            color: var(--incorrect-color);
+            border-color: #f5c6cb;
         }
 
         .result-item {
             margin-bottom: 15px;
-            padding: 10px;
-            border-left: 4px solid #3498db;
-            animation: slideIn 0.5s ease-in;
+            padding: 15px;
+            border-left: 4px solid;
+            border-radius: 4px;
         }
 
+        body[dir="rtl"] .result-item {
+             border-left: none;
+             border-right: 4px solid;
+        }
+
+
         .result-item.correct {
-            border-left-color: var(--success-color);
+            border-color: var(--correct-color);
+            background-color: #e9f7ef;
         }
 
         .result-item.incorrect {
-            border-left-color: var(--error-color);
+            border-color: var(--incorrect-color);
+            background-color: #fdedee;
+        }
+
+        .result-item p {
+            margin: 5px 0;
+        }
+
+        .result-item strong {
+            color: var(--dark-green);
+        }
+
+        .feedback {
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
         }
 
         .progress-container {
             margin-bottom: 20px;
-            padding: 15px;
-            background: #f0f0f0;
-            border-radius: var(--border-radius);
+        }
+
+        .progress-container h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
         }
 
         .progress-bar {
             height: 20px;
-            background: var(--primary-light);
+            background-color: var(--primary-green);
+            text-align: center;
+            line-height: 20px;
+            color: white;
             border-radius: 10px;
-            transition: width 0.3s ease;
+            transition: width 0.6s ease;
             position: relative;
         }
 
         .progress-text {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            width: 100%;
+            left: 0;
+            top: 0;
             color: white;
             font-weight: bold;
-            text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-        }
-
-        .stats-container {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 10px;
-        }
-
-        .stat-box {
-            text-align: center;
-            padding: 10px;
-            border-radius: var(--border-radius);
-            background: rgba(255, 255, 255, 0.7);
-            flex: 1;
-            margin: 0 5px;
-        }
-
-        .stat-value {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary-dark);
-        }
-
-        .stat-label {
-            font-size: 0.8rem;
-            color: var(--dark-text);
-        }
-
-        .feedback {
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin: 15px 0;
-            padding: 10px;
-            border-radius: var(--border-radius);
-            text-align: center;
-        }
-
-        .excellent {
-            background-color: rgba(46, 204, 113, 0.2);
-            color: var(--success-color);
-        }
-
-        .good {
-            background-color: rgba(52, 152, 219, 0.2);
-            color: #3498db;
-        }
-
-        .average {
-            background-color: rgba(241, 196, 15, 0.2);
-            color: #f1c40f;
-        }
-
-        .poor {
-            background-color: rgba(231, 76, 60, 0.2);
-            color: #e74c3c;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
 
         .tooltip {
             position: relative;
             display: inline-block;
             cursor: help;
+            margin-top: 10px;
+            color: var(--dark-green);
+        }
+
+         /* Make tooltip visible on hover AND focus */
+        .tooltip:hover .tooltiptext,
+        .tooltip:focus .tooltiptext {
+            visibility: visible;
+            opacity: 1;
         }
 
         .tooltip .tooltiptext {
@@ -414,7 +369,7 @@
             color: #fff;
             text-align: center;
             border-radius: 6px;
-            padding: 5px;
+            padding: 5px 0;
             position: absolute;
             z-index: 1;
             bottom: 125%;
@@ -424,102 +379,89 @@
             transition: opacity 0.3s;
         }
 
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
+        body[dir="rtl"] .tooltip .tooltiptext {
+            left: auto;
+            right: 50%;
+            margin-left: 0;
+            margin-right: -100px;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        /* Quiz progress indicator */
+        .quiz-progress {
+            margin-bottom: 15px;
+            font-weight: bold;
+            color: var(--dark-green);
         }
 
-        @keyframes slideIn {
-            from { transform: translateX(-20px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+        /* Accessibility improvements */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+        /* Audio controls */
+        .audio-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
         }
 
-        [dir="rtl"] {
-            text-align: right;
+        .audio-controls button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2em;
+            color: var(--dark-green);
+        }
+        .audio-controls button:focus { /* Added focus style for audio button */
+            outline: 2px solid var(--primary-yellow);
+            outline-offset: 2px;
         }
 
-        [dir="ltr"] {
-            text-align: left;
-        }
 
-        [dir="rtl"] .section-title::after {
-            right: auto;
+        /* Confirmation modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
             left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto; /* Added overflow for smaller screens */
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px; /* Add some padding so modal isn't right at the top */
         }
 
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --light-bg: #1a1a1a;
-                --dark-text: #f8f9fa;
-            }
-
-            body {
-                background: linear-gradient(to right, #1a1a1a, #2d2d2d);
-                color: var(--dark-text);
-            }
-
-            .card {
-                background: #2d2d2d;
-                color: white;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            }
-
-            .form-select {
-                background-color: #333;
-                color: white;
-                border-color: #444;
-            }
-
-            .question {
-                background-color: #2a2a2a;
-            }
-
-            .progress-container {
-                background-color: #333;
-            }
-
-            .stat-box {
-                background: rgba(0, 0, 0, 0.3);
-            }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto; /* Adjusted margin */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 90%; /* Increased width for smaller screens */
+            max-width: 500px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
-        /* Responsive adjustments */
-        @media (max-width: 576px) {
-            .logo-text {
-                font-size: 1.5rem;
-            }
-            
-            .logo-subtext {
-                font-size: 0.9rem;
-            }
-            
-            .btn-container {
-                flex-direction: column;
-            }
-            
-            .btn {
-                width: 100%;
-            }
-            
-            .stats-container {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .stat-box {
-                margin: 5px 0;
-            }
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        /* Added aria-live for result container */
+        #result[aria-live="polite"] {
+            /* Styles don't change, just the attribute matters */
         }
     </style>
 </head>
@@ -527,16 +469,13 @@
     <header class="app-header">
         <div class="container header-flex">
             <div class="logo-container">
-                <h1 class="logo-text" id="app-title">Arabic Verb Conjugation Quiz</h1>
-                <p class="logo-subtext" id="app-subtitle">Test your knowledge of Arabic verb forms</p>
+                <h1 class="logo-text" id="app-title" data-en="Arabic Verb Conjugation Quiz" data-ar="اختبار تصريف الأفعال العربية" data-ur="عربی فعل گردان کوئز">Arabic Verb Conjugation Quiz</h1>
+                <p class="logo-subtext" id="app-subtitle" data-en="Test your knowledge of Arabic verb forms" data-ar="اختبر معرفتك بصيغ الأفعال العربية" data-ur="عربی افعال کی صورتیں جانچیں">Test your knowledge of Arabic verb forms</p>
             </div>
             <div class="language-switcher">
-                <button class="lang-btn active" onclick="setLanguage('en')">
-                    <span>English</span>
-                </button>
-                <button class="lang-btn" onclick="setLanguage('ar')">
-                    <span>العربية</span>
-                </button>
+                <button class="lang-btn" onclick="setLanguage('en')" aria-pressed="true"><span>English</span></button>
+                <button class="lang-btn" onclick="setLanguage('ar')" aria-pressed="false"><span>العربية</span></button>
+                <button class="lang-btn" onclick="setLanguage('ur')" aria-pressed="false"><span>اردو</span></button>
             </div>
         </div>
     </header>
@@ -545,57 +484,48 @@
         <div class="card">
             <div class="progress-container" id="progress-container" style="display: none;">
                 <h3 id="progress-title">Your Progress</h3>
-                <div style="background: #ddd; border-radius: 10px; position: relative;">
+                <div style="background: #ddd; border-radius: 10px; position: relative; overflow: hidden;">
                     <div id="progress-bar" class="progress-bar" style="width: 0%;">
                         <span class="progress-text" id="progress-percentage">0%</span>
                     </div>
                 </div>
-                <p id="progress-text">0/5 quizzes completed</p>
+                <p id="progress-summary"></p>
             </div>
 
-            <div id="verbSelection">
-                <h2 class="section-title" id="select-verb-title">1. Select a verb:</h2>
-                <select id="verb" class="form-select">
-                    <option value="">Select a verb</option>
-                    <option value="كتب">كتب (يكتب) - to write</option>
-                    <option value="ذهب">ذهب (يذهب) - to go</option>
-                    <option value="أكل">أكل (يأكل) - to eat</option>
-                    <option value="شرب">شرب (يشرب) - to drink</option>
-                    <option value="قرأ">قرأ (يقرأ) - to read</option>
-                    <option value="درس">درس (يدرس) - to study</option>
-                    <option value="عمل">عمل (يعمل) - to work</option>
-                    <option value="نام">نام (ينام) - to sleep</option>
-                </select>
-
-                <h2 class="section-title" id="select-gender-title">2. Select gender:</h2>
-                <select id="gender" class="form-select">
-                    <option value="">Select gender</option>
-                    <option value="m">Masculine (مذكر)</option>
-                    <option value="f">Feminine (مؤنث)</option>
-                </select>
-                
-                <div class="tooltip" style="margin-top: 10px;">
+            <div id="quizSettings">
+                <span class="tooltip" tabindex="0">
                     <i class="fas fa-info-circle"></i> <span id="hint-text">Click here for tips</span>
-                    <span class="tooltiptext" id="tooltip-content">Select a verb and gender to start the quiz. You'll be tested on different conjugations.</span>
+                    <span class="tooltiptext" id="tooltip-content">Click Start Quiz to begin. You will answer 14 questions, selecting the correct conjugated verb from multiple options for various pronouns, verbs, and tenses.</span>
+                </span>
+                <div class="audio-controls">
+                    <button id="mute-btn" aria-label="Toggle sound on">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                    <span id="audio-status">Sound on</span>
                 </div>
             </div>
 
-            <div id="quiz" style="display: none;"></div>
+            <div id="quiz" style="display: none;" aria-live="polite"></div>
         </div>
 
         <div class="btn-container">
-            <button class="btn btn-primary" onclick="startQuiz()" id="start-btn" disabled>
-                <i class="fas fa-play"></i> <span id="start-btn-text">Start Quiz</span>
-            </button>
-            <button class="btn btn-success hidden" onclick="submitQuiz()" id="submit-btn">
-                <i class="fas fa-check"></i> <span id="submit-btn-text">Submit Answers</span>
-            </button>
-            <button class="btn btn-warning" onclick="resetQuiz()" id="reset-btn">
-                <i class="fas fa-redo"></i> <span id="reset-btn-text">Reset Quiz</span>
-            </button>
+            <button class="btn btn-primary" onclick="startQuiz()" id="start-btn"><i class="fas fa-play"></i> <span id="start-btn-text">Start Quiz</span></button>
+            <button class="btn btn-success hidden" onclick="showNextQuestion()" id="next-btn"><i class="fas fa-arrow-right"></i> <span id="next-btn-text">Next Exercise</span></button>
+            <button class="btn btn-danger hidden" onclick="showResetConfirmation()" id="finish-btn"><i class="fas fa-stop"></i> <span id="finish-btn-text">Finish</span></button>
+            <button class="btn btn-warning" onclick="showResetConfirmation()" id="reset-btn"><i class="fas fa-redo"></i> <span id="reset-btn-text">Reset Quiz</span></button>
         </div>
-        <div id="result" class="card hidden"></div>
+        <div id="result" class="card hidden" aria-live="polite"></div>
     </main>
+
+    <div id="confirmation-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-content">
+            <h2 id="modal-title" class="sr-only">Confirmation</h2> <p id="modal-message">Are you sure you want to reset the quiz? Your current progress will be lost.</p>
+            <div class="modal-actions">
+                <button class="btn btn-warning" onclick="closeModal()" id="modal-cancel">Cancel</button>
+                <button class="btn btn-danger" onclick="confirmReset()" id="modal-confirm">Reset</button>
+            </div>
+        </div>
+    </div>
 
     <audio id="correct-sound" preload="auto">
         <source src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3" type="audio/mpeg">
@@ -608,112 +538,136 @@
     </audio>
 
     <script>
-        // Questions array
-        const questions = [
-            { 
-                correctSuffix: "َ",
-                options: ["َ", "َتْ", "َتا", "ُوا"],
-                en: "3. Select the correct singular past form (He wrote):",
-                ar: "3. اختر صيغة الماضي المفرد المذكر (هو كتب):"
-            },
-            { 
-                correctSuffix: "َتا",
-                options: ["َتا", "َا", "ُوا", "ْنَ"],
-                en: "4. Select the correct dual past form (They two m. wrote):",
-                ar: "4. اختر صيغة الماضي المثنى المذكر (هما كتبا):"
-            },
-            { 
-                correctSuffix: "ُوا",
-                options: ["ُوا", "ْنَ", "َتا", "َ"],
-                en: "5. Select the correct plural past form (They m. pl. wrote):",
-                ar: "5. اختر صيغة الماضي الجمع المذكر (هم كتبوا):"
-            },
-            { 
-                correctSuffix: "َتْ",
-                options: ["َتْ", "َ", "َتا", "ْنَ"],
-                en: "6. Select the correct female singular past form (She wrote):",
-                ar: "6. اختر صيغة الماضي المفرد المؤنث (هي كتبتْ):"
-            },
-            { 
-                correctSuffix: "َتا",
-                options: ["َتا", "َتْ", "َا", "ُوا"],
-                en: "7. Select the correct female dual past form (They two f. wrote):",
-                ar: "7. اختر صيغة الماضي المثنى المؤنث (هما كتبتا):"
-            },
-            { 
-                correctSuffix: "ْنَ",
-                options: ["ْنَ", "ُوا", "َتا", "َ"],
-                en: "8. Select the correct female plural past form (They f. pl. wrote):",
-                ar: "8. اختر صيغة الماضي الجمع المؤنث (هن كتبْنَ):"
-            },
-            { 
-                correctSuffix: "ْتَ",
-                options: ["ْتَ", "ْتِ", "ْتُمَا", "ْتُمْ"],
-                en: "9. Select the correct masculine singular past form (You m. wrote):",
-                ar: "9. اختر صيغة الماضي المفرد المذكر للمخاطب (أنتَ كتبتَ):"
-            },
-            { 
-                correctSuffix: "ْتُمَا",
-                options: ["ْتُمَا", "ْتَ", "ْتُمْ", "ْتُنَّ"],
-                en: "10. Select the correct masculine dual past form (You two m. wrote):",
-                ar: "10. اختر صيغة الماضي المثنى المذكر للمخاطب (أنتما كتبتما):"
-            },
-            { 
-                correctSuffix: "ْتُمْ",
-                options: ["ْتُمْ", "ْتُمَا", "ْتَ", "ْتِ"],
-                en: "11. Select the correct masculine plural past form (You m. pl. wrote):",
-                ar: "11. اختر صيغة الماضي الجمع المذكر للمخاطب (أنتم كتبتم):"
-            },
-            { 
-                correctSuffix: "ْتِ",
-                options: ["ْتِ", "ْتَ", "ْتُمَا", "ْتُنَّ"],
-                en: "12. Select the correct female singular past form (You f. wrote):",
-                ar: "12. اختر صيغة الماضي المفرد المؤنث للمخاطب (أنتِ كتبتِ):"
-            },
-            { 
-                correctSuffix: "ْتُمَا",
-                options: ["ْتُمَا", "ْتِ", "ْتُمْ", "ْتُنَّ"],
-                en: "13. Select the correct female dual past form (You two f. wrote):",
-                ar: "13. اختر صيغة الماضي المثنى المؤنث للمخاطب (أنتما كتبتما):"
-            },
-            { 
-                correctSuffix: "ْتُنَّ",
-                options: ["ْتُنَّ", "ْتُمَا", "ْتُمْ", "ْتِ"],
-                en: "14. Select the correct female plural past form (You f. pl. wrote):",
-                ar: "14. اختر صيغة الماضي الجمع المؤنث للمخاطب (أنتنّ كتبتنّ):"
-            },
-            { 
-                correctSuffix: "ْتُ",
-                options: ["ْتُ", "ْنا", "ْتَ", "ْتِ"],
-                en: "15. Select the correct 'I' past form (I wrote):",
-                ar: "15. اختر صيغة الماضي للمتكلم المفرد (أنا كتبتُ):"
-            },
-            { 
-                correctSuffix: "ْنا",
-                options: ["ْنا", "ْتُ", "ْتُمْ", "ْنَ"],
-                en: "16. Select the correct 'We' past form (We wrote):",
-                ar: "16. اختر صيغة الماضي للمتكلم الجمع (نحن كتبنا):"
-            }
+        // Pronoun data remains the same
+        const pronouns = [
+            { key: "huwa", en: "He", ar: "هو", ur: "وہ (مذکر)", person: 3, number: "singular", gender: "masculine" },
+            { key: "huma_m", en: "They (2 m.)", ar: "هما", ur: "وہ دو (مذکر)", person: 3, number: "dual", gender: "masculine" },
+            { key: "hum", en: "They (pl. m.)", ar: "هم", ur: "وہ سب (مذکر)", person: 3, number: "plural", gender: "masculine" },
+            { key: "hiya", en: "She", ar: "هي", ur: "وہ (مونث)", person: 3, number: "singular", gender: "feminine" },
+            { key: "huma_f", en: "They (2 f.)", ar: "هما", ur: "وہ دو (مونث)", person: 3, number: "dual", gender: "feminine" },
+            { key: "hunna", en: "They (pl. f.)", ar: "هن", ur: "وہ سب (مونث)", person: 3, number: "plural", gender: "feminine" },
+            { key: "anta", en: "You (m.)", ar: "أنتَ", ur: "تم (مذکر)", person: 2, number: "singular", gender: "masculine" },
+            { key: "antuma", en: "You (2 m/f)", ar: "أنتما", ur: "تم دو", person: 2, number: "dual", gender: "any" },
+            { key: "antum", en: "You (pl. m.)", ar: "أنتم", ur: "تم سب (مذکر)", person: 2, number: "plural", gender: "masculine" },
+            { key: "anti", en: "You (f.)", ar: "أنتِ", ur: "تم (مونث)", person: 2, number: "singular", gender: "feminine" },
+            { key: "antunna", en: "You (pl. f.)", ar: "أنتنّ", ur: "تم سب (مونث)", person: 2, number: "plural", gender: "feminine" },
+            { key: "ana", en: "I", ar: "أنا", ur: "میں", person: 1, number: "singular", gender: "any" },
+            { key: "nahnu", en: "We", ar: "نحن", ur: "ہم", person: 1, number: "plural", gender: "any" }
         ];
 
+        // Tenses data remains the same
+        const tensesData = [
+            { key: "past", en: "Past (الماضي)", ar: "الماضي", ur: "ماضی" },
+            { key: "present", en: "Present (المضارع)", ar: "المضارع", ur: "مضارع" },
+            { key: "imperative", en: "Imperative (الأمر)", ar: "الأمر", ur: "امر", secondPersonOnly: true }
+        ];
+
+        // Conjugations Data - **MANUAL VERIFICATION REQUIRED!**
+        // The correctness of these conjugations is critical and must be verified.
+        const conjugationsData = {
+            "كتب": {
+                "meaning_en": "to write",
+                "meaning_ar": "يكتب", // This is the present tense root form, might be better as the infinitive "الكتابة"
+                "meaning_ur": "لکھنا",
+                "past": ["كتب", "كتبا", "كتبوا", "كتبت", "كتبتا", "كتبن", "كتبتَ", "كتبتما", "كتبتم", "كتبتِ", "كتبتنّ", "كتبتُ", "كتبنا"],
+                "present": ["يكتبُ", "يكتبانِ", "يكتبونَ", "تكتبُ", "تكتبانِ", "يكتبْنَ", "تكتبُ", "تكتبانِ", "تكتبونَ", "تكتبينَ", "تكتبْنَ", "أكتبُ", "نكتبُ"],
+                "imperative": [null, null, null, null, null, null, "اكتبْ", "اكتبا", "اكتبوا", "اكتبي", "اكتبنّ", null, null]
+            },
+            "ذهب": {
+                "meaning_en": "to go",
+                "meaning_ar": "يذهب", // Same note as above
+                "meaning_ur": "جانا",
+                "past": ["ذهب", "ذهبا", "ذهبوا", "ذهبت", "ذهبتا", "ذهبن", "ذهبتَ", "ذهبتما", "ذهبتم", "ذهبتِ", "ذهبتنّ", "ذهبتُ", "ذهبنا"],
+                "present": ["يذهبُ", "يذهبانِ", "يذهبونَ", "تذهبُ", "تذهبانِ", "يذهبنَ", "تذهبُ", "تذهبانِ", "تذهبونَ", "تذهبينَ", "تذهبنَ", "أذهبُ", "نذهبُ"],
+                "imperative": [null, null, null, null, null, null, "اذهبْ", "اذهبا", "اذهبوا", "اذهبي", "اذهبنَ", null, null]
+            },
+            "أكل": {
+                "meaning_en": "to eat",
+                "meaning_ar": "يأكل", // Same note as above
+                "meaning_ur": "کھانا",
+                "past": ["أكل", "أكلا", "أكلوا", "أكلت", "أكلتا", "أكلن", "أكلتَ", "أكلتما", "أكلتم", "أكلتِ", "أكلتنّ", "أكلتُ", "أكلنا"],
+                "present": ["يأكلُ", "يأكلانِ", "يأكلونَ", "تأكلُ", "تأكلانِ", "يأكلْنَ", "تأكلُ", "تأكلانِ", "تأكلونَ", "تأكلينَ", "تأكلْنَ", "آكلُ", "نأكلُ"],
+                "imperative": [null, null, null, null, null, null, "كُلْ", "كُلا", "كُلُوا", "كُلِي", "كُلْنَ", null, null]
+            },
+            "شرب": {
+                "meaning_en": "to drink",
+                "meaning_ar": "يشرب", // Same note as above
+                "meaning_ur": "پینا",
+                "past": ["شرب", "شربا", "شربوا", "شربت", "شربتا", "شربن", "شربتَ", "شربتما", "شربتم", "شربتِ", "شربتنّ", "شربتُ", "شربنا"],
+                "present": ["يشربُ", "يشربانِ", "يشربون", "تشربُ", "تشربانِ", "يشربنَ", "تشربُ", "تشربانِ", "تشربون", "تشربينَ", "تشربنَ", "أشربُ", "نشربُ"],
+                "imperative": [null, null, null, null, null, null, "اشربْ", "اشربا", "اشربوا", "اشربي", "اشربنَ", null, null]
+            },
+            "درس": {
+                "meaning_en": "to study",
+                "meaning_ar": "يدرس", // Same note as above
+                "meaning_ur": "پڑھنا",
+                "past": ["درس", "درسا", "درسوا", "درست", "درستا", "درسن", "درستَ", "درستما", "درستم", "درستِ", "درستنّ", "درستُ", "درسنا"],
+                "present": ["يدرسُ", "يدرسانِ", "يدرسونَ", "تدرسُ", "تدرسانِ", "يدرسْنَ", "تدرسُ", "تدرسانِ", "تدرسونَ", "تدرسينَ", "تدرسْنَ", "أدرسُ", "ندرسُ"],
+                "imperative": [null, null, null, null, null, null, "ادرسْ", "ادرسا", "ادرسوا", "ادرسي", "ادرسنَ", null, null]
+            },
+            "عمل": {
+                "meaning_en": "to work",
+                "meaning_ar": "يعمل", // Same note as above
+                "meaning_ur": "کام کرنا",
+                "past": ["عمل", "عملا", "عملوا", "عملت", "عملتا", "عملن", "عملتَ", "عملتما", "عملتم", "عملتِ", "عملتنّ", "عملتُ", "عملنا"],
+                "present": ["يعملُ", "يعملانِ", "يعملونَ", "تعملُ", "تعملانِ", "يعملْنَ", "تعملُ", "تعملانِ", "تعملونَ", "تعملينَ", "تعملْنَ", "أعملُ", "نعملُ"],
+                "imperative": [null, null, null, null, null, null, "اعملْ", "اعملا", "اعملوا", "اعملي", "اعملنَ", null, null]
+            },
+            "قرأ": {
+                "meaning_en": "to read",
+                "meaning_ar": "يقرأ", // Same note as above
+                "meaning_ur": "پڑھنا",
+                "past": ["قرأ", "قرآ", "قرؤوا", "قرأت", "قرأتا", "قرأن", "قرأتَ", "قرأتما", "قرأتم", "قرأتِ", "قرأتنّ", "قرأتُ", "قرأنا"],
+                "present": ["يقرأُ", "يقرآنِ", "يقرؤونَ", "تقرأُ", "تقرآنِ", "يقرأنَ", "تقرأُ", "تقرآنِ", "تقرؤونَ", "تقرئينَ", "تقرأنَ", "أقرأُ", "نقرأُ"],
+                "imperative": [null, null, null, null, null, null, "اقرأْ", "اقرأا", "اقرؤوا", "اقرأي", "اقرأنَ", null, null]
+            },
+            "بحث": {
+                "meaning_en": "to search",
+                "meaning_ar": "يبحث", // Same note as above
+                "meaning_ur": "تلاش کرنا",
+                "past": ["بحث", "بحثا", "بحثوا", "بحثَت", "بحثتا", "بحثن", "بحثْتَ", "بحثتما", "بحثتم", "بحثْتِ", "بحثتنّ", "بحثْتُ", "بحثنا"],
+                "present": ["يبحثُ", "يبحثانِ", "يبحثونَ", "تبحثُ", "تبحثانِ", "يبحثْنَ", "تبحثُ", "تبحثانِ", "تبحثونَ", "تبحثينَ", "تبحثْنَ", "أبحثُ", "نبحثُ"],
+                "imperative": [null, null, null, null, null, null, "ابحثْ", "ابحثا", "ابحثوا", "ابحثي", "ابحثنَ", null, null]
+            },
+            "فهم": {
+                "meaning_en": "to understand",
+                "meaning_ar": "يفهم", // Same note as above
+                "meaning_ur": "سمجھنا",
+                "past": ["فهم", "فهما", "فهموا", "فهمت", "فهمتا", "فهمن", "فهمتَ", "فهمتما", "فهمتم", "فهمتِ", "فهمتنّ", "فهمتُ", "فهمنا"],
+                "present": ["يفهمُ", "يفهمانِ", "يفهمونَ", "تفهمُ", "تفهمانِ", "يفهمْنَ", "تفهمُ", "تفهمانِ", "تفهمونَ", "تفهمينَ", "تفهمْنَ", "أفهمُ", "نفهمُ"],
+                "imperative": [null, null, null, null, null, null, "افهمْ", "افهما", "افهموا", "افهمي", "افهمنَ", null, null]
+            },
+            "فتح": {
+                "meaning_en": "to open",
+                "meaning_ar": "يفتح", // Same note as above
+                "meaning_ur": "کھولنا",
+                "past": ["فتح", "فتحا", "فتحوا", "فتحت", "فتحتا", "فتحن", "فتحتَ", "فتحتما", "فتحتم", "فتحتِ", "فتحتنّ", "فتحتُ", "فتحنا"],
+                "present": ["يفتحُ", "يفتحانِ", "يفتحونَ", "تفتحُ", "تفتحانِ", "يفتحنَ", "تفتحُ", "تفتحانِ", "تفتحونَ", "تفتحينَ", "تفتحنَ", "أفتحُ", "نفتحُ"],
+                "imperative": [null, null, null, null, null, null, "افتحْ", "افتحا", "افتحوا", "افتحي", "افتحنَ", null, null]
+            }
+        };
+
+        // Translations data (corrected and expanded)
         const translations = {
             en: {
                 appTitle: "Arabic Verb Conjugation Quiz",
                 appSubtitle: "Test your knowledge of Arabic verb forms",
-                selectVerb: "1. Select a verb:",
-                selectGender: "2. Select gender:",
                 startBtn: "Start Quiz",
-                submitBtn: "Submit Answers",
+                nextBtn: "Next Exercise",
+                finishBtn: "Finish",
                 resetBtn: "Reset Quiz",
                 resultsTitle: "Results",
-                verbSelected: "Selected verb:",
-                masculine: "Masculine",
-                feminine: "Feminine",
                 progressTitle: "Your Progress",
-                progressText: "{completed}/5 quizzes completed",
+                progressSummary: "Completed {completed} quizzes. Best score: {bestScore}/14.",
                 hintText: "Click here for tips",
-                tooltipContent: "Select a verb and gender to start the quiz. You'll be tested on different conjugations.",
+                tooltipContent: "Click Start Quiz to begin. You will answer 14 questions, selecting the correct conjugated verb from multiple options for various pronouns, verbs, and tenses.",
+                questionPrompt: "Conjugate <span class='arabic'>{verbRoot}</span> ({meaning}) in the {tense} tense for <span class='arabic'>{pronounArabic}</span> ({pronounEnglish}):",
+                yourAnswer: "Your answer:", // Added colon for clarity
+                correctAnswer: "Correct answer:", // Added colon for clarity
+                notAnswered: "Not answered",
                 feedback: {
+                    correct: "Correct!", // Simplified for brevity with visual cue
+                    incorrect: "Incorrect.", // Simplified for brevity with visual cue
                     excellent: "Excellent! You're a verb conjugation master!",
                     good: "Good job! Keep practicing to improve!",
                     average: "Not bad! Try again to boost your score!",
@@ -723,25 +677,45 @@
                     currentScore: "Current Score",
                     bestScore: "Best Score",
                     quizzesCompleted: "Quizzes Completed"
-                }
+                },
+                tenseOptions: {
+                    past: "Past (الماضي)",
+                    present: "Present (المضارع)",
+                    imperative: "Imperative (الأمر)"
+                },
+                pronounLabels: pronouns.reduce((acc, p) => { acc[p.key] = `${p.en} (${p.ar})`; return acc; }, {}),
+                selectOptionPrompt: "Select the correct conjugation:",
+                answerQuestionFirst: "Please answer the current question first.",
+                showResultsBtn: "Show Results",
+                questionText: "Question",
+                ofText: "of",
+                audioOn: "Sound on",
+                audioOff: "Sound off",
+                resetConfirm: "Are you sure you want to reset the quiz? Your current progress will be lost.",
+                modalCancel: "Cancel",
+                modalConfirm: "Reset",
+                // Added labels for modal confirmation
+                modalTitle: "Confirmation"
             },
             ar: {
                 appTitle: "اختبار تصريف الأفعال العربية",
                 appSubtitle: "اختبر معرفتك بصيغ الأفعال العربية",
-                selectVerb: "1. اختر الفعل:",
-                selectGender: "2. اختر الجنس:",
                 startBtn: "بدء الاختبار",
-                submitBtn: "تصحيح الإجابات",
+                nextBtn: "التمرين التالي",
+                finishBtn: "إنهاء",
                 resetBtn: "إعادة تعيين الاختبار",
                 resultsTitle: "النتائج",
-                verbSelected: "الفعل المختار:",
-                masculine: "مذكر",
-                feminine: "مؤنث",
                 progressTitle: "تقدمك",
-                progressText: "تم إكمال {completed}/5 اختبارات",
+                progressSummary: "تم إكمال {completed} اختبار. أفضل نتيجة: {bestScore}/14.",
                 hintText: "انقر هنا للحصول على نصائح",
-                tooltipContent: "اختر فعلاً وجنساً لبدء الاختبار. سيتم اختبارك على تصريفات مختلفة.",
+                tooltipContent: "انقر على بدء الاختبار لبدء. ستجيب على 14 سؤالاً، وتختار التصريف الصحيح للفعل من بين خيارات متعددة لضمائر وأفعال وأزمنة مختلفة.",
+                questionPrompt: "صرف الفعل <span class='arabic'>{verbRoot}</span> ({meaning}) في زمن الـ{tense} للضمير <span class='arabic'>{pronounArabic}</span> ({pronounEnglish}):",
+                yourAnswer: "إجابتك:", // Added colon
+                correctAnswer: "الإجابة الصحيحة:", // Added colon
+                notAnswered: "لم يتم الإجابة",
                 feedback: {
+                    correct: "صحيح!", // Simplified
+                    incorrect: "غير صحيح.", // Simplified
                     excellent: "ممتاز! أنت سيد تصريف الأفعال!",
                     good: "عمل جيد! استمر في التدرب لتحسين أدائك!",
                     average: "ليس سيئًا! حاول مجددًا لتحسين درجاتك!",
@@ -751,304 +725,656 @@
                     currentScore: "النتيجة الحالية",
                     bestScore: "أفضل نتيجة",
                     quizzesCompleted: "الاختبارات المكتملة"
+                },
+                tenseOptions: {
+                    past: "الماضي",
+                    present: "المضارع",
+                    imperative: "الأمر"
+                },
+                pronounLabels: pronouns.reduce((acc, p) => { acc[p.key] = `${p.ar} (${p.en})`; return acc; }, {}),
+                selectOptionPrompt: "اختر التصريف الصحيح:",
+                answerQuestionFirst: "الرجاء الإجابة على السؤال الحالي أولاً.",
+                showResultsBtn: "عرض النتائج",
+                questionText: "السؤال",
+                ofText: "من",
+                audioOn: "الصوت نشط",
+                audioOff: "الصوت معطل",
+                resetConfirm: "هل أنت متأكد أنك تريد إعادة تعيين الاختبار؟ ستفقد تقدمك الحالي.",
+                modalCancel: "إلغاء",
+                modalConfirm: "إعادة تعيين",
+                 modalTitle: "تأكيد"
+            },
+            ur: {
+                appTitle: "عربی فعل گردان کوئز",
+                appSubtitle: "عربی افعال کی صورتیں جانچیں",
+                startBtn: "کوئز شروع کریں",
+                nextBtn: "اگلا سوال",
+                finishBtn: "ختم کریں",
+                resetBtn: "کوئز دوبارہ شروع کریں",
+                resultsTitle: "نتائج",
+                progressTitle: "آپ کی پیش رفت",
+                progressSummary: "{completed} کوئز مکمل ہوئے۔ بہترین سکور: {bestScore}/14۔",
+                hintText: "تجاویز کے لیے یہاں کلک کریں",
+                tooltipContent: "کوئز شروع کرنے کے لیے شروع کریں پر کلک کریں۔ آپ 14 سوالات کے جواب دیں گے، مختلف ضمائر، افعال، اور زمانوں کے لیے متعدد اختیارات میں سے صحیح فعل گردان منتخب کریں گے۔",
+                questionPrompt: "فعل <span class='arabic'>{verbRoot}</span> ({meaning}) کو {tense} زمانے میں ضمیر <span class='arabic'>{pronounArabic}</span> ({pronounEnglish}) کے لیے گردان کریں:",
+                yourAnswer: "آپ کا جواب:", // Added colon
+                correctAnswer: "صحیح جواب:", // Added colon
+                notAnswered: "جواب نہیں دیا",
+                feedback: {
+                    correct: "صحیح!", // Simplified
+                    incorrect: "غلط ہے۔", // Simplified
+                    excellent: "بہترین! آپ فعل گردان کے ماہر ہیں!",
+                    good: "اچھا کام! بہتر بنانے کے لیے مشق کرتے رہیں!",
+                    average: "برا نہیں! اپنا سکور بڑھانے کے لیے دوبارہ کوشش کریں!",
+                    poor: "پڑھائی جاری رکھیں! آپ مشق سے بہتر ہوں گے!"
+                },
+                stats: {
+                    currentScore: "موجودہ سکور",
+                    bestScore: "بہترین سکور",
+                    quizzesCompleted: "کوئز مکمل ہوئے"
+                },
+                tenseOptions: {
+                    past: "ماضی",
+                    present: "مضارع",
+                    imperative: "امر"
+                },
+                pronounLabels: pronouns.reduce((acc, p) => { acc[p.key] = `${p.ur} (${p.en})`; return acc; }, {}),
+                selectOptionPrompt: "صحیح فعل گردان منتخب کریں:",
+                answerQuestionFirst: "براہ کرم پہلے موجودہ سوال کا جواب دیں۔",
+                showResultsBtn: "نتائج دکھائیں",
+                questionText: "سوال",
+                ofText: "کا",
+                audioOn: "آواز آن",
+                audioOff: "آواز بند",
+                resetConfirm: "کیا آپ واقعی کوئز دوبارہ شروع کرنا چاہتے ہیں؟ آپ کی موجودہ پیش رفت ضائع ہو جائے گی۔",
+                modalCancel: "کینسل کریں",
+                modalConfirm: "دوبارہ شروع کریں",
+                modalTitle: "تصدیق"
+            }
+        };
+
+        // State variables
+        let currentLanguage = 'en';
+        let currentQuestionIndex = 0;
+        let currentScore = 0;
+        let bestScore = localStorage.getItem('bestScore') ? parseInt(localStorage.getItem('bestScore')) : 0;
+        let totalQuestions = 14; // Assuming 14 questions per quiz as per tooltip
+        let totalQuizzes = localStorage.getItem('totalQuizzes') ? parseInt(localStorage.getItem('totalQuizzes')) : 0;
+        let quizData = []; // Array to hold the questions for the current quiz instance
+        let quizStarted = false;
+        let quizCompleted = false;
+        let audioEnabled = true; // Default to sound on
+        let answeredCurrentQuestion = false; // Flag to prevent skipping questions
+
+        // DOM Elements (cached for performance)
+        let audioCorrect, audioIncorrect, audioComplete;
+        let audioStatusText;
+        let progressBar, progressPercentage, progressSummaryText;
+        let progressContainer, progressTitle;
+        let resultContainer, resultTitle; // Removed resultText, resultFeedback as these are generated
+        let startButton, nextButton, finishButton, resetButton;
+        let quizContainer; // Removed specific question elements, will access children
+        let modal, modalMessage, modalCancelButton, modalConfirmButton;
+        let languageButtons;
+        let hintTooltip, tooltipContentSpan;
+        let appTitleElement, appSubtitleElement;
+
+
+        // --- Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Cache DOM elements
+            audioCorrect = document.getElementById('correct-sound');
+            audioIncorrect = document.getElementById('incorrect-sound');
+            audioComplete = document.getElementById('complete-sound');
+            audioStatusText = document.getElementById('audio-status');
+            progressBar = document.getElementById('progress-bar');
+            progressPercentage = document.getElementById('progress-percentage');
+            progressSummaryText = document.getElementById('progress-summary');
+            progressContainer = document.getElementById('progress-container');
+            progressTitle = document.getElementById('progress-title');
+            resultContainer = document.getElementById('result');
+            resultTitle = document.createElement('h2'); // Create result title element
+            resultContainer.prepend(resultTitle); // Add title to result container
+            startButton = document.getElementById('start-btn');
+            nextButton = document.getElementById('next-btn');
+            finishButton = document.getElementById('finish-btn');
+            resetButton = document.getElementById('reset-btn');
+            quizContainer = document.getElementById('quiz');
+            modal = document.getElementById('confirmation-modal');
+            modalMessage = document.getElementById('modal-message');
+            modalCancelButton = document.getElementById('modal-cancel');
+            modalConfirmButton = document.getElementById('modal-confirm');
+            languageButtons = document.querySelectorAll('.language-switcher .lang-btn');
+            hintTooltip = document.querySelector('.tooltip'); // Get the tooltip span
+            tooltipContentSpan = document.getElementById('tooltip-content');
+            appTitleElement = document.getElementById('app-title');
+            appSubtitleElement = document.getElementById('app-subtitle');
+
+            // Set initial language and update UI
+            setLanguage(currentLanguage);
+            updateProgressSummary();
+
+            // Add event listener for mute button (using cached element)
+            document.getElementById('mute-btn').addEventListener('click', toggleMute);
+        });
+
+        // --- Language Switching ---
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            const rtlLangs = ['ar', 'ur'];
+            const isRtl = rtlLangs.includes(lang);
+
+            // Update html and body direction/language
+            document.documentElement.lang = lang;
+            document.body.dir = isRtl ? 'rtl' : 'ltr';
+
+            // Update button active state and aria-pressed
+            languageButtons.forEach(button => {
+                const buttonLang = button.getAttribute('onclick').slice(12, 14); // Extract lang from onclick
+                if (buttonLang === lang) {
+                    button.classList.add('active');
+                    button.setAttribute('aria-pressed', 'true');
+                } else {
+                    button.classList.remove('active');
+                    button.setAttribute('aria-pressed', 'false');
+                }
+            });
+
+            // Update all text content
+            const textElements = {
+                'app-title': 'appTitle',
+                'app-subtitle': 'appSubtitle',
+                'start-btn-text': 'startBtn',
+                'next-btn-text': 'nextBtn',
+                'finish-btn-text': 'finishBtn',
+                'reset-btn-text': 'resetBtn',
+                'progress-title': 'progressTitle',
+                'hint-text': 'hintText',
+                'tooltip-content': 'tooltipContent',
+                'audio-status': 'audioOn', // Initial status text
+                'modal-message': 'resetConfirm',
+                'modal-cancel': 'modalCancel',
+                'modal-confirm': 'modalConfirm',
+                // Add more IDs as needed for translation
+            };
+
+            for (const id in textElements) {
+                const element = document.getElementById(id);
+                if (element) {
+                     // Check for data attributes first, as they might contain the specific translation
+                     const dataKey = element.dataset[lang];
+                     if(dataKey) {
+                         element.textContent = dataKey;
+                     } else if (translations[lang][textElements[id]]) {
+                         element.textContent = translations[lang][textElements[id]];
+                     }
                 }
             }
-        };
 
-        let progress = JSON.parse(localStorage.getItem('quizProgress')) || {
-            completed: 0,
-            scores: [],
-            bestScore: 0
-        };
+             // Special case for modal title (hidden)
+             const modalTitleElement = document.getElementById('modal-title');
+             if(modalTitleElement) {
+                 modalTitleElement.textContent = translations[lang].modalTitle;
+             }
 
-        function setLanguage(lang) {
-            console.log('Setting language to:', lang);
-            document.documentElement.lang = lang;
-            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-            
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.remove('active');
+
+            // Update audio status text separately as it depends on audioEnabled state
+            updateAudioStatusText();
+
+            // Update quiz content if quiz is active
+            if (quizStarted && !quizCompleted) {
+                displayQuestion(currentQuestionIndex);
+            }
+
+            // Update result content if results are showing
+            if (resultContainer.classList.contains('card') && !resultContainer.classList.contains('hidden')) {
+                 showResult(); // Re-render results in the new language
+            }
+
+             // Update progress summary
+             updateProgressSummary();
+
+             // Update tooltip content (already handled by textElements but good to be explicit)
+             if(tooltipContentSpan) {
+                 tooltipContentSpan.textContent = translations[lang].tooltipContent;
+             }
+        }
+
+        // Function to update audio status text based on currentLanguage and audioEnabled
+        function updateAudioStatusText() {
+             if (audioStatusText) {
+                audioStatusText.textContent = audioEnabled ? translations[currentLanguage].audioOn : translations[currentLanguage].audioOff;
+                // Update aria-label on mute button
+                const muteBtn = document.getElementById('mute-btn');
+                if(muteBtn) {
+                     muteBtn.setAttribute('aria-label', audioEnabled ? translations[currentLanguage].audioOff : translations[currentLanguage].audioOn);
+                }
+            }
+        }
+
+        // --- Audio Control ---
+        function toggleMute() {
+            audioEnabled = !audioEnabled;
+            const muteBtn = document.getElementById('mute-btn');
+            const icon = muteBtn.querySelector('i');
+
+            if (audioEnabled) {
+                icon.classList.remove('fa-volume-mute');
+                icon.classList.add('fa-volume-up');
+            } else {
+                icon.classList.remove('fa-volume-up');
+                icon.classList.add('fa-volume-mute');
+            }
+            updateAudioStatusText();
+        }
+
+        function playSound(soundElement) {
+            if (audioEnabled && soundElement) {
+                soundElement.currentTime = 0; // Rewind to the start
+                soundElement.play().catch(e => console.error("Error playing sound:", e)); // Catch potential errors
+            }
+        }
+
+        // --- Quiz Logic ---
+
+        // Generate quiz questions
+        function generateQuizData() {
+            quizData = [];
+            const verbs = Object.keys(conjugationsData);
+            const allCombinations = [];
+
+            verbs.forEach(verbRoot => {
+                tensesData.forEach(tenseData => {
+                    // Filter pronouns for imperative tense (2nd person only)
+                    const availablePronouns = tenseData.secondPersonOnly
+                        ? pronouns.filter(p => p.person === 2)
+                        : pronouns;
+
+                    availablePronouns.forEach(pronoun => {
+                        const conjugationIndex = pronouns.findIndex(p => p.key === pronoun.key);
+                        const correctAnswer = conjugationsData[verbRoot][tenseData.key][conjugationIndex];
+
+                        // Only add questions if a valid conjugation exists for this combination
+                        if (correctAnswer !== null) {
+                            allCombinations.push({
+                                verbRoot,
+                                tenseKey: tenseData.key,
+                                pronounKey: pronoun.key,
+                                correctAnswer: correctAnswer
+                            });
+                        }
+                    });
+                });
             });
-            event.target.classList.add('active');
-            
-            const t = translations[lang];
-            document.getElementById('app-title').textContent = t.appTitle;
-            document.getElementById('app-subtitle').textContent = t.appSubtitle;
-            document.getElementById('select-verb-title').textContent = t.selectVerb;
-            document.getElementById('select-gender-title').textContent = t.selectGender;
-            document.getElementById('start-btn-text').textContent = t.startBtn;
-            document.getElementById('submit-btn-text').textContent = t.submitBtn;
-            document.getElementById('reset-btn-text').textContent = t.resetBtn;
-            document.getElementById('progress-title').textContent = t.progressTitle;
-            document.getElementById('hint-text').textContent = t.hintText;
-            document.getElementById('tooltip-content').textContent = t.tooltipContent;
-            
-            updateProgressDisplay(lang);
-            
-            if (document.getElementById('quiz').style.display !== 'none') {
-                const verb = document.getElementById('verb').value;
-                showQuestions(verb, lang);
+
+            // Shuffle combinations and select the first totalQuestions
+            shuffleArray(allCombinations);
+            quizData = allCombinations.slice(0, totalQuestions);
+
+            // Ensure there are enough questions
+            if (quizData.length < totalQuestions) {
+                 console.warn(`Could only generate ${quizData.length} unique questions. Max possible: ${allCombinations.length}`);
+                 totalQuestions = quizData.length; // Adjust totalQuestions if not enough combinations
             }
-            
-            // Update any existing results display
-            if (!document.getElementById('result').classList.contains('hidden')) {
-                const verb = document.getElementById('verb').value;
-                const gender = document.getElementById('gender').value;
-                const score = parseInt(document.getElementById('result').getAttribute('data-score'));
-                const results = JSON.parse(document.getElementById('result').getAttribute('data-results'));
-                displayResults(score, results, verb, lang);
-            }
+
+            // Add options to each question (including the correct one and distractors)
+            quizData.forEach(question => {
+                const allConjugationsForTense = conjugationsData[question.verbRoot][question.tenseKey].filter(c => c !== null);
+                const options = new Set(); // Use a Set to ensure uniqueness
+
+                options.add(question.correctAnswer); // Add the correct answer
+
+                // Add random incorrect options from the same tense and verb
+                while (options.size < 4 && options.size < allConjugationsForTense.length) {
+                    const randomIndex = Math.floor(Math.random() * allConjugationsForTense.length);
+                    options.add(allConjugationsForTense[randomIndex]);
+                }
+
+                 // If still not enough options (e.g., imperative has fewer forms), add nulls or handle differently if needed
+                 // For now, let's just shuffle what we have.
+                 question.options = shuffleArray(Array.from(options));
+            });
         }
 
-        function updateProgressDisplay(lang = 'en') {
-            console.log('Updating progress display for language:', lang);
-            const t = translations[lang];
-            const progressContainer = document.getElementById('progress-container');
-            const percentage = Math.round((progress.completed / 5) * 100);
-            
-            progressContainer.style.display = progress.completed > 0 ? 'block' : 'none';
-            document.getElementById('progress-bar').style.width = `${percentage}%`;
-            document.getElementById('progress-percentage').textContent = `${percentage}%`;
-            document.getElementById('progress-text').textContent = t.progressText.replace('{completed}', progress.completed);
-        }
-
-        function updateButtonStates() {
-            const verb = document.getElementById('verb').value;
-            const gender = document.getElementById('gender').value;
-            const startBtn = document.getElementById('start-btn');
-            const submitBtn = document.getElementById('submit-btn');
-            
-            console.log('Updating button states: verb=', verb, 'gender=', gender);
-            startBtn.disabled = !(verb && gender);
-            submitBtn.classList.toggle('hidden', document.getElementById('quiz').style.display !== 'block');
-            startBtn.classList.toggle('hidden', document.getElementById('quiz').style.display === 'block');
-        }
-
-        document.getElementById('verb').addEventListener('change', () => {
-            console.log('Verb changed to:', document.getElementById('verb').value);
-            updateButtonStates();
-        });
-        
-        document.getElementById('gender').addEventListener('change', () => {
-            console.log('Gender changed to:', document.getElementById('gender').value);
-            updateButtonStates();
-        });
-
-        function startQuiz() {
-            const verb = document.getElementById('verb').value;
-            const gender = document.getElementById('gender').value;
-            const lang = document.documentElement.lang || 'en';
-            
-            if (!verb || !gender) {
-                console.error('Cannot start quiz: verb or gender missing');
-                alert(lang === 'ar' ? "الرجاء اختيار فعل وجنس أولاً" : "Please select a verb and gender first");
-                return;
-            }
-            
-            console.log('Starting quiz with verb:', verb, 'gender:', gender, 'language:', lang);
-            showQuestions(verb, lang);
-        }
-
+        // Helper function to shuffle an array
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
+                [array[i], array[j]] = [array[j], array[i]]; // Swap elements
             }
             return array;
         }
 
-        function showQuestions(verb, lang = 'en') {
-            console.log('Showing questions for verb:', verb, 'language:', lang);
-            const quizDiv = document.getElementById('quiz');
-            quizDiv.style.display = 'block';
-            quizDiv.innerHTML = ''; // Clear previous content
-            
-            if (!questions || questions.length === 0) {
-                console.error('Questions array is empty or undefined');
-                alert(lang === 'ar' ? "خطأ: لم يتم تحميل الأسئلة" : "Error: Questions failed to load");
+        // Start the quiz
+        function startQuiz() {
+            resetQuizState(); // Ensure fresh start
+            generateQuizData();
+
+             if (quizData.length === 0) {
+                 alert("Could not generate quiz questions. Please check conjugation data.");
+                 return;
+             }
+
+            quizStarted = true;
+            quizCompleted = false;
+            currentQuestionIndex = 0;
+            currentScore = 0;
+            answeredCurrentQuestion = false; // Reset for the first question
+
+            document.getElementById('quizSettings').style.display = 'none';
+            resultContainer.classList.add('hidden');
+            quizContainer.style.display = 'block';
+            progressContainer.style.display = 'block';
+            startButton.classList.add('hidden');
+            resetButton.classList.remove('hidden');
+            // Next button will show after answering
+            finishButton.classList.add('hidden'); // Hide finish button initially
+
+            updateProgressBar();
+            displayQuestion(currentQuestionIndex);
+        }
+
+        // Display the current question
+        function displayQuestion(index) {
+            if (index >= quizData.length) {
+                endQuiz();
                 return;
             }
-            
-            const root = verb.slice(0, -1);
-            console.log('Rendering', questions.length, 'questions with root:', root);
-            
-            questions.forEach((q, index) => {
-                console.log('Rendering question', index + 1, ':', q[lang]);
-                const questionDiv = document.createElement('div');
-                questionDiv.className = 'question';
-                questionDiv.id = `question-${index}`;
-                
-                const shuffledOptions = shuffleArray([...q.options]);
-                const optionsHtml = shuffledOptions.map(opt => {
-                    const conjugated = root + opt;
-                    return `<option value="${opt}"><span class="arabic">${conjugated}</span> (${conjugated})</option>`;
-                }).join('');
-                
-                questionDiv.innerHTML = `
-                    <p>${q[lang]}</p>
-                    <select id="q${index + 1}" class="form-select" onchange="checkAnswer(${index}, '${q.correctSuffix}', '${root}')">
-                        <option value="">${lang === 'ar' ? 'اختر الإجابة الصحيحة' : 'Select the correct answer'}</option>
-                        ${optionsHtml}
-                    </select>
-                    <div class="question-feedback" id="feedback-${index}"></div>
-                `;
-                quizDiv.appendChild(questionDiv);
-            });
-            
-            console.log('All questions rendered successfully');
-            updateButtonStates();
-            
-            // Scroll to quiz section
-            quizDiv.scrollIntoView({ behavior: 'smooth' });
-        }
 
-        function checkAnswer(questionIndex, correctSuffix, root) {
-            const select = document.getElementById(`q${questionIndex + 1}`);
-            const selectedSuffix = select.value;
-            const questionDiv = document.getElementById(`question-${questionIndex}`);
-            const feedbackDiv = document.getElementById(`feedback-${questionIndex}`);
-            const lang = document.documentElement.lang || 'en';
-            
-            if (!selectedSuffix) {
-                questionDiv.classList.remove('correct', 'incorrect');
-                feedbackDiv.style.display = 'none';
-                return;
-            }
-            
-            const isCorrect = selectedSuffix === correctSuffix;
-            
-            if (isCorrect) {
-                questionDiv.classList.add('correct');
-                questionDiv.classList.remove('incorrect');
-                feedbackDiv.textContent = lang === 'ar' ? "✓ إجابة صحيحة!" : "✓ Correct answer!";
-                feedbackDiv.className = 'question-feedback correct';
-                document.getElementById('correct-sound').play();
-            } else {
-                questionDiv.classList.add('incorrect');
-                questionDiv.classList.remove('correct');
-                feedbackDiv.textContent = lang === 'ar' 
-                    ? `✗ غير صحيح. الجواب الصحيح هو: ${root + correctSuffix}` 
-                    : `✗ Incorrect. The correct answer is: ${root + correctSuffix}`;
-                feedbackDiv.className = 'question-feedback incorrect';
-                document.getElementById('incorrect-sound').play();
-            }
-        }
+            currentQuestion = quizData[index];
+            currentVerbRoot = currentQuestion.verbRoot;
+            currentTense = tensesData.find(t => t.key === currentQuestion.tenseKey);
+            currentPronoun = pronouns.find(p => p.key === currentQuestion.pronounKey);
+            correctAnswer = currentQuestion.correctAnswer;
+            userAnswer = null; // Reset user answer for the new question
+            answeredCurrentQuestion = false; // Allow answering
 
-        function submitQuiz() {
-            const verb = document.getElementById('verb').value;
-            const lang = document.documentElement.lang || 'en';
-            const t = translations[lang];
-            
-            console.log('Submitting quiz for verb:', verb);
-            if (!verb) {
-                console.error('Cannot submit quiz: no verb selected');
-                alert(lang === 'ar' ? "الرجاء اختيار فعل وجنس أولاً" : "Please select a verb and gender first");
-                return;
-            }
-            
-            const root = verb.slice(0, -1);
-            let score = 0;
-            const results = [];
-            let allAnswered = true;
+            const verbMeaning = conjugationsData[currentVerbRoot]['meaning_' + currentLanguage] || conjugationsData[currentVerbRoot].meaning_en; // Fallback to English
+            const tenseLabel = translations[currentLanguage].tenseOptions[currentTense.key];
+            const pronounLabelArabic = currentPronoun.ar;
+            const pronounLabelEnglish = currentPronoun.en;
 
-            questions.forEach((q, index) => {
-                const select = document.getElementById(`q${index + 1}`);
-                const selectedSuffix = select.value;
-                
-                if (!selectedSuffix) {
-                    allAnswered = false;
-                }
-                
-                const isCorrect = selectedSuffix === q.correctSuffix;
-                
-                if (isCorrect) {
-                    score++;
-                }
-                
-                results.push({
-                    question: q[lang],
-                    correctAnswer: root + q.correctSuffix,
-                    userAnswer: selectedSuffix ? root + selectedSuffix : lang === 'ar' ? "لم يتم الاختيار" : "Not selected",
-                    isCorrect: isCorrect
-                });
-            });
-
-            if (!allAnswered) {
-                const confirmSubmit = confirm(lang === 'ar' 
-                    ? "لم تجب على جميع الأسئلة. هل أنت متأكد أنك تريد التقديم؟" 
-                    : "You haven't answered all questions. Are you sure you want to submit?");
-                if (!confirmSubmit) return;
-            }
-
-            // Update progress
-            progress.completed = Math.min(progress.completed + 1, 5);
-            progress.scores.push(score);
-            
-            // Update best score
-            if (score > progress.bestScore) {
-                progress.bestScore = score;
-            }
-            
-            localStorage.setItem('quizProgress', JSON.stringify(progress));
-            updateProgressDisplay(lang);
-            displayResults(score, results, verb, lang);
-            
-            // Play completion sound if score is good
-            if (score >= questions.length * 0.7) {
-                document.getElementById('complete-sound').play();
-            }
-        }
-        // Reset quiz
-        function resetQuiz() {
-            console.log('Resetting quiz');
-            document.getElementById('verb').value = '';
-            document.getElementById('gender').value = '';
-            document.getElementById('quiz').style.display = 'none';
-            document.getElementById('result').classList.add('hidden');
-            progress = { completed: 0, scores: [] };
-            localStorage.setItem('quizProgress', JSON.stringify(progress));
-            updateProgressDisplay(document.documentElement.lang || 'en');
-            updateButtonStates();
-        }
-
-        function displayResults(score, results, verb, lang = 'en') {
-            console.log('Displaying results: score=', score, 'verb=', verb);
-            const resultDiv = document.getElementById('result');
-            resultDiv.classList.remove('hidden');
-            const percentage = Math.round((score / questions.length) * 100);
-            const t = translations[lang];
-            
-            let feedback;
-            if (percentage >= 90) feedback = t.feedback.excellent;
-            else if (percentage >= 70) feedback = t.feedback.good;
-            else if (percentage >= 50) feedback = t.feedback.average;
-            else feedback = t.feedback.poor;
-
-            let html = `
-                <h2>${t.resultsTitle}: ${score}/${questions.length} (${percentage}%)</h2>
-                <p class="feedback">${feedback}</p>
-                <p>${t.verbSelected} <span class="arabic">${verb}</span></p>
-                <p>${document.getElementById('gender').value === 'm' ? t.masculine : t.feminine}</p>
+            let questionHtml = `
+                <div class="quiz-progress">${translations[currentLanguage].questionText} ${index + 1} ${translations[currentLanguage].ofText} ${totalQuestions}</div>
+                <div class="quiz-question">
+                    <p class="question-prompt">
+                        ${translations[currentLanguage].questionPrompt
+                            .replace('{verbRoot}', currentVerbRoot)
+                            .replace('{meaning}', verbMeaning)
+                            .replace('{tense}', tenseLabel)
+                            .replace('{pronounArabic}', pronounLabelArabic)
+                            .replace('{pronounEnglish}', pronounLabelEnglish)}
+                    </p>
+                    <div class="options-container">
             `;
-            
-            results.forEach((r, index) => {
-                html += `
-                    <div class="result-item ${r.isCorrect ? 'correct' : 'incorrect'}">
-                        <p><strong>${lang === 'ar' ? 'السؤال' : 'Question'} ${index + 1}:</strong> ${r.question}</p>
-                        <p>${lang === 'ar' ? 'إجابتك' : 'Your answer'}: <span class="arabic">${r.userAnswer}</span> ${r.isCorrect ? '✓' : '✗'}</p>
-                        <p>${lang === 'ar' ? 'الإجابة الصحيحة' : 'Correct answer'}: <span class="arabic">${r.correctAnswer}</span></p>
+
+            currentQuestion.options.forEach((option, optIndex) => {
+                 // Assign unique ID to each radio input
+                 const radioId = `q${index}-option${optIndex}`;
+                questionHtml += `
+                    <div class="option-item">
+                        <input type="radio" id="${radioId}" name="answer" value="${option}" ${userAnswer !== null ? 'disabled' : ''}>
+                        <label for="${radioId}" class="arabic">${option}</label>
                     </div>
                 `;
             });
 
-            resultDiv.innerHTML = html;
-            resultDiv.scrollIntoView({ behavior: 'smooth' });
+            questionHtml += `
+                    </div>
+                    <div id="question-feedback" class="question-feedback" style="display: none;"></div>
+                </div>
+                <button class="btn btn-primary" onclick="checkAnswer()" id="submit-answer-btn">${translations[currentLanguage].showResultsBtn}</button>
+            `; // Changed button text to "Show Results" for clarity
+
+            quizContainer.innerHTML = questionHtml;
+
+            // Update button visibility
+            startButton.classList.add('hidden');
+            nextButton.classList.add('hidden');
+            finishButton.classList.add('hidden');
+            document.getElementById('submit-answer-btn').classList.remove('hidden'); // Show submit button
+             resetButton.classList.remove('hidden'); // Keep reset button visible
+
+            // Add event listeners to radio buttons after they are in the DOM
+            quizContainer.querySelectorAll('input[name="answer"]').forEach(radio => {
+                 radio.addEventListener('change', enableSubmitButton);
+            });
+
+             // Initially disable submit button until an option is selected
+             document.getElementById('submit-answer-btn').disabled = true;
         }
 
-        // Initialize
-        console.log('Initializing quiz with', questions.length, 'questions');
-        updateProgressDisplay();
-        updateButtonStates();
+         // Enable submit button when an option is selected
+        function enableSubmitButton() {
+            document.getElementById('submit-answer-btn').disabled = false;
+        }
+
+
+        // Check the user's answer
+        function checkAnswer() {
+             if (answeredCurrentQuestion) return; // Prevent checking multiple times
+
+            const selectedOption = quizContainer.querySelector('input[name="answer"]:checked');
+            const feedbackElement = document.getElementById('question-feedback');
+            const submitButton = document.getElementById('submit-answer-btn');
+
+            if (!selectedOption) {
+                alert(translations[currentLanguage].answerQuestionFirst);
+                return;
+            }
+
+            userAnswer = selectedOption.value;
+            answeredCurrentQuestion = true; // Mark question as answered
+
+            // Disable options after answering
+            quizContainer.querySelectorAll('input[name="answer"]').forEach(radio => {
+                radio.disabled = true;
+            });
+            submitButton.disabled = true; // Disable submit button
+
+            feedbackElement.style.display = 'block';
+
+            // Provide visual feedback
+            if (userAnswer === correctAnswer) {
+                currentScore++;
+                feedbackElement.textContent = translations[currentLanguage].feedback.correct;
+                feedbackElement.className = 'question-feedback correct';
+                playSound(audioCorrect);
+            } else {
+                feedbackElement.textContent = `${translations[currentLanguage].feedback.incorrect} ${translations[currentLanguage].correctAnswer} <span class="arabic">${correctAnswer}</span>`;
+                feedbackElement.className = 'question-feedback incorrect';
+                playSound(audioIncorrect);
+            }
+
+            updateProgressBar();
+
+            // Show next or finish button
+            submitButton.classList.add('hidden');
+            if (currentQuestionIndex < totalQuestions - 1) {
+                nextButton.classList.remove('hidden');
+            } else {
+                finishButton.classList.remove('hidden');
+            }
+        }
+
+        // Show next question
+        function showNextQuestion() {
+             if (!answeredCurrentQuestion && quizStarted && !quizCompleted) {
+                 alert(translations[currentLanguage].answerQuestionFirst);
+                 return;
+             }
+            currentQuestionIndex++;
+            displayQuestion(currentQuestionIndex);
+             nextButton.classList.add('hidden'); // Hide next button until next answer
+        }
+
+        // End the quiz
+        function endQuiz() {
+            quizStarted = false;
+            quizCompleted = true;
+            totalQuizzes++; // Increment completed quizzes
+
+            // Update best score if current score is higher
+            if (currentScore > bestScore) {
+                bestScore = currentScore;
+            }
+
+            // Save progress to localStorage
+            localStorage.setItem('totalQuizzes', totalQuizzes);
+            localStorage.setItem('bestScore', bestScore);
+
+            playSound(audioComplete);
+            showResult();
+            quizContainer.style.display = 'none';
+            nextButton.classList.add('hidden');
+            finishButton.classList.add('hidden');
+            startButton.classList.remove('hidden');
+            resetButton.classList.remove('hidden'); // Keep reset visible
+            progressContainer.style.display = 'none'; // Hide progress bar after quiz
+
+             // Update progress summary on quiz settings page
+             updateProgressSummary();
+             document.getElementById('quizSettings').style.display = 'block'; // Show settings again
+        }
+
+        // Show the quiz results
+        function showResult() {
+            resultContainer.classList.remove('hidden');
+             // Use the cached resultTitle element
+            resultTitle.textContent = translations[currentLanguage].resultsTitle;
+            resultContainer.innerHTML = ''; // Clear previous results
+            resultContainer.appendChild(resultTitle); // Add the updated title
+
+            const scorePercentage = (currentScore / totalQuestions) * 100;
+            let feedbackText = '';
+
+            if (scorePercentage >= 80) {
+                feedbackText = translations[currentLanguage].feedback.excellent;
+            } else if (scorePercentage >= 60) {
+                feedbackText = translations[currentLanguage].feedback.good;
+            } else if (scorePercentage >= 40) {
+                feedbackText = translations[currentLanguage].feedback.average;
+            } else {
+                feedbackText = translations[currentLanguage].feedback.poor;
+            }
+
+            const feedbackElement = document.createElement('p');
+            feedbackElement.className = 'feedback';
+            feedbackElement.textContent = `${translations[currentLanguage].stats.currentScore}: ${currentScore}/${totalQuestions}. ${feedbackText}`;
+            resultContainer.appendChild(feedbackElement);
+
+            // Display detailed results for each question
+            quizData.forEach((question, index) => {
+                const resultItem = document.createElement('div');
+                resultItem.className = `result-item ${question.userAnswer === question.correctAnswer ? 'correct' : 'incorrect'}`;
+
+                const verbMeaning = conjugationsData[question.verbRoot]['meaning_' + currentLanguage] || conjugationsData[question.verbRoot].meaning_en;
+                 const tenseLabel = translations[currentLanguage].tenseOptions[question.tenseKey];
+                 const pronounLabelArabic = pronouns.find(p => p.key === question.pronounKey).ar;
+                 const pronounLabelEnglish = pronouns.find(p => p.key === question.pronounKey).en;
+
+
+                resultItem.innerHTML += `
+                    <p><strong>${translations[currentLanguage].questionText} ${index + 1}:</strong>
+                     ${translations[currentLanguage].questionPrompt
+                            .replace('{verbRoot}', question.verbRoot)
+                            .replace('{meaning}', verbMeaning)
+                            .replace('{tense}', tenseLabel)
+                            .replace('{pronounArabic}', pronounLabelArabic)
+                            .replace('{pronounEnglish}', pronounLabelEnglish)}
+                     </p>
+                    <p>${translations[currentLanguage].yourAnswer} <span class="arabic">${question.userAnswer || translations[currentLanguage].notAnswered}</span></p>
+                    ${question.userAnswer !== question.correctAnswer ?
+                       `<p>${translations[currentLanguage].correctAnswer} <span class="arabic">${question.correctAnswer}</span></p>` : ''
+                    }
+                `;
+                 // Store the user's answer in the quizData object for results display
+                 // This needs to be done in the checkAnswer function
+                 if (typeof question.userAnswer === 'undefined') { // Handle cases where user didn't answer (shouldn't happen with current logic)
+                      question.userAnswer = translations[currentLanguage].notAnswered;
+                 }
+
+
+                resultContainer.appendChild(resultItem);
+            });
+        }
+
+         // Update the progress bar and text
+         function updateProgressBar() {
+             const percentage = totalQuestions > 0 ? (currentQuestionIndex / totalQuestions) * 100 : 0;
+             if (progressBar) {
+                 progressBar.style.width = percentage + '%';
+             }
+             if (progressPercentage) {
+                 progressPercentage.textContent = `${Math.round(percentage)}%`;
+             }
+             // Update progress summary is done separately when scores change
+         }
+
+        // Update the progress summary text
+        function updateProgressSummary() {
+             if (progressSummaryText) {
+                 progressSummaryText.textContent = translations[currentLanguage].progressSummary
+                     .replace('{completed}', totalQuizzes)
+                     .replace('{bestScore}', bestScore);
+             }
+        }
+
+
+        // Reset the quiz state
+        function resetQuizState() {
+            quizStarted = false;
+            quizCompleted = false;
+            currentQuestionIndex = 0;
+            currentScore = 0;
+            quizData = [];
+            answeredCurrentQuestion = false; // Reset answer state
+
+            quizContainer.innerHTML = ''; // Clear quiz display
+            quizContainer.style.display = 'none';
+            resultContainer.classList.add('hidden');
+            progressContainer.style.display = 'none';
+            startButton.classList.remove('hidden');
+            nextButton.classList.add('hidden');
+            finishButton.classList.add('hidden');
+             // Keep reset visible
+             resetButton.classList.remove('hidden');
+            document.getElementById('quizSettings').style.display = 'block'; // Show settings
+
+             updateProgressBar(); // Reset progress bar visual
+        }
+
+        // --- Modal Logic ---
+        function showResetConfirmation() {
+            modal.style.display = 'block';
+            // Set focus to the cancel button when the modal opens (for accessibility)
+            modalCancelButton.focus();
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        function confirmReset() {
+            resetQuizState();
+            closeModal();
+            // Optionally update URL or state if needed after reset
+        }
+
+        // Close modal if user clicks outside of it
+        window.onclick = function(event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+         // Optional: Close modal with Escape key
+         window.addEventListener('keydown', function(event) {
+             if (event.key === 'Escape' && modal.style.display === 'block') {
+                 closeModal();
+             }
+         });
+
     </script>
 </body>
 </html>
