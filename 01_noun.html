@@ -5,11 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Arabic Grammar – Noun Lesson</title>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOM8d7x1z5l5e5c5e5e5e5e5e5e5e5e5e5e5e" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOM8d7x1z5l5e5c5e5e5e5e5e5e5e5e5e5e5e5e5e" crossorigin="anonymous" />
   <link rel="stylesheet" href="css/styles.css" />
+  <!-- jsPDF library for PDF generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <style>
+    .download-btn {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 20px 0;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+    .download-btn:hover {
+      background-color: #45a049;
+    }
+    .download-btn i {
+      margin-right: 8px;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
+   
+
     <h1>📌 What is a Noun in Arabic?</h1>
     <p><strong>الاسم (Al-Ism)</strong> — The Noun</p>
     <div class="note">
@@ -155,6 +182,47 @@
     <div class="example">رأيتُ طالبًا. → <i>Taliban</i> (Nasb – object)</div>
     <div class="example">مررتُ بطالبِ. → <i>Talibin</i> (Jarr – after preposition)</div>
 
+    <section class="feminine-markers">
+    <h2>✨ Recognizing Feminine Nouns</h2>
+    <p>While many feminine nouns refer to females, not all do. Arabic has specific signs and conventions to identify feminine nouns:</p>
+
+    <h3>1. The Taa Marbuta (<bdi>ـة / ة</bdi>)</h3>
+    <p>This is the most common sign. If a noun ends with a <bdi>تَاء مَرْبُوطَة</bdi> (taa marbuta), it is usually feminine.</p>
+    <div class="example-box">
+        <ul>
+            <li><bdi>طالبةٌ</bdi> (<span>ṭālibatun</span>) - Female student</li>
+            <li><bdi>مدينةٌ</bdi> (<span>madīnatun</span>) - City (even though a city is not biologically female)</li>
+            <li><bdi>شجرةٌ</bdi> (<span>shajaratun</span>) - Tree</li>
+        </ul>
+    </div>
+
+    <h3>2. Alif Maqsoora (<bdi>ـى</bdi>)</h3>
+    <p>Nouns ending with <bdi>ألف مقصورة</bdi> (a special form of Alif that looks like a `ي` without dots) are feminine.</p>
+    <div class="example-box">
+        <ul>
+            <li><bdi>كُبْرَى</bdi> (<span>kubrā</span>) - Greatest (feminine form)</li>
+            <li><bdi>صُغْرَى</bdi> (<span>ṣughrā</span>) - Smallest (feminine form)</li>
+        </ul>
+    </div>
+
+    <h3>3. Alif Mamdooda (<bdi>ـاء</bdi>)</h3>
+    <p>Nouns ending with <bdi>ألف ممدودة</bdi> (Alif followed by Hamza) are also typically feminine.</p>
+    <div class="example-box">
+        <ul>
+            <li><bdi>حمراء</bdi> (<span>ḥamrāʼ</span>) - Red (feminine form)</li>
+            <li><bdi>صحراء</bdi> (<span>ṣaḥrāʼ</span>) - Desert</li>
+        </ul>
+    </div>
+
+    <h3>Feminine by Convention (No Obvious Sign):</h3>
+    <p>Some nouns are considered feminine despite not having the above endings. These often include:</p>
+    <ul>
+        <li>Paired body parts (e.g., <bdi>عين</bdi> - eye, <bdi>يد</bdi> - hand)</li>
+        <li>Names of countries and cities (e.g., <bdi>مصر</bdi> - Egypt, <bdi>دمشق</bdi> - Damascus)</li>
+        <li>Certain natural phenomena (e.g., <bdi>شمس</bdi> - sun, <bdi>نار</bdi> - fire)</li>
+    </ul>
+</section>
+
     <h2>📝 Summary:</h2>
     <table>
       <tr>
@@ -206,6 +274,9 @@
       </tr>
     </table>
     
+    <button id="downloadPdf" class="download-btn">
+      <i class="fas fa-file-pdf"></i> Download PDF
+    </button>
     <div class="nav-buttons">
       <a href="index.html">⬅️ Previous Lesson</a>
       <a href="index.html">📚 View All Lessons</a>
@@ -214,6 +285,7 @@
   </div>
   
   <!-- Google tag (gtag.js) -->
+<script src="quiz/js/download-pdf.js"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-E8RSVHS80Z"></script>
   <script>
       window.dataLayer = window.dataLayer || [];
