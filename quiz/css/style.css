@@ -1,0 +1,680 @@
+        /* General Styles */
+        :root {
+            --primary-green: #4CAF50;
+            --dark-green: #388E3C;
+            --light-green: #E8F5E9;
+            --primary-yellow: #3bbaff;
+            --dark-yellow: #FBC02D;
+            --text-color: #212121;
+            --card-bg: #FFFFFF;
+            --border-color: #c8e6c9;
+            --correct-color: #4CAF50;
+            --incorrect-color: #F44336;
+            --button-text-color: #212121;
+            --disabled-opacity: 0.6;
+            --transition-speed: 0.3s;
+
+            /* Dark Mode Colors */
+            --text-color-dark: #E0E0E0;
+            --card-bg-dark: #2d2d2d; /* Darker card */
+            --light-green-dark: #1e2a21; /* Darker background */
+            --border-color-dark: #3a4a3a;
+            --primary-green-dark: #5cb85c; /* Slightly lighter green for dark mode */
+            --dark-green-dark: #449d44;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0; /* Removed default padding to allow full-width header */
+            background-color: var(--light-green);
+            color: var(--text-color);
+            direction: ltr;
+            text-align: left;
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+        }
+
+        body.dark-mode {
+            --primary-green: var(--primary-green-dark);
+            --dark-green: var(--dark-green-dark);
+            --light-green: var(--light-green-dark);
+            --text-color: var(--text-color-dark);
+            --card-bg: var(--card-bg-dark);
+            --border-color: var(--border-color-dark);
+            --button-text-color: var(--text-color-dark); /* Adjust if needed for yellow buttons */
+        }
+
+
+        body[dir="rtl"] {
+            direction: rtl;
+            text-align: right;
+        }
+
+        .arabic, .urdu {
+            font-family: 'Arial', 'Times New Roman', 'Tahoma', sans-serif;
+            font-size: 1.1em;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -40px; /* Hidden off-screen */
+            left: 0;
+            background: var(--dark-green);
+            color: white;
+            padding: 10px;
+            z-index: 10000;
+            text-decoration: none;
+            transition: top var(--transition-speed) ease;
+        }
+        .skip-link:focus {
+            top: 0; /* Bring into view on focus */
+        }
+
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto; /* Centered, no top margin here */
+            padding: 20px 15px;
+        }
+
+        .app-header {
+            background: var(--dark-green);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color var(--transition-speed) ease;
+        }
+
+        .header-content { /* New wrapper for header content */
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+
+        .logo-container h1 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+
+        .logo-container p {
+            margin: 2px 0 0;
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .controls-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .language-switcher button, .dark-mode-toggle button {
+            background: none;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color var(--transition-speed) ease;
+        }
+
+        .language-switcher button:hover:not(.active),
+        .language-switcher button:focus:not(.active),
+        .dark-mode-toggle button:hover,
+        .dark-mode-toggle button:focus {
+            background-color: rgba(255, 255, 255, 0.1);
+            outline: none;
+        }
+
+        .language-switcher button.active {
+            background-color: white;
+            color: var(--dark-green);
+            border-color: white;
+            font-weight: bold;
+        }
+        body.dark-mode .language-switcher button.active {
+             color: var(--dark-green-dark); /* Ensure contrast for active button in dark mode */
+        }
+
+
+        .card {
+            background: var(--card-bg);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .section-title {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: var(--dark-green);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            transition: color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color var(--transition-speed) ease, opacity var(--transition-speed) ease;
+            font-weight: bold;
+            min-width: 120px;
+        }
+
+        @media (max-width: 600px) {
+            .btn {
+                padding: 8px 12px;
+                font-size: 0.9em;
+                min-width: 100px;
+                flex-grow: 1; /* Allow buttons to grow in smaller containers */
+            }
+            .controls-container {
+                width: 100%;
+                justify-content: space-around;
+                margin-top:10px;
+            }
+        }
+
+        .btn-primary {
+            background-color: var(--primary-green);
+            color: white;
+        }
+        body.dark-mode .btn-primary {
+             color: var(--text-color); /* Or white if contrast is better */
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background-color: var(--dark-green);
+        }
+
+        .btn-success {
+            background-color: var(--primary-yellow);
+            color: var(--button-text-color); /* Will change with dark mode */
+        }
+        .btn-success:hover:not(:disabled) {
+            background-color: var(--dark-yellow);
+        }
+
+        .btn-danger {
+            background-color: var(--incorrect-color);
+            color: white;
+        }
+        body.dark-mode .btn-danger {
+             color: var(--text-color);
+        }
+        .btn-danger:hover:not(:disabled) {
+            background-color: #d32f2f;
+        }
+
+        .btn-warning {
+            background-color: #e0e0e0;
+            color: var(--text-color);
+        }
+        body.dark-mode .btn-warning {
+            background-color: #424242; /* Darker grey for dark mode */
+            color: var(--text-color-dark);
+        }
+        .btn-warning:hover {
+            background-color: #bdbdbd;
+        }
+        body.dark-mode .btn-warning:hover {
+            background-color: #616161;
+        }
+
+
+        .btn:disabled {
+            opacity: var(--disabled-opacity);
+            cursor: not-allowed;
+        }
+         .btn:focus {
+            outline: 2px solid var(--primary-yellow);
+            outline-offset: 2px;
+        }
+
+
+        .hidden {
+            display: none !important; /* Use important to ensure override */
+        }
+
+        /* Quiz question transitions */
+        #quiz-content-wrapper {
+            transition: opacity var(--transition-speed) ease-in-out, transform var(--transition-speed) ease-in-out;
+            opacity: 1;
+            transform: translateX(0);
+        }
+        #quiz-content-wrapper.fade-out-left {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+        #quiz-content-wrapper.fade-out-right {
+            opacity: 0;
+            transform: translateX(20px);
+        }
+        #quiz-content-wrapper.fade-in {
+             opacity: 1;
+            transform: translateX(0);
+        }
+
+
+        .quiz-question {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background-color: var(--card-bg); /* Match card background */
+            transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+        }
+
+        .quiz-question .question-prompt {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .option-item input[type="radio"] {
+            margin-right: 10px;
+            cursor: pointer;
+            min-width: 1.2em; /* Ensure consistent size */
+            min-height: 1.2em;
+        }
+
+        body[dir="rtl"] .option-item input[type="radio"] {
+            margin-right: 0;
+            margin-left: 10px;
+        }
+
+        .option-item label {
+            flex-grow: 1;
+            cursor: pointer;
+            padding: 8px;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+            background-color: #f9f9f9;
+            color: #333; /* Explicit color for labels inside options */
+        }
+        body.dark-mode .option-item label {
+            background-color: #3e3e3e; /* Darker background for options */
+            border-color: #555;
+            color: var(--text-color-dark);
+        }
+
+
+        .option-item input[type="radio"]:focus + label {
+             outline: 2px solid var(--primary-yellow);
+             outline-offset: 2px;
+        }
+
+
+        .option-item label:hover {
+            background-color: #f0f0f0;
+            border-color: #ccc;
+        }
+        body.dark-mode .option-item label:hover {
+            background-color: #4f4f4f;
+            border-color: #777;
+        }
+
+
+        .option-item input[type="radio"]:checked + label {
+            background-color: var(--light-green);
+            border-color: var(--primary-green);
+            font-weight: bold;
+        }
+        body.dark-mode .option-item input[type="radio"]:checked + label {
+            background-color: var(--light-green-dark); /* Use dark mode light green */
+            border-color: var(--primary-green-dark);
+        }
+
+
+        .question-feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            border: 1px solid transparent;
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+            /* aria-live is an HTML attribute */
+        }
+
+        .question-feedback.correct {
+            background-color: #d4edda;
+            color: var(--correct-color); /* Use direct color, not text-color */
+            border-color: #c3e6cb;
+        }
+         body.dark-mode .question-feedback.correct {
+            background-color: #2a5732; /* Darker green */
+            color: #a3d9b1;
+            border-color: #3e7049;
+        }
+
+
+        .question-feedback.incorrect {
+            background-color: #f8d7da;
+            color: var(--incorrect-color); /* Use direct color */
+            border-color: #f5c6cb;
+        }
+        body.dark-mode .question-feedback.incorrect {
+            background-color: #5e2d31; /* Darker red */
+            color: #f0b6bc;
+            border-color: #8a434a;
+        }
+
+        .educational-content {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #eee;
+            border-radius: 4px;
+        }
+        body.dark-mode .educational-content {
+            background-color: #383838;
+            border-color: #4f4f4f;
+        }
+        .educational-content h4 { margin-top: 0; color: var(--dark-green); }
+        .educational-content p { font-size: 0.9em; }
+
+
+        .result-item {
+            margin-bottom: 15px;
+            padding: 15px;
+            border-left: 4px solid;
+            border-radius: 4px;
+            transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+        }
+
+        body[dir="rtl"] .result-item {
+             border-left: none;
+             border-right: 4px solid;
+        }
+
+
+        .result-item.correct {
+            border-color: var(--correct-color);
+            background-color: #e9f7ef;
+        }
+         body.dark-mode .result-item.correct {
+            background-color: #223e2a;
+            border-color: var(--correct-color);
+        }
+
+        .result-item.incorrect {
+            border-color: var(--incorrect-color);
+            background-color: #fdedee;
+        }
+         body.dark-mode .result-item.incorrect {
+            background-color: #442426;
+            border-color: var(--incorrect-color);
+        }
+
+
+        .result-item p {
+            margin: 5px 0;
+        }
+
+        .result-item strong {
+            color: var(--dark-green);
+        }
+         body.dark-mode .result-item strong {
+            color: var(--primary-green-dark);
+        }
+
+
+        .feedback {
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .progress-container {
+            margin-bottom: 20px;
+        }
+
+        .progress-container h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .progress-bar-outer {
+            background: #ddd;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            height: 20px;
+        }
+        body.dark-mode .progress-bar-outer {
+            background: #555;
+        }
+
+
+        .progress-bar-inner {
+            height: 100%;
+            background-color: var(--primary-green);
+            text-align: center;
+            line-height: 20px;
+            color: white;
+            border-radius: 10px 0 0 10px; /* Keep left radius */
+            transition: width 0.6s ease;
+            position: relative;
+        }
+         body.dark-mode .progress-bar-inner {
+            color: #111; /* Ensure contrast on green bar if green is light */
+        }
+
+
+        .progress-text {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 0;
+            color: white;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+         body.dark-mode .progress-text {
+             color: #111; /* Or white if green is dark enough */
+         }
+
+
+        .quiz-settings-toggles {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .quiz-settings-toggles label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+        .quiz-settings-toggles input[type="checkbox"] {
+            cursor: pointer;
+            width: 1.2em;
+            height: 1.2em;
+        }
+
+        .timer-display {
+            font-weight: bold;
+            color: var(--dark-green);
+            margin-top: 10px;
+            text-align: center;
+            font-size: 1.2em;
+        }
+
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+            margin-top: 10px;
+            color: var(--dark-green);
+        }
+
+        .tooltip:hover .tooltiptext,
+        .tooltip:focus .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        body[dir="rtl"] .tooltip .tooltiptext {
+            left: auto;
+            right: 50%;
+            margin-left: 0;
+            margin-right: -100px;
+        }
+
+        .quiz-progress-text { /* Renamed from quiz-progress to avoid conflict */
+            margin-bottom: 15px;
+            font-weight: bold;
+            color: var(--dark-green);
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        .audio-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .audio-controls button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2em;
+            color: var(--dark-green);
+        }
+        .audio-controls button:focus {
+            outline: 2px solid var(--primary-yellow);
+            outline-offset: 2px;
+        }
+
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+        body.dark-mode .modal {
+            background-color: rgba(0,0,0,0.7); /* Darker overlay for dark mode */
+        }
+
+        .modal-content {
+            background-color: var(--card-bg); /* Use card bg for modal */
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid var(--border-color); /* Use border color */
+            width: 90%;
+            max-width: 500px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        #scoreHistoryContainer .score-entry {
+            padding: 8px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        #scoreHistoryContainer .score-entry:last-child {
+            border-bottom: none;
+        }
+        #scoreHistoryContainer .score-entry small {
+            display: block;
+            color: #777;
+        }
+         body.dark-mode #scoreHistoryContainer .score-entry small {
+            color: #aaa;
+        }
+
+
+        .share-buttons button {
+            margin: 5px;
+        }
+
+        /* NoScript styles */
+        .noscript-message {
+            padding: 20px;
+            text-align: center;
+            background-color: var(--incorrect-color);
+            color: white;
+            font-weight: bold;
+        }
+   
